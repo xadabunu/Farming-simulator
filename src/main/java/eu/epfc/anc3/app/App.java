@@ -1,6 +1,7 @@
 //ANC3 2223 a05
 package eu.epfc.anc3.app;
 
+import eu.epfc.anc3.model.Field;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import java.util.*;
 
 public class App extends Application  {
 
