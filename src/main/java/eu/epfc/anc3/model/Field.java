@@ -15,4 +15,6 @@ public class Field {
     LandContent getValue(int line, int col) {
         return lands[line][col].getValue();
     }
+
+
 }
