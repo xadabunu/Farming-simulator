@@ -1,8 +1,8 @@
 package eu.epfc.anc3.model;
 
 public class Field {
+    static final int LINES = 15, COLUMNS =15;
 
-    static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
     public Field() {
@@ -11,4 +11,10 @@ public class Field {
             for (int j = 0 ; j < COLUMNS ; ++j)
                 lands[i][j] = new Land();
     }
+
+    LandContent getValue(int line, int col) {
+        return lands[line][col].getValue();
+    }
+
+
 }
