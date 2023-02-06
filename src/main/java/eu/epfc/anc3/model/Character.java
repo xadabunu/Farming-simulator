@@ -5,7 +5,6 @@ public abstract class Character {
 
     private Land position;
 
-
     public void move() {
 
     }
