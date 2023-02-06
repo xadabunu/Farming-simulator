@@ -17,18 +17,19 @@ public class App extends Application  {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane root = new StackPane();
-        Label label = new Label("Hello !");
-        label.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 60));
+//        Pane root = new StackPane();
+//        Label label = new Label("Hello !");
+//        label.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 60));
+//
+//        root.getChildren().add(label);
+//        Scene scene = new Scene(root, 640, 480);
+//        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+//        stage.setScene(scene);
+//        stage.show();
+//        stage.setTitle("Projet ANC3 2223 a05");
+//        stage.setMinHeight(stage.getHeight());
+//        stage.setMinWidth(stage.getWidth());
 
-        root.getChildren().add(label);
-        Scene scene = new Scene(root, 640, 480);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Projet ANC3 2223 a05");
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
     }
 
     public static void main(String[] args) {

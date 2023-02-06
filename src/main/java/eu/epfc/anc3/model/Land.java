@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class Land {
 
+
     private final ObjectProperty<LandContent> value = new SimpleObjectProperty<>(LandContent.DIRT);
 
     public Land() {
@@ -23,6 +24,11 @@ public class Land {
 
     ReadOnlyObjectProperty<LandContent> valueProperty() {
         return value;
+
     }
 
+    @Override
+    public String toString() {
+        return "x";
+    }
 }
