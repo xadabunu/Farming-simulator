@@ -1,6 +1,6 @@
 package eu.epfc.anc3.view;
 
-import eu.epfc.anc3.model.LandContent;
+import eu.epfc.anc3.model.LandContend;
 import eu.epfc.anc3.vm.LandViewModel;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -20,13 +20,13 @@ public class LandView extends StackPane {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
-        ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
+        ReadOnlyObjectProperty<LandContend> valueProp = landViewModel.valueProperty();
         valueProp.addListener((obs, old, newVal) -> setOxoImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
     }
 
-    private void setOxoImage(ImageView imageView, LandContent cellValue) {
-        if (cellValue == LandContent.GRASS) imageView.setImage(grassImage);
+    private void setOxoImage(ImageView imageView, LandContend landContend) {
+        if (landContend == LandContend.GRASS) imageView.setImage(grassImage);
         else imageView.setImage(dirtImage);
     }
 
