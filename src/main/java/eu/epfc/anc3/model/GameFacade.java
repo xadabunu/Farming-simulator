@@ -13,8 +13,8 @@ public class GameFacade {
 
     public ReadOnlyBooleanProperty isOnProperty() {return isOn;}
 
-    public ReadOnlyObjectProperty<LandContent> contendProperty(int line, int col) {
-        return game.contendProperty(line ,col);
+    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
+        return game.contentProperty(line ,col);
     }
 
     public static int fieldCol(){return Field.COLUMNS;};

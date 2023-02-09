@@ -20,7 +20,7 @@ public class LandViewModel {
     }
 
     public ReadOnlyObjectProperty<LandContent> valueProperty() {
-        return game.contendProperty(line, col);
+        return game.contentProperty(line, col);
     }
 
     //public ReadOnlyObjectProperty<LandContent>

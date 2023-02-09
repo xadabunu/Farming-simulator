@@ -19,7 +19,7 @@ public class Game {
         characterPosition = field.getLand(line, col);
     }
 
-    ReadOnlyObjectProperty<LandContent> contendProperty(int line, int col) {
+    ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return field.contentProperty(line, col);
     }
 

@@ -21,11 +21,11 @@ public class LandView extends StackPane {
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
         ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
-        valueProp.addListener((obs, old, newVal) -> setOxoImage(imageView, newVal));
+        valueProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
     }
 
-    private void setOxoImage(ImageView imageView, LandContent landContent) {
+    private void setLandImage(ImageView imageView, LandContent landContent) {
         if (landContent == LandContent.GRASS) imageView.setImage(grassImage);
         else imageView.setImage(dirtImage);
     }
