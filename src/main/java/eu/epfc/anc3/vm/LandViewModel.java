@@ -1,7 +1,7 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
-import eu.epfc.anc3.model.LandContend;
+import eu.epfc.anc3.model.LandContent;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
 public class LandViewModel {
@@ -19,7 +19,7 @@ public class LandViewModel {
         game.teleport(line, col);
     }
 
-    public ReadOnlyObjectProperty<LandContend> valueProperty() {
+    public ReadOnlyObjectProperty<LandContent> valueProperty() {
         return game.contendProperty(line, col);
     }
 

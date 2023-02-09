@@ -13,14 +13,14 @@ public class GameFacade {
 
     public ReadOnlyBooleanProperty isOnProperty() {return isOn;}
 
-
-
-    public ReadOnlyObjectProperty<LandContend> contendProperty(int line, int col) {
+    public ReadOnlyObjectProperty<LandContent> contendProperty(int line, int col) {
         return game.contendProperty(line ,col);
     }
 
+    public static int fieldCol(){return Field.COLUMNS;};
+    public static int fieldLines(){return Field.LINES;}
 
-    public LandContend teleport(int line, int col) {
-        return game.teleport(line, col);
+    public void teleport(int line, int col) {
+        game.teleport(line, col);
     }
 }

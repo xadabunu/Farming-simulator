@@ -1,7 +1,6 @@
 //ANC3 2223 a05
 package eu.epfc.anc3.app;
 
-import eu.epfc.anc3.model.Field;
 import eu.epfc.anc3.view.AppView;
 import javafx.application.Application;
 import javafx.scene.Scene;

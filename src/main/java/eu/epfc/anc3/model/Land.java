@@ -7,22 +7,22 @@ import javafx.beans.property.SimpleObjectProperty;
 public class Land {
 
 
-    private final ObjectProperty<LandContend> value = new SimpleObjectProperty<>(LandContend.DIRT);
+    private final ObjectProperty<LandContent> value = new SimpleObjectProperty<>(LandContent.DIRT);
 
     public Land() {
     }
 
-    LandContend getValue() {
+    LandContent getValue() {
         return value.getValue();
     }
 
-    boolean setValue(LandContend value) {
-        if (this.value.get() != LandContend.DIRT) return false;
+    boolean setValue(LandContent value) {
+        if (this.value.get() != LandContent.DIRT) return false;
         this.value.setValue(value);
         return true;
     }
 
-    ReadOnlyObjectProperty<LandContend> valueProperty() {
+    ReadOnlyObjectProperty<LandContent> valueProperty() {
         return value;
 
     }

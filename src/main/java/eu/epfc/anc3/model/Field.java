@@ -2,8 +2,8 @@ package eu.epfc.anc3.model;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 
-public class Field {
-    static final int LINES = 15, COLUMNS =15;
+class Field {
+    static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
     public Field() {
@@ -13,12 +13,13 @@ public class Field {
                 lands[i][j] = new Land();
     }
 
-    LandContend getValue(int line, int col) {
+    LandContent getValue(int line, int col) {
         return lands[line][col].getValue();
     }
 
+    public Land getLand(int line, int col) {return lands[line][col];}
 
-    public ReadOnlyObjectProperty<LandContend> contendProperty(int line, int col) {
+    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return lands[line][col].valueProperty();
     }
 }
