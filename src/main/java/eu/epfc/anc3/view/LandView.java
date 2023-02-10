@@ -15,20 +15,18 @@ public class LandView extends StackPane {
 
     private final ImageView imageView = new ImageView();
 
-
     public LandView(LandViewModel landViewModel, DoubleBinding landWidthProperty) {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
         ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
-        //System.out.println(i + " " + j);
         valueProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
+        setLandImage(imageView, LandContent.DIRT);
     }
 
     private void setLandImage(ImageView imageView, LandContent landContent) {
-        if (landContent == LandContent.GRASS) imageView.setImage(grassImage);
-        else imageView.setImage(dirtImage);
+        imageView.setImage(landContent == LandContent.GRASS ? grassImage : dirtImage);
     }
 
 
