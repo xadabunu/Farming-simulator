@@ -21,6 +21,7 @@ public class LandView extends StackPane {
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
         ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
+        //System.out.println(i + " " + j);
         valueProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
     }
