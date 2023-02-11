@@ -7,6 +7,9 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,12 +20,16 @@ public class AppView extends VBox {
     static final int MENU_HEIGHT = 30;
     static final int MENU_WIDTH = 160;
     static final int PADDING = 20;
-    private static final int SCENE_MIN_WIDTH = 750, SCENE_MIN_HEIGHT = 450;
+
+    private static final int SCENE_MIN_WIDTH = 1500, SCENE_MIN_HEIGHT = 1000;
+
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
+    private int grassCtr = 0;
 
-    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty();
-//    private final DoubleProperty fieldHeightProperty = new SimpleDoubleProperty(150);
+    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(0);
+    //private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(150);
+
 
     private MenuView menuView;
     private FieldView fieldView;
@@ -42,7 +49,7 @@ public class AppView extends VBox {
 
     private void configMainComponents(Stage stage) {
         stage.titleProperty().bind(appViewModel.titleProperty());
-        //Compteur;
+        configCounter();
         configFieldView();
         configMenu();
     }
@@ -51,6 +58,20 @@ public class AppView extends VBox {
         menuView = new MenuView(appViewModel.getMenuViewModel());
         this.getChildren().add(menuView);
         setAlignment(Pos.BOTTOM_CENTER);
+        getChildren().add(menuView);
+    }
+
+    private void configCounter() {
+        var pane = new HBox();
+        Label labelCtr = new Label("Nombre de parcelles de gazon: ");
+        TextField ctrTxt = new TextField();
+        ctrTxt.setMaxWidth(30);
+        ctrTxt.setDisable(true);
+        ctrTxt.setText("0");
+        pane.setAlignment(Pos.CENTER);
+        pane.getChildren().addAll(labelCtr, ctrTxt);
+        getChildren().addAll(pane);
+
     }
 
     private void configFieldView() {
@@ -60,7 +81,9 @@ public class AppView extends VBox {
         fieldView.maxHeightProperty().bind(fieldWidthProperty);
         fieldView.maxWidthProperty().bind(fieldWidthProperty);
         fieldWidthProperty.bind(Bindings.min(widthProperty().subtract(2 * PADDING), heightProperty().subtract(MENU_HEIGHT + 2 * PADDING)));
+
         this.getChildren().add(fieldView);
         setAlignment(Pos.CENTER);
+
     }
 }
