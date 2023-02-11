@@ -21,7 +21,7 @@ public class AppView extends VBox {
     static final int MENU_WIDTH = 160;
     static final int PADDING = 20;
 
-    private static final int SCENE_MIN_WIDTH = 1500, SCENE_MIN_HEIGHT = 1000;
+    private static final int SCENE_MIN_WIDTH = 1250, SCENE_MIN_HEIGHT = 750;
 
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
@@ -57,8 +57,6 @@ public class AppView extends VBox {
     private void configMenu() {
         menuView = new MenuView(appViewModel.getMenuViewModel());
         this.getChildren().add(menuView);
-        setAlignment(Pos.BOTTOM_CENTER);
-        getChildren().add(menuView);
     }
 
     private void configCounter() {
@@ -70,7 +68,7 @@ public class AppView extends VBox {
         ctrTxt.setText("0");
         pane.setAlignment(Pos.CENTER);
         pane.getChildren().addAll(labelCtr, ctrTxt);
-        getChildren().addAll(pane);
+        this.getChildren().addAll(pane);
 
     }
 
@@ -81,9 +79,8 @@ public class AppView extends VBox {
         fieldView.maxHeightProperty().bind(fieldWidthProperty);
         fieldView.maxWidthProperty().bind(fieldWidthProperty);
         fieldWidthProperty.bind(Bindings.min(widthProperty().subtract(2 * PADDING), heightProperty().subtract(MENU_HEIGHT + 2 * PADDING)));
-
         this.getChildren().add(fieldView);
-        setAlignment(Pos.CENTER);
+
 
     }
 }

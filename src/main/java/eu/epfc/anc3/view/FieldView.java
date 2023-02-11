@@ -4,8 +4,6 @@ import eu.epfc.anc3.vm.FieldViewModel;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -16,7 +14,19 @@ public class FieldView extends GridPane {
 
     public FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty) {
         setPadding(new Insets(PADDING));
-        DoubleBinding landWidthProperty = fieldWidthProperty.subtract(PADDING*2).divide(FIELD_WIDTH);
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setPercentHeight(100.0 / FIELD_HEIGHT);
+//        ColumnConstraints columnConstraints = new ColumnConstraints();
+//        columnConstraints.setPercentWidth(100.0 / FIELD_WIDTH);
+        DoubleBinding landWidthProperty = fieldWidthProperty.subtract(PADDING*2).divide(FIELD_HEIGHT);
+
+//        for (int i = 0; i < FIELD_WIDTH; ++i) {
+//            getColumnConstraints().add(columnConstraints);
+//            getRowConstraints().add(rowConstraints);
+//        }
+        for (int i = 0; i < FIELD_HEIGHT; ++i) {
+            getRowConstraints().add(rowConstraints);
+        }
 
         // Remplissage de la grille
         for (int i = 0; i < FIELD_WIDTH; ++i) {
