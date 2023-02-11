@@ -4,6 +4,7 @@ import eu.epfc.anc3.model.GameFacade;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.layout.VBox;
 
 public class AppViewModel {
 
