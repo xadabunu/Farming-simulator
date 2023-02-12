@@ -15,10 +15,9 @@ import javafx.stage.Stage;
 
 public class AppView extends VBox {
 
-    private AppViewModel appViewModel = new AppViewModel();
+    private final AppViewModel appViewModel = new AppViewModel();
 
     static final int MENU_HEIGHT = 30;
-    static final int MENU_WIDTH = 160;
     static final int PADDING = 20;
 
     private static final int SCENE_MIN_WIDTH = 1250, SCENE_MIN_HEIGHT = 750;
@@ -27,7 +26,7 @@ public class AppView extends VBox {
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
     private int grassCtr = 0;
 
-    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(0);
+    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(250);
     //private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(150);
 
 
@@ -68,7 +67,7 @@ public class AppView extends VBox {
         ctrTxt.setText("0");
         pane.setAlignment(Pos.CENTER);
         pane.getChildren().addAll(labelCtr, ctrTxt);
-        this.getChildren().addAll(pane);
+        this.getChildren().add(pane);
 
     }
 
