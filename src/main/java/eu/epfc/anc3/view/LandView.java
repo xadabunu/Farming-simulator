@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import static eu.epfc.anc3.view.AppView.PADDING;
+
 public class LandView extends StackPane {
 
     private static final Image grassImage = new Image("grass.png");
