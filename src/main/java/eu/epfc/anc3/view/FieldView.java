@@ -12,27 +12,32 @@ import static eu.epfc.anc3.view.AppView.*;
 
 public class FieldView extends GridPane {
 
-    public FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty) {
+    public FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty, DoubleProperty fieldHeightProperty) {
         setPadding(new Insets(PADDING));
+//        this.prefWidthProperty().bind(fieldWidthProperty);
+//        this.prefHeightProperty().bind(fieldHeightProperty);
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setPercentHeight(100.0 / FIELD_HEIGHT);
-//        ColumnConstraints columnConstraints = new ColumnConstraints();
-//        columnConstraints.setPercentWidth(100.0 / FIELD_WIDTH);
-        DoubleBinding landWidthProperty = fieldWidthProperty.subtract(PADDING*2).divide(FIELD_HEIGHT);
+        ColumnConstraints columnConstraints = new ColumnConstraints();
+        columnConstraints.setPercentWidth(100.0 / FIELD_WIDTH);
+        DoubleBinding landWidthProperty = fieldWidthProperty.divide(FIELD_WIDTH);
 
-//        for (int i = 0; i < FIELD_WIDTH; ++i) {
-//            getColumnConstraints().add(columnConstraints);
-//            getRowConstraints().add(rowConstraints);
-//        }
-        for (int i = 0; i < FIELD_HEIGHT; ++i) {
+
+        for(int i = 0; i < FIELD_WIDTH; ++i) {
+            getColumnConstraints().add(columnConstraints);
+        }
+
+        for(int i = 0; i < FIELD_HEIGHT; ++i) {
             getRowConstraints().add(rowConstraints);
         }
 
+
+
         // Remplissage de la grille
-        for (int i = 0; i < FIELD_WIDTH; ++i) {
-            for (int j = 0; j < FIELD_HEIGHT; ++j) {
-                LandView caseView = new LandView(fieldViewModel.getLandViewModel(j, i), landWidthProperty);
-                add(caseView, i, j); // lignes/colonnes inversées dans gridpane
+        for (int i = 0; i < FIELD_HEIGHT; ++i) {
+            for (int j = 0; j < FIELD_WIDTH; ++j) {
+                LandView caseView = new LandView(fieldViewModel.getLandViewModel(i,j), landWidthProperty);
+                add(caseView, j, i); // lignes/colonnes inversées dans gridpane
             }
         }
     }

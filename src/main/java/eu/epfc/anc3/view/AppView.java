@@ -5,11 +5,13 @@ import eu.epfc.anc3.vm.AppViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,15 +22,14 @@ public class AppView extends VBox {
     static final int MENU_HEIGHT = 30;
     static final int PADDING = 20;
 
-    private static final int SCENE_MIN_WIDTH = 1250, SCENE_MIN_HEIGHT = 750;
+    private static final int SCENE_MIN_WIDTH = 1000, SCENE_MIN_HEIGHT = 600;
 
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
     private int grassCtr = 0;
 
-    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(250);
-    //private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(150);
-
+    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
+    private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
 
     private MenuView menuView;
     private FieldView fieldView;
@@ -65,20 +66,21 @@ public class AppView extends VBox {
         ctrTxt.setMaxWidth(30);
         ctrTxt.setDisable(true);
         ctrTxt.setText("0");
-        pane.setAlignment(Pos.CENTER);
         pane.getChildren().addAll(labelCtr, ctrTxt);
         this.getChildren().add(pane);
-
+        pane.setAlignment(Pos.CENTER);
     }
 
     private void configFieldView() {
-        fieldView = new FieldView(appViewModel.getFieldViewModel(), fieldWidthProperty);
-        fieldView.minHeightProperty().bind(fieldWidthProperty);
+        fieldView = new FieldView(appViewModel.getFieldViewModel(), fieldWidthProperty, fieldhHeightProperty);
+        fieldView.minHeightProperty().bind(fieldhHeightProperty);
         fieldView.minWidthProperty().bind(fieldWidthProperty);
-        fieldView.maxHeightProperty().bind(fieldWidthProperty);
+        fieldView.maxHeightProperty().bind(fieldhHeightProperty);
         fieldView.maxWidthProperty().bind(fieldWidthProperty);
-        fieldWidthProperty.bind(Bindings.min(widthProperty().subtract(2 * PADDING), heightProperty().subtract(MENU_HEIGHT + 2 * PADDING)));
+//        fieldWidthProperty.bind(Bindings.min(widthProperty().subtract(2 * PADDING), heightProperty().subtract(MENU_HEIGHT + 2 * PADDING)));
         this.getChildren().add(fieldView);
+        setAlignment(Pos.CENTER);
+
 
 
     }
