@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class AppView extends VBox {
 
-    private AppViewModel appViewModel = new AppViewModel();
+    private final AppViewModel appViewModel = new AppViewModel();
 
     static final int MENU_HEIGHT = 30;
     static final int PADDING = 20;
@@ -30,7 +30,6 @@ public class AppView extends VBox {
 
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
-
 
     private MenuView menuView;
     private FieldView fieldView;
@@ -68,7 +67,7 @@ public class AppView extends VBox {
         ctrTxt.setDisable(true);
         ctrTxt.setText("0");
         pane.getChildren().addAll(labelCtr, ctrTxt);
-        this.getChildren().addAll(pane);
+        this.getChildren().add(pane);
         pane.setAlignment(Pos.CENTER);
     }
 
