@@ -53,6 +53,12 @@ public class MenuView extends HBox {
         menuViewModel.isOnProperty().addListener((obs, oldval,newval) -> {
             btnSwitch.textProperty().bind(menuViewModel.startLabelProperty());
         });
+        menuViewModel.isPlantproperty().addListener((obs, oldval, newval) -> {
+            btnPlant.underlineProperty().bind(menuViewModel.isPlantproperty());
+        });
+        menuViewModel.isUnplantproperty().addListener((obs, oldval, newval) -> {
+            btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
+        });
 
     }
 

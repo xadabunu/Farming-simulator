@@ -21,11 +21,11 @@ public class Game {
     }
 
     void plant() {
-        gameStatus.set(GameStatus.PLANT);
+        gameStatus.set(gameStatus.isEqualTo(GameStatus.PLANT).get() ? GameStatus.GAME_ON : GameStatus.PLANT);
     }
 
     void unPlant() {
-        gameStatus.set(GameStatus.UNPLANT);
+        gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
     void stop() {
