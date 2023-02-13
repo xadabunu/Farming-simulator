@@ -17,8 +17,20 @@ public class GameFacade {
         return game.contentProperty(line ,col);
     }
 
-    public static int fieldCol(){return Field.COLUMNS;};
-    public static int fieldLines(){return Field.LINES;}
+    public ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
+        return game.gameStatusProperty();
+    }
+
+    public static int fieldCol(){
+        return Field.COLUMNS;
+    }
+    public static int fieldLines(){
+        return Field.LINES;
+    }
+
+    public void start() {
+        game.start();
+    }
 
     public void teleport(int line, int col) {
         game.teleport(line, col);

@@ -15,12 +15,24 @@ public class Game {
         gameStatus.set(GameStatus.GAME_ON);
     }
 
+    private GameStatus status() {
+        return this.gameStatus.get();
+    }
+
+    private LandContent getCurrentLandContent() {
+        return status() == GameStatus.PLANT ? LandContent.GRASS : LandContent.DIRT;
+    }
+
     public void teleport(int line, int col) {
         characterPosition = field.getLand(line, col);
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return field.contentProperty(line, col);
+    }
+
+    ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
+        return gameStatus;
     }
 
 }
