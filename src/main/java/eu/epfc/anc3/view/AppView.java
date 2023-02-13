@@ -10,10 +10,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class AppView extends VBox {
 
@@ -33,6 +36,7 @@ public class AppView extends VBox {
 
     private MenuView menuView;
     private FieldView fieldView;
+    private CharacterView characterView;
 
     public AppView(Stage stage) {
         start(stage);
@@ -52,6 +56,7 @@ public class AppView extends VBox {
         configCounter();
         configFieldView();
         configMenu();
+        initiateCharacter();
     }
 
     private void configMenu() {
@@ -81,8 +86,11 @@ public class AppView extends VBox {
         fieldhHeightProperty.bind(heightProperty().subtract(PADDING*2).subtract(MENU_HEIGHT));
         this.getChildren().add(fieldView);
         setAlignment(Pos.CENTER);
-
-
-
     }
+
+    private void initiateCharacter() {
+        characterView = new CharacterView("farmer.png");
+
+        fieldView.add(new ImageView(characterView.getImage()), 0,0);
+        }
 }
