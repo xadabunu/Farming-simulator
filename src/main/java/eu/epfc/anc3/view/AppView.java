@@ -77,7 +77,8 @@ public class AppView extends VBox {
         fieldView.minWidthProperty().bind(fieldWidthProperty);
         fieldView.maxHeightProperty().bind(fieldhHeightProperty);
         fieldView.maxWidthProperty().bind(fieldWidthProperty);
-//        fieldWidthProperty.bind(Bindings.min(widthProperty().subtract(2 * PADDING), heightProperty().subtract(MENU_HEIGHT + 2 * PADDING)));
+        fieldWidthProperty.bind(widthProperty().subtract(PADDING*2));
+        fieldhHeightProperty.bind(heightProperty().subtract(PADDING*2).subtract(MENU_HEIGHT));
         this.getChildren().add(fieldView);
         setAlignment(Pos.CENTER);
 

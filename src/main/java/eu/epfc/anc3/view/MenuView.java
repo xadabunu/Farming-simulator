@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.EventListener;
+
 public class MenuView extends HBox {
 
     private final MenuViewModel menuViewModel;
@@ -18,7 +20,8 @@ public class MenuView extends HBox {
     public MenuView(MenuViewModel menuViewModel) {
         this.menuViewModel = menuViewModel;
         configButtons();
-        manageBtnSwitch();
+        manageBtn();
+        configLogicBinding();
 
     }
 
@@ -27,8 +30,6 @@ public class MenuView extends HBox {
         configLabel();
         setAlignment(Pos.CENTER);
         setSpacing(30);
-        btnPlant.setDisable(true);
-        btnUnplant.setDisable(true);
     }
 
     private void configLabel() {
@@ -37,8 +38,23 @@ public class MenuView extends HBox {
         btnUnplant.textProperty().bind(menuViewModel.unplantLabelProperty());
     }
 
-    private void manageBtnSwitch(){
+    private void manageBtn(){
         btnSwitch.setOnAction(e -> menuViewModel.start());
+        btnPlant.setOnAction(e -> menuViewModel.plant());
+        btnUnplant.setOnAction(e -> menuViewModel.unPlant());
     }
+
+
+    private void configLogicBinding() {
+        btnPlant.disableProperty().bind(menuViewModel.isOnProperty().not());
+        btnUnplant.disableProperty().bind(menuViewModel.isOnProperty().not());
+        btnPlant.underlineProperty().bind(menuViewModel.isPlantproperty());
+        btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
+        menuViewModel.isOnProperty().addListener((obs, oldval,newval) -> {
+            btnSwitch.textProperty().bind(menuViewModel.startLabelProperty());
+        });
+
+    }
+
 
 }
