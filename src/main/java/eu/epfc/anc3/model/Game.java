@@ -11,16 +11,29 @@ public class Game {
     private Land characterPosition = field.getLand(0, 0);
 
     void start() {
-        field = new Field();
-        gameStatus.set(GameStatus.GAME_ON);
+        if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
+            field = new Field();
+            gameStatus.set(GameStatus.GAME_ON);
+        }
+        else {
+            gameStatus.set(GameStatus.GAME_OFF);
+        }
+    }
+
+    void plant() {
+        gameStatus.set(GameStatus.PLANT);
+    }
+
+    void unPlant() {
+        gameStatus.set(GameStatus.UNPLANT);
+    }
+
+    void stop() {
+        gameStatus.set(GameStatus.GAME_OFF);
     }
 
     private GameStatus status() {
         return this.gameStatus.get();
-    }
-
-    private LandContent getCurrentLandContent() {
-        return status() == GameStatus.PLANT ? LandContent.GRASS : LandContent.DIRT;
     }
 
     public void teleport(int line, int col) {
