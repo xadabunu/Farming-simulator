@@ -31,7 +31,7 @@ public class LandView extends StackPane {
         imageView.setImage(landContent == LandContent.GRASS ? grassImage : dirtImage);
     }
 
-    public void setCharacterImage (ImageView imageView, CharacterView character) {
+    public void setCharacterImage (CharacterView character) {
         imageView.setImage(character.getImage());
     }
 

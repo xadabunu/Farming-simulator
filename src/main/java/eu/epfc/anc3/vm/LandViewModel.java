@@ -24,4 +24,8 @@ public class LandViewModel {
     }
 
     //public ReadOnlyObjectProperty<LandContent>
+
+    public void setCharacter() {
+        game.teleport(line, col);
+    }
 }
