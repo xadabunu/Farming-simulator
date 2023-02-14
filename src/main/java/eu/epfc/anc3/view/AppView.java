@@ -77,7 +77,7 @@ public class AppView extends VBox {
     }
 
     private void configFieldView() {
-        fieldView = new FieldView(appViewModel.getFieldViewModel(), fieldWidthProperty, fieldhHeightProperty);
+        fieldView = new FieldView(appViewModel.getFieldViewModel(), fieldWidthProperty);
         fieldView.minHeightProperty().bind(fieldhHeightProperty);
         fieldView.minWidthProperty().bind(fieldWidthProperty);
         fieldView.maxHeightProperty().bind(fieldhHeightProperty);
@@ -90,7 +90,6 @@ public class AppView extends VBox {
 
     private void initiateCharacter() {
         characterView = new CharacterView("farmer.png");
-
         fieldView.add(new ImageView(characterView.getImage()), 0,0);
-        }
+    }
 }

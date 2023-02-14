@@ -15,13 +15,11 @@ public class FieldView extends GridPane {
 
     private final FieldViewModel fieldViewModel;
 
-    public FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty, DoubleProperty fieldHeightProperty) {
+    public FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty) {
 
         this.fieldViewModel = fieldViewModel;
 
         setPadding(new Insets(PADDING));
-//        this.prefWidthProperty().bind(fieldWidthProperty);
-//        this.prefHeightProperty().bind(fieldHeightProperty);
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setPercentHeight(100.0 / FIELD_HEIGHT);
         ColumnConstraints columnConstraints = new ColumnConstraints();

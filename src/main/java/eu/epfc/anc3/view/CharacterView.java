@@ -12,7 +12,6 @@ public class CharacterView {
     private final CharacterViewModel characterViewModel = new CharacterViewModel();
 
     public CharacterView (String imagePath) {
-
         image = new Image(imagePath);
         imageView.setPreserveRatio(true);
         //imageView.fitWidthProperty().bind();

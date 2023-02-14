@@ -28,7 +28,7 @@ public class AppViewModel {
         return new SimpleStringProperty("OUR FARM");
     }
 
-    public ReadOnlyBooleanProperty isGameOnProperty() {
+    public ReadOnlyBooleanProperty isOnProperty() {
         return game.isOnProperty();
     }
 }

@@ -28,6 +28,10 @@ public class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
+    void setCharacterPosition(Character c, int line, int col) {
+        //a toi olivier (ou xavier) !
+    }
+
     void stop() {
         gameStatus.set(GameStatus.GAME_OFF);
     }

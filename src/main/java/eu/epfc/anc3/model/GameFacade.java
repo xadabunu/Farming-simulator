@@ -61,6 +61,10 @@ public class GameFacade {
         game.stop();
     }
 
+    public void setCharacterPosition(Character c, int line, int col) {
+        game.setCharacterPosition(c, line, col);
+    }
+
     public void teleport(int line, int col) {
         game.teleport(line, col);
     }
