@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import static eu.epfc.anc3.view.AppView.PADDING;
+
 public class LandView extends StackPane {
 
     private static final Image grassImage = new Image("grass.png");
@@ -15,21 +17,22 @@ public class LandView extends StackPane {
 
     private final ImageView imageView = new ImageView();
 
-
     public LandView(LandViewModel landViewModel, DoubleBinding landWidthProperty) {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
         ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
-        valueProp.addListener((obs, old, newVal) -> setOxoImage(imageView, newVal));
+        valueProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
+        setLandImage(imageView, LandContent.DIRT);
     }
 
-    private void setOxoImage(ImageView imageView, LandContent cellValue) {
-        if (cellValue == LandContent.GRASS) imageView.setImage(grassImage);
-        else imageView.setImage(dirtImage);
+    private void setLandImage(ImageView imageView, LandContent landContent) {
+        imageView.setImage(landContent == LandContent.GRASS ? grassImage : dirtImage);
     }
 
-
+    public void setCharacterImage (CharacterView character) {
+        imageView.setImage(character.getImage());
+    }
 
 }

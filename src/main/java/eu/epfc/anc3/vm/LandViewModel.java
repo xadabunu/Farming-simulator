@@ -20,8 +20,12 @@ public class LandViewModel {
     }
 
     public ReadOnlyObjectProperty<LandContent> valueProperty() {
-        return game.valueProperty(line, col);
+        return game.contentProperty(line, col);
     }
 
     //public ReadOnlyObjectProperty<LandContent>
+
+    public void setCharacter() {
+        game.teleport(line, col);
+    }
 }
