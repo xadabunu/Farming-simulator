@@ -1,15 +1,16 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleStringProperty;
+import eu.epfc.anc3.model.GameStatus;
+import eu.epfc.anc3.view.CounterView;
+import javafx.beans.property.*;
 import javafx.scene.layout.VBox;
 
 public class AppViewModel {
 
     private final MenuViewModel menuViewModel;
     private final FieldViewModel fieldViewModel;
+    private final CounterViewModel counterViewModel;
     private final GameFacade game = new GameFacade();
 
     public FieldViewModel getFieldViewModel() {
@@ -19,9 +20,14 @@ public class AppViewModel {
         return menuViewModel;
     }
 
+    public CounterViewModel getCounterViewModel() {
+        return counterViewModel;
+    }
+
     public AppViewModel() {
         menuViewModel = new MenuViewModel(game);
         fieldViewModel = new FieldViewModel(game);
+        counterViewModel = new CounterViewModel(game);
     }
 
     public ReadOnlyStringProperty titleProperty() {
@@ -30,5 +36,10 @@ public class AppViewModel {
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return game.isOnProperty();
+    }
+
+
+    public void plantUnplant() {
+        game.plantUnplant();
     }
 }

@@ -1,14 +1,14 @@
 package eu.epfc.anc3.model;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 public class Game {
     private Field field = new Field();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     private final Character farmer = new Farmer();
     private Land characterPosition = field.getLand(0, 0);
+
+    public final IntegerProperty ctr = new SimpleIntegerProperty(5);
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -52,4 +52,50 @@ public class Game {
         return gameStatus;
     }
 
+
+    public boolean plantUnplant() {
+        if(gameStatus.isEqualTo(GameStatus.PLANT).get()) {
+            return plantGrass();
+        }
+        else if (gameStatus.isEqualTo(GameStatus.UNPLANT).get()){
+            return unplantGrass();
+        }
+        return false;
+    }
+
+    private boolean plantGrass() {
+        if (characterPosition.getValue() == LandContent.DIRT) {
+            characterPosition.setValue(LandContent.GRASS);
+//            updateCtr();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean unplantGrass() {
+        if (characterPosition.getValue() != LandContent.DIRT) {
+            characterPosition.setValue(LandContent.DIRT);
+//            updateCtr();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean counterManager() {
+        if (plantUnplant()){
+            if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get()){
+                ctr.setValue(ctr.intValue()+1);
+            }
+            else {
+                ctr.setValue(ctr.intValue()-1);
+            }
+//            System.out.println(ctr);
+            return true;
+        }
+        return false;
+    }
+
+//    void updateCtr() {
+//        ctr.set(ctr.get() + (gameStatusProperty().isEqualTo(GameStatus.PLANT).get() ? 1 : -1 ));
+//    }
 }

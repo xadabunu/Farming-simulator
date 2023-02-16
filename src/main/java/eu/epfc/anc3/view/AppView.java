@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -34,12 +35,14 @@ public class AppView extends VBox {
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
 
+    private CounterView counterView;
     private MenuView menuView;
     private FieldView fieldView;
     private CharacterView characterView;
 
     public AppView(Stage stage) {
         start(stage);
+        spaceBar();
     }
 
     public void start(Stage stage) {
@@ -65,15 +68,10 @@ public class AppView extends VBox {
     }
 
     private void configCounter() {
-        var pane = new HBox();
-        Label labelCtr = new Label("Nombre de parcelles de gazon: ");
-        TextField ctrTxt = new TextField();
-        ctrTxt.setMaxWidth(30);
-        ctrTxt.setDisable(true);
-        ctrTxt.setText("0");
-        pane.getChildren().addAll(labelCtr, ctrTxt);
-        this.getChildren().add(pane);
-        pane.setAlignment(Pos.CENTER);
+        counterView = new CounterView(appViewModel.getCounterViewModel());
+        this.getChildren().add(counterView);
+        counterView.setAlignment(Pos.CENTER);
+        counterView.setSpacing(5);
     }
 
     private void configFieldView() {
@@ -91,5 +89,13 @@ public class AppView extends VBox {
     private void initiateCharacter() {
         characterView = new CharacterView("farmer.png");
         fieldView.add(new ImageView(characterView.getImage()), 0,0);
+    }
+
+    private void spaceBar() {
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.G) {
+                appViewModel.plantUnplant();
+            }
+        });
     }
 }

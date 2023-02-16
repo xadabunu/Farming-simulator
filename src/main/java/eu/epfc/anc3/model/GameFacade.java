@@ -1,9 +1,7 @@
 package eu.epfc.anc3.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.*;
+import javafx.scene.input.KeyCode;
 
 public class GameFacade {
 
@@ -25,6 +23,11 @@ public class GameFacade {
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return game.contentProperty(line ,col);
+    }
+
+    public IntegerProperty ctrProperty() {
+//        System.out.println(game.ctr);
+        return game.ctr;
     }
 
     public GameFacade() {
@@ -68,4 +71,13 @@ public class GameFacade {
     public void teleport(int line, int col) {
         game.teleport(line, col);
     }
+
+    public boolean plantUnplant(){
+        return game.counterManager();
+    }
+
+//    public void updateCtr() {
+//        game.updateCtr();
+//    }
+
 }
