@@ -25,7 +25,8 @@ public class GameFacade {
         return game.contentProperty(line ,col);
     }
 
-    public ReadOnlyIntegerProperty ctrProperty() {
+    public IntegerProperty ctrProperty() {
+//        System.out.println(game.ctr);
         return game.ctr;
     }
 
@@ -74,5 +75,9 @@ public class GameFacade {
     public boolean plantUnplant(){
         return game.counterManager();
     }
+
+//    public void updateCtr() {
+//        game.updateCtr();
+//    }
 
 }

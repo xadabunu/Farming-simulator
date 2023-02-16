@@ -8,7 +8,7 @@ public class Game {
     private final Character farmer = new Farmer();
     private Land characterPosition = field.getLand(0, 0);
 
-    public final IntegerProperty ctr = new SimpleIntegerProperty();
+    public final IntegerProperty ctr = new SimpleIntegerProperty(5);
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -66,6 +66,7 @@ public class Game {
     private boolean plantGrass() {
         if (characterPosition.getValue() == LandContent.DIRT) {
             characterPosition.setValue(LandContent.GRASS);
+//            updateCtr();
             return true;
         }
         return false;
@@ -74,6 +75,7 @@ public class Game {
     private boolean unplantGrass() {
         if (characterPosition.getValue() != LandContent.DIRT) {
             characterPosition.setValue(LandContent.DIRT);
+//            updateCtr();
             return true;
         }
         return false;
@@ -82,13 +84,18 @@ public class Game {
     public boolean counterManager() {
         if (plantUnplant()){
             if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get()){
-                ctr.add(1);
+                ctr.setValue(ctr.intValue()+1);
             }
             else {
-                ctr.subtract(1);
+                ctr.setValue(ctr.intValue()-1);
             }
+//            System.out.println(ctr);
             return true;
         }
         return false;
     }
+
+//    void updateCtr() {
+//        ctr.set(ctr.get() + (gameStatusProperty().isEqualTo(GameStatus.PLANT).get() ? 1 : -1 ));
+//    }
 }

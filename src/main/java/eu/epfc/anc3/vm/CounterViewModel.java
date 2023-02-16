@@ -16,9 +16,21 @@ public class CounterViewModel {
         return new SimpleStringProperty("Nombre de parcelles de gazons");
     }
 
-    public StringProperty counterProperty() {
-        return new SimpleStringProperty(String.valueOf(game.ctrProperty()));
+//    public StringProperty counterProperty() {
+//        System.out.println(game.ctrProperty());
+//        return new SimpleStringProperty(String.valueOf(game.ctrProperty().getValue()));
+//
+//    }
+
+    public IntegerProperty counterProperty() {
+        System.out.println(game.ctrProperty());
+        return game.ctrProperty();
+
     }
+
+//    public void updateCtr() {
+//        game.updateCtr();
+//    }
 
 //    public void counterManager() {
 //        if (game.plantUnplant()){
