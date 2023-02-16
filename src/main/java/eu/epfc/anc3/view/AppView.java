@@ -34,6 +34,7 @@ public class AppView extends VBox {
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
 
+    private CounterView counterView;
     private MenuView menuView;
     private FieldView fieldView;
     private CharacterView characterView;
@@ -65,15 +66,10 @@ public class AppView extends VBox {
     }
 
     private void configCounter() {
-        var pane = new HBox();
-        Label labelCtr = new Label("Nombre de parcelles de gazon: ");
-        TextField ctrTxt = new TextField();
-        ctrTxt.setMaxWidth(30);
-        ctrTxt.setDisable(true);
-        ctrTxt.setText("0");
-        pane.getChildren().addAll(labelCtr, ctrTxt);
-        this.getChildren().add(pane);
-        pane.setAlignment(Pos.CENTER);
+        counterView = new CounterView(appViewModel.getCounterViewModel());
+        this.getChildren().add(counterView);
+        counterView.setAlignment(Pos.CENTER);
+        counterView.setSpacing(5);
     }
 
     private void configFieldView() {
