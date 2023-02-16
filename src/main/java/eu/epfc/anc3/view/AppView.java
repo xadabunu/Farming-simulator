@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -41,6 +42,7 @@ public class AppView extends VBox {
 
     public AppView(Stage stage) {
         start(stage);
+        spaceBar();
     }
 
     public void start(Stage stage) {
@@ -87,5 +89,13 @@ public class AppView extends VBox {
     private void initiateCharacter() {
         characterView = new CharacterView("farmer.png");
         fieldView.add(new ImageView(characterView.getImage()), 0,0);
+    }
+
+    private void spaceBar() {
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.G) {
+                appViewModel.plantUnplant();
+            }
+        });
     }
 }

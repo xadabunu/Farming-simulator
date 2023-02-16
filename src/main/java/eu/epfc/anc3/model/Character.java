@@ -11,4 +11,8 @@ public abstract class Character {
     public void move() {
 
     }
+
+    public Land getPosition() {
+        return position;
+    }
 }
