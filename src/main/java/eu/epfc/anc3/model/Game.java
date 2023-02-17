@@ -5,11 +5,14 @@ import javafx.beans.property.*;
 public class Game {
     private Field field = new Field();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
-    private final Character farmer = new Farmer();
-    private Land characterPosition = field.getLand(0, 0);
+//    private Land characterPosition = field.getLand(0, 0);
+    private ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
+    public final IntegerProperty ctr = new SimpleIntegerProperty(0);
+    //public final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0);)
 
-    public final IntegerProperty ctr = new SimpleIntegerProperty(5);
-
+    public ReadOnlyObjectProperty<Field> fieldProperty() {
+        return new SimpleObjectProperty<>(field);
+    }
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
             field = new Field();
@@ -24,8 +27,12 @@ public class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.PLANT).get() ? GameStatus.GAME_ON : GameStatus.PLANT);
     }
 
-    void unPlant() {
+    void unplant() {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
+    }
+
+    ReadOnlyObjectProperty<Position> characterPositionProperty() {
+        return characterPosition;
     }
 
     void setCharacterPosition(Character c, int line, int col) {
@@ -41,7 +48,7 @@ public class Game {
     }
 
     public void teleport(int line, int col) {
-        characterPosition = field.getLand(line, col);
+        characterPosition.set(new Position(line, col));
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
@@ -52,50 +59,40 @@ public class Game {
         return gameStatus;
     }
 
-
     public boolean plantUnplant() {
-        if(gameStatus.isEqualTo(GameStatus.PLANT).get()) {
+        if (gameStatus.isEqualTo(GameStatus.PLANT).get())
             return plantGrass();
-        }
-        else if (gameStatus.isEqualTo(GameStatus.UNPLANT).get()){
+        else if (gameStatus.isEqualTo(GameStatus.UNPLANT).get())
             return unplantGrass();
-        }
         return false;
     }
 
     private boolean plantGrass() {
-        if (characterPosition.getValue() == LandContent.DIRT) {
-            characterPosition.setValue(LandContent.GRASS);
-//            updateCtr();
+        var pos = field.getLand(characterPosition.getValue().getLine(), characterPosition.get().getCol());
+        if (pos.contentProperty().isEqualTo(LandContent.DIRT).get()) {
+            pos.setContent(LandContent.GRASS);
             return true;
         }
         return false;
     }
 
     private boolean unplantGrass() {
-        if (characterPosition.getValue() != LandContent.DIRT) {
-            characterPosition.setValue(LandContent.DIRT);
-//            updateCtr();
+        var pos = field.getLand(characterPosition.getValue().getLine(), characterPosition.get().getCol());
+        if (!pos.contentProperty().isEqualTo(LandContent.DIRT).get()) {
+            pos.setContent(LandContent.DIRT);
             return true;
         }
         return false;
     }
 
     public boolean counterManager() {
-        if (plantUnplant()){
-            if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get()){
-                ctr.setValue(ctr.intValue()+1);
-            }
-            else {
-                ctr.setValue(ctr.intValue()-1);
-            }
-//            System.out.println(ctr);
+        if (plantUnplant()) {
+            if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
+                ctr.setValue(ctr.intValue() + 1);
+            else
+                ctr.setValue(ctr.intValue() - 1);
             return true;
         }
         return false;
     }
-
-//    void updateCtr() {
-//        ctr.set(ctr.get() + (gameStatusProperty().isEqualTo(GameStatus.PLANT).get() ? 1 : -1 ));
-//    }
 }

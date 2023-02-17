@@ -19,7 +19,6 @@ public class CounterView extends HBox {
     private final Label labelCtr = new Label();
     private final TextField ctrTxt = new TextField();
 
-//    private final StringProperty ctr = new SimpleStringProperty("5");
 
 
     public CounterView(CounterViewModel counterViewModel) {
@@ -38,10 +37,9 @@ public class CounterView extends HBox {
     private void configLabel() {
         labelCtr.textProperty().bind(counterViewModel.counterLabelProperty());
         ctrTxt.textProperty().bindBidirectional(counterViewModel.counterProperty(), NumberFormat.getIntegerInstance());
-        counterViewModel.counterProperty().addListener((obs, oldval, newval)-> {
-            ctrTxt.textProperty().bindBidirectional(counterViewModel.counterProperty(), NumberFormat.getIntegerInstance());
-        });
-//        System.out.println(ctr);
+//        counterViewModel.counterProperty().addListener((obs, oldval, newval)-> {
+//            ctrTxt.textProperty().bindBidirectional(counterViewModel.counterProperty(), NumberFormat.getIntegerInstance());
+//        });
     }
 
 

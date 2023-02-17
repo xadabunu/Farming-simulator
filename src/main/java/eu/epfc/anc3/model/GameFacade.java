@@ -1,7 +1,6 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.*;
-import javafx.scene.input.KeyCode;
 
 public class GameFacade {
 
@@ -10,6 +9,8 @@ public class GameFacade {
     private final BooleanProperty isOn = new SimpleBooleanProperty(false);
     private final BooleanProperty isPlant = new SimpleBooleanProperty(false);
     private final BooleanProperty isUnplant = new SimpleBooleanProperty(false);
+    //private final ObjectProperty<Position> characterPositionProperty = game.fieldProperty().get().characterPositionProperty();
+    private final ObjectProperty<Position> characterPositionProperty = new SimpleObjectProperty<>(game.fieldProperty().get().characterPositionProperty().get()) ;
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return isOn;
@@ -26,15 +27,18 @@ public class GameFacade {
     }
 
     public IntegerProperty ctrProperty() {
-//        System.out.println(game.ctr);
         return game.ctr;
     }
 
+    private Position charPos = characterPositionProperty.get();
+    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
+        return game.characterPositionProperty();
+    }
     public GameFacade() {
         isOn.bind(game.gameStatusProperty().isNotEqualTo(GameStatus.GAME_OFF));
         isPlant.bind(game.gameStatusProperty().isEqualTo(GameStatus.PLANT));
         isUnplant.bind(game.gameStatusProperty().isEqualTo(GameStatus.UNPLANT));
-
+        characterPositionProperty.bind(game.characterPositionProperty());
     }
 
     public ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
@@ -57,7 +61,7 @@ public class GameFacade {
     }
 
     public void unPlant() {
-        game.unPlant();
+        game.unplant();
     }
 
     public void stop() {
@@ -75,9 +79,4 @@ public class GameFacade {
     public boolean plantUnplant(){
         return game.counterManager();
     }
-
-//    public void updateCtr() {
-//        game.updateCtr();
-//    }
-
 }

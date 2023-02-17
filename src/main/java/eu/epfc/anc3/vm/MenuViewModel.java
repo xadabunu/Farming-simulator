@@ -38,7 +38,6 @@ public class MenuViewModel {
         }
     }
 
-
     public ReadOnlyStringProperty plantLabelProperty() {
         return new SimpleStringProperty("Planter du gazon");
     }

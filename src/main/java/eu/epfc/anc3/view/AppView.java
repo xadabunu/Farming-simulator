@@ -38,7 +38,6 @@ public class AppView extends VBox {
     private CounterView counterView;
     private MenuView menuView;
     private FieldView fieldView;
-    private CharacterView characterView;
 
     public AppView(Stage stage) {
         start(stage);
@@ -59,7 +58,6 @@ public class AppView extends VBox {
         configCounter();
         configFieldView();
         configMenu();
-        initiateCharacter();
     }
 
     private void configMenu() {
@@ -86,10 +84,6 @@ public class AppView extends VBox {
         setAlignment(Pos.CENTER);
     }
 
-    private void initiateCharacter() {
-        characterView = new CharacterView("farmer.png");
-        fieldView.add(new ImageView(characterView.getImage()), 0,0);
-    }
 
     private void spaceBar() {
         this.setOnKeyPressed(event -> {

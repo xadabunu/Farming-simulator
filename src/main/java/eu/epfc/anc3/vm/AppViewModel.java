@@ -1,10 +1,7 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
-import eu.epfc.anc3.model.GameStatus;
-import eu.epfc.anc3.view.CounterView;
 import javafx.beans.property.*;
-import javafx.scene.layout.VBox;
 
 public class AppViewModel {
 
@@ -31,13 +28,12 @@ public class AppViewModel {
     }
 
     public ReadOnlyStringProperty titleProperty() {
-        return new SimpleStringProperty("OUR FARM");
+        return new SimpleStringProperty("ANC3 - Farming Simulator");
     }
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return game.isOnProperty();
     }
-
 
     public void plantUnplant() {
         game.plantUnplant();

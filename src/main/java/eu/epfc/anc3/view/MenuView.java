@@ -22,7 +22,6 @@ public class MenuView extends HBox {
         configButtons();
         manageBtn();
         configLogicBinding();
-
     }
 
     private void configButtons() {
@@ -44,7 +43,6 @@ public class MenuView extends HBox {
         btnUnplant.setOnAction(e -> menuViewModel.unPlant());
     }
 
-
     private void configLogicBinding() {
         btnPlant.disableProperty().bind(menuViewModel.isOnProperty().not());
         btnUnplant.disableProperty().bind(menuViewModel.isOnProperty().not());
@@ -59,8 +57,5 @@ public class MenuView extends HBox {
         menuViewModel.isUnplantproperty().addListener((obs, oldval, newval) -> {
             btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
         });
-
     }
-
-
 }

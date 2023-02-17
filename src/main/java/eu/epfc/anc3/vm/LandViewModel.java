@@ -1,6 +1,7 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
+import eu.epfc.anc3.model.GameStatus;
 import eu.epfc.anc3.model.LandContent;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
@@ -16,14 +17,13 @@ public class LandViewModel {
     }
 
     public void teleport() {
-        game.teleport(line, col);
+        if (!game.gameStatusProperty().isEqualTo(GameStatus.GAME_OFF).get())
+            game.teleport(line, col);
     }
 
     public ReadOnlyObjectProperty<LandContent> valueProperty() {
         return game.contentProperty(line, col);
     }
-
-    //public ReadOnlyObjectProperty<LandContent>
 
     public void setCharacter() {
         game.teleport(line, col);
