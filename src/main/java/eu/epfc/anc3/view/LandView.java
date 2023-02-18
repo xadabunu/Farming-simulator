@@ -21,8 +21,8 @@ public class LandView extends StackPane {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
-        ReadOnlyObjectProperty<LandContent> valueProp = landViewModel.valueProperty();
-        valueProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
+        ReadOnlyObjectProperty<LandContent> contentProp = landViewModel.contentProperty();
+        contentProp.addListener((obs, old, newVal) -> setLandImage(imageView, newVal));
         this.setOnMouseClicked(e -> landViewModel.teleport());
         setLandImage(imageView, LandContent.DIRT);
     }

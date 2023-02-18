@@ -21,7 +21,7 @@ public class LandViewModel {
             game.teleport(line, col);
     }
 
-    public ReadOnlyObjectProperty<LandContent> valueProperty() {
+    public ReadOnlyObjectProperty<LandContent> contentProperty() {
         return game.contentProperty(line, col);
     }
 
