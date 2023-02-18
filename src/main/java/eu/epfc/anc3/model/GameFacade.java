@@ -79,4 +79,8 @@ public class GameFacade {
     public boolean plantUnplant(){
         return game.counterManager();
     }
+
+    public void move(Direction d) {
+        game.move(d);
+    }
 }

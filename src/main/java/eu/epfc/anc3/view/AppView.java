@@ -1,23 +1,14 @@
 package eu.epfc.anc3.view;
 
+import eu.epfc.anc3.model.Direction;
 import eu.epfc.anc3.model.GameFacade;
 import eu.epfc.anc3.vm.AppViewModel;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class AppView extends VBox {
 
@@ -41,7 +32,7 @@ public class AppView extends VBox {
 
     public AppView(Stage stage) {
         start(stage);
-        spaceBar();
+        keyboardManager();
     }
 
     public void start(Stage stage) {
@@ -85,10 +76,14 @@ public class AppView extends VBox {
     }
 
 
-    private void spaceBar() {
-        this.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.G) {
-                appViewModel.plantUnplant();
+    private void keyboardManager() {
+        setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case G -> appViewModel.plantUnplant();
+                case A, Q -> appViewModel.move(Direction.LEFT);
+                case S -> appViewModel.move(Direction.DOWN);
+                case D -> appViewModel.move(Direction.RIGHT);
+                case W, Z -> appViewModel.move(Direction.UP);
             }
         });
     }

@@ -1,5 +1,6 @@
 package eu.epfc.anc3.vm;
 
+import eu.epfc.anc3.model.Direction;
 import eu.epfc.anc3.model.GameFacade;
 import javafx.beans.property.*;
 
@@ -37,5 +38,9 @@ public class AppViewModel {
 
     public void plantUnplant() {
         game.plantUnplant();
+    }
+
+    public void move(Direction d) {
+        game.move(d);
     }
 }

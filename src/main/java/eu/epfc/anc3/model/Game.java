@@ -59,7 +59,7 @@ public class Game {
         return gameStatus;
     }
 
-    public boolean plantUnplant() {
+    private boolean plantUnplant() {
         if (gameStatus.isEqualTo(GameStatus.PLANT).get())
             return plantGrass();
         else if (gameStatus.isEqualTo(GameStatus.UNPLANT).get())
@@ -94,5 +94,27 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    public void move(Direction d) {
+        var pos = characterPosition.get();
+        switch (d) {
+            case UP -> {
+                if (pos.getLine() > 0)
+                    teleport(pos.getLine() - 1, pos.getCol());
+            }
+            case DOWN -> {
+                if (pos.getLine() < Field.LINES - 1)
+                    teleport(pos.getLine() + 1, pos.getCol());
+            }
+            case RIGHT -> {
+                if (pos.getCol() < Field.COLUMNS - 1)
+                    teleport(pos.getLine(), pos.getCol() + 1);
+            }
+            case LEFT -> {
+                if (pos.getCol() > 0)
+                    teleport(pos.getLine(), pos.getCol() - 1);
+            }
+        }
     }
 }
