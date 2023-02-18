@@ -25,6 +25,7 @@ class Field {
     public Land getLand(int line, int col) {return lands[line][col];}
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
+        //System.out.println("field : " + line + ", " + col);
         return lands[line][col].contentProperty();
     }
 
