@@ -16,6 +16,8 @@ public class Game {
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
             field = new Field();
+            ctr.set(0);
+            characterPosition.set(new Position (0,0));
             gameStatus.set(GameStatus.GAME_ON);
         }
         else {
