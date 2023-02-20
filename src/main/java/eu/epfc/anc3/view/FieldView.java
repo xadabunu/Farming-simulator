@@ -63,6 +63,6 @@ public class FieldView extends GridPane {
             getChildren().remove(imageView);
             add(imageView, newVal.getCol(), newVal.getLine());
         });
-
+        imageView.setTranslateY(-7);
     }
 }
