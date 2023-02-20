@@ -53,17 +53,13 @@ public class MenuView extends HBox {
     private void configLogicBinding() {
         btnPlant.disableProperty().bind(menuViewModel.isOnProperty().not());
         btnUnplant.disableProperty().bind(menuViewModel.isOnProperty().not());
-        btnPlant.underlineProperty().bind(menuViewModel.isPlantproperty());
-        btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
         menuViewModel.isOnProperty().addListener((obs, oldval, newval) -> {
             btnSwitch.textProperty().bind(menuViewModel.startLabelProperty());
         });
-        menuViewModel.isPlantproperty().addListener((obs, oldval, newval) -> {
-            btnPlant.underlineProperty().bind(menuViewModel.isPlantproperty());
+        menuViewModel.isOnProperty().addListener((obs, old, newVal) -> {
+            btnPlant.setSelected(false);
+            btnUnplant.setSelected(false);
         });
-        menuViewModel.isUnplantproperty().addListener((obs, oldval, newval) -> {
-            btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
-        });
-    }
 
+    }
 }

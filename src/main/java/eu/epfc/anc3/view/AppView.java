@@ -78,12 +78,13 @@ public class AppView extends VBox {
 
     private void keyboardManager() {
         setOnKeyPressed(e -> {
+            fieldView.requestFocus();
             switch (e.getCode()) {
-                case G -> appViewModel.plantUnplant();
-                case A, Q -> appViewModel.move(Direction.LEFT);
-                case S -> appViewModel.move(Direction.DOWN);
-                case D -> appViewModel.move(Direction.RIGHT);
-                case W, Z -> appViewModel.move(Direction.UP);
+                case SPACE -> appViewModel.plantUnplant();
+                case A, Q, LEFT -> appViewModel.move(Direction.LEFT);
+                case S, DOWN -> appViewModel.move(Direction.DOWN);
+                case D, RIGHT -> appViewModel.move(Direction.RIGHT);
+                case W, Z, UP -> appViewModel.move(Direction.UP);
             }
         });
     }
