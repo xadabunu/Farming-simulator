@@ -4,6 +4,7 @@ import eu.epfc.anc3.vm.MenuViewModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -14,8 +15,10 @@ public class MenuView extends HBox {
 
     private final MenuViewModel menuViewModel;
     private final Button btnSwitch = new Button();
-    private final Button btnPlant = new Button();
-    private final Button btnUnplant = new Button();
+    private final ToggleButton btnPlant = new ToggleButton();
+    private final ToggleButton btnUnplant = new ToggleButton();
+
+
 
     public MenuView(MenuViewModel menuViewModel) {
         this.menuViewModel = menuViewModel;

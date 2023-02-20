@@ -5,7 +5,6 @@ import javafx.beans.property.*;
 public class GameFacade {
 
     private final Game game = new Game();
-
     private final BooleanProperty isOn = new SimpleBooleanProperty(false);
     private final BooleanProperty isPlant = new SimpleBooleanProperty(false);
     private final BooleanProperty isUnplant = new SimpleBooleanProperty(false);

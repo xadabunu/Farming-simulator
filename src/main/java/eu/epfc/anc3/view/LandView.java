@@ -10,13 +10,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import java.text.NumberFormat;
+
 public class LandView extends StackPane {
 
     private static final Image grassImage = new Image("grass.png");
     private static final Image dirtImage = new Image("dirt.png");
 
     private final ImageView imageView = new ImageView();
-    ObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
+    ReadOnlyObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
 
     public LandView(LandViewModel landViewModel, DoubleBinding landWidthProperty) {
         imageView.setPreserveRatio(true);
@@ -25,13 +27,11 @@ public class LandView extends StackPane {
         setLandImage(imageView, landContentProperty.get());
         ReadOnlyObjectProperty<LandContent> contentProperty = landViewModel.contentProperty();
         contentProperty.addListener((obs, old, newVal) -> {
-            getChildren().remove(imageView);
-            setLandImage(imageView, newVal);
-            getChildren().add(imageView);
+            setLandImage(imageView, landViewModel.contentProperty().get());
         });
-        //landContentProperty.bind(landViewModel.contentProperty());
-        //landContentProperty.addListener((a, b, c) -> System.out.println("here"));
-        setOnMouseClicked(e -> landViewModel.teleport());
+        setOnMouseClicked(e -> {
+            landViewModel.teleport();
+        });
     }
 
     private void setLandImage(ImageView imageView, LandContent landContent) {
