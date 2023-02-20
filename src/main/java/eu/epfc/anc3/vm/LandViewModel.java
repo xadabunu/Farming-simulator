@@ -17,8 +17,7 @@ public class LandViewModel {
     }
 
     public void teleport() {
-        if (!game.gameStatusProperty().isEqualTo(GameStatus.GAME_OFF).get())
-            game.teleport(line, col);
+        game.teleport(line, col);
     }
 
     public ReadOnlyObjectProperty<LandContent> contentProperty() {

@@ -5,10 +5,8 @@ import javafx.beans.property.*;
 public class Game {
     private Field field = new Field();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
-//    private Land characterPosition = field.getLand(0, 0);
     private ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
     public final IntegerProperty ctr = new SimpleIntegerProperty(0);
-    //public final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0);)
 
     public ReadOnlyObjectProperty<Field> fieldProperty() {
         return new SimpleObjectProperty<>(field);
@@ -16,6 +14,8 @@ public class Game {
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
             field = new Field();
+            ctr.set(0);
+            characterPosition.set(new Position(0, 0));
             gameStatus.set(GameStatus.GAME_ON);
         }
         else {
@@ -34,21 +34,14 @@ public class Game {
     ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return characterPosition;
     }
-
-    void setCharacterPosition(Character c, int line, int col) {
-        //a toi olivier (ou xavier) !
-    }
-
-    void stop() {
-        gameStatus.set(GameStatus.GAME_OFF);
-    }
-
+    
     private GameStatus status() {
         return this.gameStatus.get();
     }
 
     public void teleport(int line, int col) {
-        characterPosition.set(new Position(line, col));
+        if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get())
+            characterPosition.set(new Position(line, col));
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
