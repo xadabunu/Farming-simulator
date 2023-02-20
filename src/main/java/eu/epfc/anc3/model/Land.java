@@ -33,5 +33,4 @@ public class Land {
     public ObjectProperty<Position> getPosition() {
         return new SimpleObjectProperty<>(position);
     }
-
 }
