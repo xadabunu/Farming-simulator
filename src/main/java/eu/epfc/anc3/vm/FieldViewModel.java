@@ -19,13 +19,7 @@ public class FieldViewModel {
         return new LandViewModel(line, col, game);
     }
 
-    public void setCharacterPosition(Character c, int line, int col) {
-        game.setCharacterPosition(c, line, col);
-    }
-
     public ReadOnlyObjectProperty<Position> characterPositionProperty() {
-        //var pos = game.characterPositionProperty().get().getPosition();
-        //return new SimpleObjectProperty<>(new Position(pos.getLine(), pos.getCol()));
         return game.characterPositionProperty();
     }
 }

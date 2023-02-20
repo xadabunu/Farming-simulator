@@ -25,10 +25,6 @@ public class MenuViewModel {
         game.unPlant();
     }
 
-    public void stop() {
-        game.stop();
-    }
-
     public ReadOnlyStringProperty startLabelProperty() {
         if(!game.isOnProperty().get()){
             return new SimpleStringProperty("Démarrer");

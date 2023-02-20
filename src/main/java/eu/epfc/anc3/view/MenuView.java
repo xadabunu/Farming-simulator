@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -32,6 +33,9 @@ public class MenuView extends HBox {
         configLabel();
         setAlignment(Pos.CENTER);
         setSpacing(30);
+        ToggleGroup group = new ToggleGroup();
+        btnPlant.setToggleGroup(group);
+        btnUnplant.setToggleGroup(group);
     }
 
     private void configLabel() {
@@ -61,4 +65,5 @@ public class MenuView extends HBox {
             btnUnplant.underlineProperty().bind(menuViewModel.isUnplantproperty());
         });
     }
+
 }
