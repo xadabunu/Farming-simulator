@@ -30,8 +30,9 @@ public class CounterView extends HBox {
     private void configCounter() {
         getChildren().addAll(labelCtr, ctrTxt);
         configLabel();
-        ctrTxt.setMaxWidth(30);
+        ctrTxt.setMaxWidth(50);
         ctrTxt.setEditable(false);
+        ctrTxt.setDisable(true);
     }
 
     private void configLabel() {
