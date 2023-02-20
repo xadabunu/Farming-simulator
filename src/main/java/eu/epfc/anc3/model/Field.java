@@ -31,4 +31,11 @@ class Field {
     public ObjectProperty<Position> characterPositionProperty() {
         return characterPosition.get().getPosition();
     }
+
+    public void reset() {
+        for (int i = 0; i < LINES; ++i) {
+            for (int j = 0; j < COLUMNS; ++j)
+                lands[i][j].setContent(LandContent.DIRT);
+        }
+    }
 }

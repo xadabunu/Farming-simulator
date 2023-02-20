@@ -13,6 +13,7 @@ public class Game {
     }
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
+            field.reset();
             ctr.set(0);
             characterPosition.set(new Position(0, 0));
             gameStatus.set(GameStatus.GAME_ON);
@@ -33,7 +34,7 @@ public class Game {
     ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return characterPosition;
     }
-    
+
     private GameStatus status() {
         return this.gameStatus.get();
     }

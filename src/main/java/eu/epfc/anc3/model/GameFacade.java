@@ -8,7 +8,6 @@ public class GameFacade {
     private final BooleanProperty isOn = new SimpleBooleanProperty(false);
     private final BooleanProperty isPlant = new SimpleBooleanProperty(false);
     private final BooleanProperty isUnplant = new SimpleBooleanProperty(false);
-    //private final ObjectProperty<Position> characterPositionProperty = game.fieldProperty().get().characterPositionProperty();
     private final ObjectProperty<Position> characterPositionProperty = new SimpleObjectProperty<>(game.fieldProperty().get().characterPositionProperty().get()) ;
 
     public ReadOnlyBooleanProperty isOnProperty() {
