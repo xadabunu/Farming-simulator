@@ -25,11 +25,17 @@ class Field {
     public Land getLand(int line, int col) {return lands[line][col];}
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
-        //System.out.println("field : " + line + ", " + col);
         return lands[line][col].contentProperty();
     }
 
     public ObjectProperty<Position> characterPositionProperty() {
         return characterPosition.get().getPosition();
+    }
+
+    public void reset() {
+        for (int i = 0; i < LINES; ++i) {
+            for (int j = 0; j < COLUMNS; ++j)
+                lands[i][j].setContent(LandContent.DIRT);
+        }
     }
 }
