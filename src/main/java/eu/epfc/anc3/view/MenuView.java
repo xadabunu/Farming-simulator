@@ -10,18 +10,18 @@ import javafx.scene.layout.HBox;
 
 class MenuView extends HBox {
 
+    private FieldView fieldView;
     private final MenuViewModel menuViewModel;
     private final Button btnSwitch = new Button();
     private final ToggleButton btnPlant = new ToggleButton();
     private final ToggleButton btnUnplant = new ToggleButton();
 
-
-
-    MenuView(MenuViewModel menuViewModel) {
+    MenuView(MenuViewModel menuViewModel, FieldView fieldView) {
         this.menuViewModel = menuViewModel;
         configButtons();
         manageBtn();
         configLogicBinding();
+        this.fieldView = fieldView;
     }
 
     private void configButtons() {
@@ -41,9 +41,20 @@ class MenuView extends HBox {
     }
 
     private void manageBtn(){
-        btnSwitch.setOnAction(e -> menuViewModel.start());
-        btnPlant.setOnAction(e -> menuViewModel.setStatusPlant());
-        btnUnplant.setOnAction(e -> menuViewModel.setStatusUnplant());
+        btnSwitch.setOnAction(e -> {
+            menuViewModel.start();
+            fieldView.requestFocus();
+        });
+        btnPlant.setOnAction(e -> {
+            menuViewModel.setStatusPlant();
+            fieldView.requestFocus();
+        });
+        btnUnplant.setOnAction(e -> {
+            menuViewModel.setStatusUnplant();
+            fieldView.requestFocus();
+        });
+
+
     }
 
     private void configLogicBinding() {

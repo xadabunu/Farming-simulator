@@ -45,7 +45,7 @@ public class AppView extends VBox {
     }
 
     private void configMenu() {
-        MenuView menuView = new MenuView(appViewModel.getMenuViewModel());
+        MenuView menuView = new MenuView(appViewModel.getMenuViewModel(), fieldView);
         this.getChildren().add(menuView);
     }
 
