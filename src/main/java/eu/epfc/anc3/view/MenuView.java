@@ -42,8 +42,8 @@ class MenuView extends HBox {
 
     private void manageBtn(){
         btnSwitch.setOnAction(e -> menuViewModel.start());
-        btnPlant.setOnAction(e -> menuViewModel.plant());
-        btnUnplant.setOnAction(e -> menuViewModel.unPlant());
+        btnPlant.setOnAction(e -> menuViewModel.setStatusPlant());
+        btnUnplant.setOnAction(e -> menuViewModel.setStatusUnplant());
     }
 
     private void configLogicBinding() {
