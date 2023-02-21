@@ -15,7 +15,7 @@ class Game {
             ctr.set(0);
             characterPosition.set(new Position(0, 0));
             gameStatus.set(GameStatus.GAME_ON);
-            character = new Farmer(this, gameStatus);
+            character = new Farmer(this);
         }
         else {
             gameStatus.set(GameStatus.GAME_OFF);
@@ -85,6 +85,8 @@ class Game {
     }
 
     void move(Direction d) {
-        character.move(d);
+        if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
+            character.move(d);
+        }
     }
 }
