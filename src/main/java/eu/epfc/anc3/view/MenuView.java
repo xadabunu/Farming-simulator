@@ -3,16 +3,12 @@ package eu.epfc.anc3.view;
 import eu.epfc.anc3.vm.MenuViewModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-import java.util.EventListener;
 
-public class MenuView extends HBox {
+class MenuView extends HBox {
 
     private final MenuViewModel menuViewModel;
     private final Button btnSwitch = new Button();
@@ -21,7 +17,7 @@ public class MenuView extends HBox {
 
 
 
-    public MenuView(MenuViewModel menuViewModel) {
+    MenuView(MenuViewModel menuViewModel) {
         this.menuViewModel = menuViewModel;
         configButtons();
         manageBtn();

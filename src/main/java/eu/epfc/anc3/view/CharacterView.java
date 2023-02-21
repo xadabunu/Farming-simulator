@@ -1,22 +1,19 @@
 package eu.epfc.anc3.view;
 
-import eu.epfc.anc3.vm.CharacterViewModel;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CharacterView {
 
-    private static Image image;
-    private final ImageView imageView = new ImageView();
-    private final CharacterViewModel characterViewModel = new CharacterViewModel();
+    private final Image image;
 
     public CharacterView (String imagePath) {
         image = new Image(imagePath);
+        ImageView imageView = new ImageView();
         imageView.setPreserveRatio(true);
     }
 
-    public Image getImage() {
+    Image getImage() {
         return image;
     }
 

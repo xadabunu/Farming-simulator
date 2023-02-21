@@ -32,10 +32,6 @@ public class AppViewModel {
         return new SimpleStringProperty("ANC3 - Farming Simulator");
     }
 
-    public ReadOnlyBooleanProperty isOnProperty() {
-        return game.isOnProperty();
-    }
-
     public void plantUnplant() {
         game.plantUnplant();
     }

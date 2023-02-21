@@ -14,20 +14,13 @@ public class AppView extends VBox {
 
     private final AppViewModel appViewModel = new AppViewModel();
 
-    static final int MENU_HEIGHT = 30;
+    private static final int MENU_HEIGHT = 30;
     static final int PADDING = 20;
-
     private static final int SCENE_MIN_WIDTH = 1000, SCENE_MIN_HEIGHT = 600;
-
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
-    private int grassCtr = 0;
-
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
-
-    private CounterView counterView;
-    private MenuView menuView;
     private FieldView fieldView;
 
     public AppView(Stage stage) {
@@ -35,7 +28,7 @@ public class AppView extends VBox {
         keyboardManager();
     }
 
-    public void start(Stage stage) {
+    private void start(Stage stage) {
         configMainComponents(stage);
         Scene scene = new Scene(this, SCENE_MIN_WIDTH, SCENE_MIN_HEIGHT);
         stage.setScene(scene);
@@ -52,12 +45,12 @@ public class AppView extends VBox {
     }
 
     private void configMenu() {
-        menuView = new MenuView(appViewModel.getMenuViewModel());
+        MenuView menuView = new MenuView(appViewModel.getMenuViewModel());
         this.getChildren().add(menuView);
     }
 
     private void configCounter() {
-        counterView = new CounterView(appViewModel.getCounterViewModel());
+        CounterView counterView = new CounterView(appViewModel.getCounterViewModel());
         this.getChildren().add(counterView);
         counterView.setAlignment(Pos.CENTER);
         counterView.setSpacing(5);

@@ -1,18 +1,9 @@
 package eu.epfc.anc3.model;
 
 
-public abstract class Character {
+abstract class Character {
 
-    private Land position;
-
-    public Character() {
+    Character() {
     }
 
-    public void move() {
-
-    }
-
-    public Land getPosition() {
-        return position;
-    }
 }

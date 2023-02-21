@@ -2,15 +2,13 @@ package eu.epfc.anc3.model;
 
 import javafx.beans.property.*;
 
-public class Game {
-    private Field field = new Field();
+class Game {
+    private final Field field = new Field();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
-    private ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
+    private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
     public final IntegerProperty ctr = new SimpleIntegerProperty(0);
 
-    public ReadOnlyObjectProperty<Field> fieldProperty() {
-        return new SimpleObjectProperty<>(field);
-    }
+
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
             field.reset();
@@ -31,15 +29,11 @@ public class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
-    ReadOnlyObjectProperty<Position> characterPositionProperty() {
+    ObjectProperty<Position> characterPositionProperty() {
         return characterPosition;
     }
 
-    private GameStatus status() {
-        return this.gameStatus.get();
-    }
-
-    public void teleport(int line, int col) {
+    void teleport(int line, int col) {
         if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get())
             characterPosition.set(new Position(line, col));
     }
@@ -78,7 +72,7 @@ public class Game {
         return false;
     }
 
-    public boolean counterManager() {
+    boolean counterManager() {
         if (plantUnplant()) {
             if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
                 ctr.setValue(ctr.intValue() + 1);
@@ -89,7 +83,7 @@ public class Game {
         return false;
     }
 
-    public void move(Direction d) {
+    void move(Direction d) {
         var pos = characterPosition.get();
         switch (d) {
             case UP -> {

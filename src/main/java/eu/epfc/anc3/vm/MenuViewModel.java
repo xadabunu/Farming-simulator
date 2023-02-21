@@ -9,7 +9,7 @@ public class MenuViewModel {
 
     private final GameFacade game;
 
-    public MenuViewModel(GameFacade game) {
+    MenuViewModel(GameFacade game) {
         this.game = game;
     }
 
@@ -45,14 +45,5 @@ public class MenuViewModel {
     public ReadOnlyBooleanProperty isOnProperty() {
         return game.isOnProperty();
     }
-
-    public ReadOnlyBooleanProperty isPlantproperty() {
-        return game.isPlantProperty();
-    }
-
-    public ReadOnlyBooleanProperty isUnplantproperty() {
-        return game.isUnplantProperty();
-    }
-
 
 }

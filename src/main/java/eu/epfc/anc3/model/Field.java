@@ -6,20 +6,12 @@ class Field {
     static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
-    private final IntegerProperty grassCtr = new SimpleIntegerProperty();
-    private final ObjectProperty<Land> characterPosition;
-
-    public Field() {
+    Field() {
         lands = new Land[LINES][COLUMNS];
         for (int i = 0 ; i < LINES ; ++i) {
             for (int j = 0 ; j < COLUMNS ; ++j)
                 lands[i][j] = new Land(new Position(i,j));
         }
-        characterPosition = new SimpleObjectProperty<>(lands[0][0]);
-    }
-
-    LandContent getValue(int line, int col) {
-        return lands[line][col].getContent();
     }
 
     public Land getLand(int line, int col) {return lands[line][col];}
@@ -28,11 +20,7 @@ class Field {
         return lands[line][col].contentProperty();
     }
 
-    public ObjectProperty<Position> characterPositionProperty() {
-        return characterPosition.get().getPosition();
-    }
-
-    public void reset() {
+    void reset() {
         for (int i = 0; i < LINES; ++i) {
             for (int j = 0; j < COLUMNS; ++j)
                 lands[i][j].setContent(LandContent.DIRT);
