@@ -7,7 +7,7 @@ class Game {
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
     public final IntegerProperty ctr = new SimpleIntegerProperty(0);
-
+    public Character character;
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -15,6 +15,7 @@ class Game {
             ctr.set(0);
             characterPosition.set(new Position(0, 0));
             gameStatus.set(GameStatus.GAME_ON);
+            character = new Farmer(this);
         }
         else {
             gameStatus.set(GameStatus.GAME_OFF);
@@ -84,24 +85,8 @@ class Game {
     }
 
     void move(Direction d) {
-        var pos = characterPosition.get();
-        switch (d) {
-            case UP -> {
-                if (pos.getLine() > 0)
-                    teleport(pos.getLine() - 1, pos.getCol());
-            }
-            case DOWN -> {
-                if (pos.getLine() < Field.LINES - 1)
-                    teleport(pos.getLine() + 1, pos.getCol());
-            }
-            case RIGHT -> {
-                if (pos.getCol() < Field.COLUMNS - 1)
-                    teleport(pos.getLine(), pos.getCol() + 1);
-            }
-            case LEFT -> {
-                if (pos.getCol() > 0)
-                    teleport(pos.getLine(), pos.getCol() - 1);
-            }
+        if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
+            character.move(d);
         }
     }
 }
