@@ -79,6 +79,7 @@ public class AppView extends VBox {
                 case D, RIGHT -> appViewModel.move(Direction.RIGHT);
                 case W, Z, UP -> appViewModel.move(Direction.UP);
             }
+            fieldView.requestFocus();
         });
     }
 }

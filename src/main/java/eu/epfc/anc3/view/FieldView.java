@@ -17,7 +17,7 @@ import static eu.epfc.anc3.view.AppView.*;
 
 class FieldView extends GridPane {
 
-    private final ObjectProperty<Position> characterPosition;
+    private final ReadOnlyObjectProperty<Position> characterPosition;
 
     FieldView(FieldViewModel fieldViewModel, DoubleProperty fieldWidthProperty) {
         characterPosition = fieldViewModel.characterPositionProperty();

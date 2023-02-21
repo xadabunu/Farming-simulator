@@ -16,7 +16,7 @@ public class FieldViewModel {
         return new LandViewModel(line, col, game);
     }
 
-    public ObjectProperty<Position> characterPositionProperty() {
+    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return game.characterPositionProperty();
     }
 }

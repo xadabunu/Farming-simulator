@@ -19,7 +19,7 @@ public class GameFacade {
         return game.ctr;
     }
 
-    public ObjectProperty<Position> characterPositionProperty() {
+    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return game.characterPositionProperty();
     }
     public GameFacade() {

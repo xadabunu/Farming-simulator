@@ -1,12 +1,12 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 abstract class Character {
     private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
-    Character(Game game) {
-        characterPosition.bindBidirectional(game.characterPositionProperty());
+    Character() {
     }
     void move(Direction d) {
         var pos = characterPosition.get();
@@ -32,4 +32,14 @@ abstract class Character {
     void teleport(int line, int col) {
         characterPosition.set(new Position(line, col));
     }
+
+    void resetPosition(){
+        characterPosition.set(new Position(0,0));
+    }
+
+    ReadOnlyObjectProperty<Position> characterPositionProperty() {
+        return characterPosition;
+    }
+
+
 }

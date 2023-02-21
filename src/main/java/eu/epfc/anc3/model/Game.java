@@ -3,19 +3,18 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.*;
 
 class Game {
-    private final Field field = new Field();
+    private final Character character = new Farmer();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
-    private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
     public final IntegerProperty ctr = new SimpleIntegerProperty(0);
-    public Character character;
+    private final Field field = new Field();
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
+            character.resetPosition();
             field.reset();
             ctr.set(0);
-            characterPosition.set(new Position(0, 0));
             gameStatus.set(GameStatus.GAME_ON);
-            character = new Farmer(this);
+
         }
         else {
             gameStatus.set(GameStatus.GAME_OFF);
@@ -30,13 +29,13 @@ class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
-    ObjectProperty<Position> characterPositionProperty() {
-        return characterPosition;
+    ReadOnlyObjectProperty<Position> characterPositionProperty() {
+        return character.characterPositionProperty();
     }
 
     void teleport(int line, int col) {
         if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get())
-            characterPosition.set(new Position(line, col));
+            character.teleport(line, col);
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
@@ -56,7 +55,7 @@ class Game {
     }
 
     private boolean plantGrass() {
-        var pos = field.getLand(characterPosition.getValue().getLine(), characterPosition.get().getCol());
+        var pos = field.getLand(characterPositionProperty().getValue().getLine(), characterPositionProperty().get().getCol());
         if (pos.contentProperty().isEqualTo(LandContent.DIRT).get()) {
             pos.setContent(LandContent.GRASS);
             return true;
@@ -65,7 +64,7 @@ class Game {
     }
 
     private boolean unplantGrass() {
-        var pos = field.getLand(characterPosition.getValue().getLine(), characterPosition.get().getCol());
+        var pos = field.getLand(characterPositionProperty().getValue().getLine(), characterPositionProperty().get().getCol());
         if (!pos.contentProperty().isEqualTo(LandContent.DIRT).get()) {
             pos.setContent(LandContent.DIRT);
             return true;
