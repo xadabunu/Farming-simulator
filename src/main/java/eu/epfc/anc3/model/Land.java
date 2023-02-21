@@ -7,10 +7,8 @@ import javafx.beans.property.SimpleObjectProperty;
 class Land {
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
-    private final Position position;
 
-    Land(Position position) {
-        this.position = position;
+    Land() {
     }
 
 

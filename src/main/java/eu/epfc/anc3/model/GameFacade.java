@@ -37,12 +37,12 @@ public class GameFacade {
         game.start();
     }
 
-    public void plant() {
-        game.plant();
+    public void setStatusPlant() {
+        game.setStatusPlant();
     }
 
-    public void unPlant() {
-        game.unplant();
+    public void setStatusUnplant() {
+        game.setStatusUnplant();
     }
 
     public void teleport(int line, int col) {

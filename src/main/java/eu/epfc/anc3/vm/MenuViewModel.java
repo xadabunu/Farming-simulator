@@ -17,12 +17,12 @@ public class MenuViewModel {
         game.start();
     }
 
-    public void plant() {
-        game.plant();
+    public void setStatusPlant() {
+        game.setStatusPlant();
     }
 
-    public void unPlant() {
-        game.unPlant();
+    public void setStatusUnplant() {
+        game.setStatusUnplant();
     }
 
     public ReadOnlyStringProperty startLabelProperty() {
