@@ -7,6 +7,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class AppView extends VBox {
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
     private FieldView fieldView;
+    private boolean spacePressed = false;
 
     public AppView(Stage stage) {
         start(stage);
@@ -68,18 +70,35 @@ public class AppView extends VBox {
         setAlignment(Pos.CENTER);
     }
 
-
     private void keyboardManager() {
         setOnKeyPressed(e -> {
-            fieldView.requestFocus();
             switch (e.getCode()) {
-                case SPACE -> appViewModel.plantUnplant();
-                case A, Q, LEFT -> appViewModel.move(Direction.LEFT);
-                case S, DOWN -> appViewModel.move(Direction.DOWN);
-                case D, RIGHT -> appViewModel.move(Direction.RIGHT);
-                case W, Z, UP -> appViewModel.move(Direction.UP);
+                case SPACE -> {
+                    appViewModel.plantUnplant();
+                    spacePressed = true;
+                }
+                case A, Q, LEFT -> {
+                    appViewModel.move(Direction.LEFT);
+                    if (spacePressed) appViewModel.plantUnplant();
+                }
+                case S, DOWN -> {
+                    appViewModel.move(Direction.DOWN);
+                    if (spacePressed) appViewModel.plantUnplant();
+                }
+                case D, RIGHT -> {
+                    appViewModel.move(Direction.RIGHT);
+                    if (spacePressed) appViewModel.plantUnplant();
+                }
+                case W, Z, UP -> {
+                    appViewModel.move(Direction.UP);
+                    if (spacePressed) appViewModel.plantUnplant();
+                }
             }
             e.consume();
+        });
+        setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.SPACE)
+                spacePressed = false;
         });
     }
 }
