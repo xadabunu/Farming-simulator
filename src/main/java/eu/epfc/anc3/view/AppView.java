@@ -17,11 +17,11 @@ public class AppView extends VBox {
 
     private static final int MENU_HEIGHT = 30;
     static final int PADDING = 20;
-    private static final int SCENE_MIN_WIDTH = 1000, SCENE_MIN_HEIGHT = 600;
+    private static final int SCENE_MIN_WIDTH = 1200, SCENE_MIN_HEIGHT = 800;
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
-    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(875);
-    private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(525);
+    private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(500);
+    private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(300);
     private FieldView fieldView;
     private boolean spacePressed = false;
 
@@ -37,6 +37,8 @@ public class AppView extends VBox {
         stage.show();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
+        stage.setMaxHeight(SCENE_MIN_HEIGHT);
+        stage.setMaxWidth(SCENE_MIN_WIDTH);
     }
 
     private void configMainComponents(Stage stage) {
