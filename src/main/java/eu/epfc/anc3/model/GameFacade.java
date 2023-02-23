@@ -7,31 +7,20 @@ public class GameFacade {
     private final Game game = new Game();
     private final BooleanProperty isOn = new SimpleBooleanProperty(false);
 
-    public ReadOnlyBooleanProperty isOnProperty() {
-        return isOn;
-    }
-
-    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
-        return game.contentProperty(line ,col);
-    }
-
-    public IntegerProperty ctrProperty() {
-        return game.ctr;
-    }
-
-    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
-        return game.characterPositionProperty();
-    }
     public GameFacade() {
         isOn.bind(game.gameStatusProperty().isNotEqualTo(GameStatus.GAME_OFF));
     }
 
-    public static int fieldCol(){
+    public static int fieldCol() {
         return Field.COLUMNS;
     }
-    public static int fieldLines(){
+
+    public static int fieldLines() {
         return Field.LINES;
     }
+
+
+//----------------- Methode Start/Reset + Methodes modifiant le status -----------------
 
     public void start() {
         game.start();
@@ -45,15 +34,40 @@ public class GameFacade {
         game.setStatusUnplant();
     }
 
+
+//----------------- Planter/Déplanter + Retour counter -----------------
+
+    public boolean plantUnplant() {
+        return game.counterManager();
+    }
+
+    public IntegerProperty ctrProperty() {
+        return game.counter;
+    }
+
+
+//-------------------------- Mouvement -------------------------------
+
     public void teleport(int line, int col) {
         game.teleport(line, col);
     }
 
-    public boolean plantUnplant(){
-        return game.counterManager();
-    }
-
     public void move(Direction d) {
         game.move(d);
+    }
+
+
+//----------------- ReadOnlyProperty -----------------
+
+    public ReadOnlyBooleanProperty isOnProperty() {
+        return isOn;
+    }
+
+    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
+        return game.contentProperty(line ,col);
+    }
+
+    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
+        return game.characterPositionProperty();
     }
 }

@@ -4,11 +4,11 @@
 
 ### Liste des bugs connus
 
-  * bug 1
-  * bug 2
-  * ...
+  * La taille de la fenetre est fixe pour éviter le chevauchement des cellules.
 
 ### Liste des fonctionnalités supplémentaires
+
+  * Le déplacement fonctionne avec les fleches et avec ZQSD sur AZERTY et WASD sur QWERTY.
 
 ### Divers
 

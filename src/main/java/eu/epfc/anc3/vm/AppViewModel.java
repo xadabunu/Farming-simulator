@@ -11,25 +11,10 @@ public class AppViewModel {
     private final CounterViewModel counterViewModel;
     private final GameFacade game = new GameFacade();
 
-    public FieldViewModel getFieldViewModel() {
-        return fieldViewModel;
-    }
-    public MenuViewModel getMenuViewModel() {
-        return menuViewModel;
-    }
-
-    public CounterViewModel getCounterViewModel() {
-        return counterViewModel;
-    }
-
     public AppViewModel() {
         menuViewModel = new MenuViewModel(game);
         fieldViewModel = new FieldViewModel(game);
         counterViewModel = new CounterViewModel(game);
-    }
-
-    public ReadOnlyStringProperty titleProperty() {
-        return new SimpleStringProperty("ANC3 - Farming Simulator");
     }
 
     public void plantUnplant() {
@@ -38,5 +23,21 @@ public class AppViewModel {
 
     public void move(Direction d) {
         game.move(d);
+    }
+
+    public FieldViewModel getFieldViewModel() {
+        return fieldViewModel;
+    }
+
+    public MenuViewModel getMenuViewModel() {
+        return menuViewModel;
+    }
+
+    public CounterViewModel getCounterViewModel() {
+        return counterViewModel;
+    }
+
+    public ReadOnlyStringProperty titleProperty() {
+        return new SimpleStringProperty("ANC3 - Farming Simulator");
     }
 }

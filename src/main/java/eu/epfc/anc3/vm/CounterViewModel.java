@@ -17,6 +17,5 @@ public class CounterViewModel {
 
     public IntegerProperty counterProperty() {
         return game.ctrProperty();
-
     }
 }

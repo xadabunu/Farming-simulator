@@ -3,6 +3,7 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.*;
 
 class Field {
+
     static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
@@ -14,10 +15,8 @@ class Field {
         }
     }
 
-    public Land getLand(int line, int col) {return lands[line][col];}
-
-    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
-        return lands[line][col].contentProperty();
+    public Land getLand(int line, int col) {
+        return lands[line][col];
     }
 
     void reset() {
@@ -25,5 +24,9 @@ class Field {
             for (int j = 0; j < COLUMNS; ++j)
                 lands[i][j].setContent(LandContent.DIRT);
         }
+    }
+
+    public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
+        return lands[line][col].contentProperty();
     }
 }

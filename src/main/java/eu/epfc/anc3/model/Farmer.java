@@ -20,5 +20,4 @@ class Farmer extends Character {
         }
         return false;
     }
-
 }

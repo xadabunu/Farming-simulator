@@ -14,7 +14,6 @@ public class LandView extends StackPane {
 
     private static final Image grassImage = new Image("grass.png");
     private static final Image dirtImage = new Image("dirt.png");
-
     private final ImageView imageView = new ImageView();
     ReadOnlyObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
 

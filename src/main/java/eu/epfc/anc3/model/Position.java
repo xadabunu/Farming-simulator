@@ -16,5 +16,4 @@ public class Position {
     public int getLine() {
         return line;
     }
-
 }

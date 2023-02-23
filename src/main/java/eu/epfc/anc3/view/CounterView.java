@@ -13,8 +13,6 @@ class CounterView extends HBox {
     private final Label labelCtr = new Label();
     private final TextField ctrTxt = new TextField();
 
-
-
     CounterView(CounterViewModel counterViewModel) {
         this.counterViewModel = counterViewModel;
         configCounter();
@@ -32,7 +30,4 @@ class CounterView extends HBox {
         labelCtr.textProperty().bind(counterViewModel.counterLabelProperty());
         ctrTxt.textProperty().bindBidirectional(counterViewModel.counterProperty(), NumberFormat.getIntegerInstance());
     }
-
-
-
 }
