@@ -15,7 +15,7 @@ class Field {
         }
     }
 
-    public Land getLand(int line, int col) {
+    Land getLand(int line, int col) {
         return lands[line][col];
     }
 
