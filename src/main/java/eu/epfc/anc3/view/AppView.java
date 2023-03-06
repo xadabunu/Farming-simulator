@@ -56,8 +56,8 @@ public class AppView extends VBox {
     private void configCounter() {
         CounterView counterView = new CounterView(appViewModel.getCounterViewModel());
         this.getChildren().add(counterView);
-        counterView.setAlignment(Pos.CENTER);
-        counterView.setSpacing(5);
+        //counterView.setAlignment(Pos.CENTER);
+        //counterView.setSpacing(700);
     }
 
     private void configFieldView() {

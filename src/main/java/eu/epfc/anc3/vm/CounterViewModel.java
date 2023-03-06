@@ -11,12 +11,16 @@ public class CounterViewModel {
         this.game = game;
     }
 
-    public ReadOnlyStringProperty counterLabelProperty() {
-        return new SimpleStringProperty("Nombre de parcelles de gazons");
+    public ReadOnlyStringProperty labelScoreProperty() {
+        return new SimpleStringProperty("Score :");
     }
-
-    public IntegerProperty counterProperty() {
-        return game.ctrProperty();
-
+    public ReadOnlyStringProperty labelDaysProperty() {
+        return new SimpleStringProperty("Jour :");
+    }
+    public IntegerProperty counterScoreProperty() {
+        return game.ctrScoreProperty();
+    }
+    public IntegerProperty counterDaysProperty() {
+        return game.ctrDaysProperty();
     }
 }

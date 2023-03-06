@@ -15,8 +15,11 @@ public class GameFacade {
         return game.contentProperty(line ,col);
     }
 
-    public IntegerProperty ctrProperty() {
-        return game.ctr;
+    public IntegerProperty ctrScoreProperty() {
+        return game.ctrScore;
+    }
+    public IntegerProperty ctrDaysProperty() {
+        return game.ctrDays;
     }
 
     public ReadOnlyObjectProperty<Position> characterPositionProperty() {

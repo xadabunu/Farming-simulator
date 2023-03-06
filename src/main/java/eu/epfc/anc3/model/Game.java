@@ -5,14 +5,16 @@ import javafx.beans.property.*;
 class Game {
     private final Character character = new Farmer();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
-    public final IntegerProperty ctr = new SimpleIntegerProperty(0);
+    public final IntegerProperty ctrScore = new SimpleIntegerProperty(0);
+    public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
     private final Field field = new Field();
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
             character.resetPosition();
             field.reset();
-            ctr.set(0);
+            ctrScore.set(0);
+            ctrDays.set(0);
             gameStatus.set(GameStatus.GAME_ON);
 
         }
@@ -75,9 +77,9 @@ class Game {
     boolean counterManager() {
         if (plantUnplant()) {
             if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
-                ctr.setValue(ctr.intValue() + 1);
+                ctrScore.setValue(ctrScore.intValue() + 1);
             else
-                ctr.setValue(ctr.intValue() - 1);
+                ctrScore.setValue(ctrScore.intValue() - 1);
             return true;
         }
         return false;

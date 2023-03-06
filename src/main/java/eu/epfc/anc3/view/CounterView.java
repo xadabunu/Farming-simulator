@@ -1,17 +1,23 @@
 package eu.epfc.anc3.view;
 
 import eu.epfc.anc3.vm.CounterViewModel;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 import java.text.NumberFormat;
 
 class CounterView extends HBox {
 
     private final CounterViewModel counterViewModel;
-    private final Label labelCtr = new Label();
-    private final TextField ctrTxt = new TextField();
+    private final Label labelScore = new Label();
+    private final TextField textScore = new TextField();
+    private final Label labelDays = new Label();
+    private final TextField textDays = new TextField();
 
 
 
@@ -21,16 +27,42 @@ class CounterView extends HBox {
     }
 
     private void configCounter() {
-        getChildren().addAll(labelCtr, ctrTxt);
+        HBox scoreBox = new HBox();
+        HBox daysBox = new HBox();
+
+        setHgrow(scoreBox, Priority.ALWAYS);
+        setHgrow(daysBox, Priority.ALWAYS);
+
+        setMargin(scoreBox, new Insets(0, 0, 0, 500));
+        setMargin(daysBox, new Insets(0, 0, 0, 400));
+
+        setMargin(labelScore, new Insets(3,0,0,0));
+        setMargin(labelDays, new Insets(3,0,0,0));
+
+        scoreBox.getChildren().addAll(labelScore, textScore);
+        daysBox.getChildren().addAll(labelDays, textDays);
+
+        getChildren().addAll(scoreBox,daysBox);
+
         configLabel();
-        ctrTxt.setMaxWidth(50);
-        ctrTxt.setEditable(false);
-        ctrTxt.setDisable(true);
+
+        textScore.setPrefWidth(50);
+        textScore.setMaxWidth(50);
+        textScore.setEditable(false);
+        textScore.setDisable(true);
+
+        textDays.setPrefWidth(50);
+        textDays.setMaxWidth(50);
+        textDays.setEditable(false);
+        textDays.setDisable(true);
     }
 
     private void configLabel() {
-        labelCtr.textProperty().bind(counterViewModel.counterLabelProperty());
-        ctrTxt.textProperty().bindBidirectional(counterViewModel.counterProperty(), NumberFormat.getIntegerInstance());
+        labelScore.textProperty().bind(counterViewModel.labelScoreProperty());
+        textScore.textProperty().bindBidirectional(counterViewModel.counterScoreProperty(), NumberFormat.getIntegerInstance());
+
+        labelDays.textProperty().bind(counterViewModel.labelDaysProperty());
+        textDays.textProperty().bindBidirectional(counterViewModel.counterDaysProperty(), NumberFormat.getIntegerInstance());
     }
 
 
