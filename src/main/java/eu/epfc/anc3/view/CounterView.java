@@ -19,8 +19,6 @@ class CounterView extends HBox {
     private final Label labelDays = new Label();
     private final TextField textDays = new TextField();
 
-
-
     CounterView(CounterViewModel counterViewModel) {
         this.counterViewModel = counterViewModel;
         configCounter();
@@ -36,8 +34,8 @@ class CounterView extends HBox {
         setMargin(scoreBox, new Insets(0, 0, 0, 500));
         setMargin(daysBox, new Insets(0, 0, 0, 400));
 
-        setMargin(labelScore, new Insets(3,0,0,0));
-        setMargin(labelDays, new Insets(3,0,0,0));
+        setMargin(labelScore, new Insets(3,5,0,0));
+        setMargin(labelDays, new Insets(3,5,0,0));
 
         scoreBox.getChildren().addAll(labelScore, textScore);
         daysBox.getChildren().addAll(labelDays, textDays);
@@ -64,7 +62,4 @@ class CounterView extends HBox {
         labelDays.textProperty().bind(counterViewModel.labelDaysProperty());
         textDays.textProperty().bindBidirectional(counterViewModel.counterDaysProperty(), NumberFormat.getIntegerInstance());
     }
-
-
-
 }

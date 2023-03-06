@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class AppView extends VBox {
 
     private final AppViewModel appViewModel = new AppViewModel();
-
     private static final int MENU_HEIGHT = 30;
     static final int PADDING = 20;
     private static final int SCENE_MIN_WIDTH = 1200, SCENE_MIN_HEIGHT = 800;
@@ -56,8 +55,6 @@ public class AppView extends VBox {
     private void configCounter() {
         CounterView counterView = new CounterView(appViewModel.getCounterViewModel());
         this.getChildren().add(counterView);
-        //counterView.setAlignment(Pos.CENTER);
-        //counterView.setSpacing(700);
     }
 
     private void configFieldView() {

@@ -5,9 +5,12 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 abstract class Character {
+
     private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
+
     Character() {
     }
+
     void move(Direction d) {
         var pos = characterPosition.get();
         switch (d) {
@@ -29,17 +32,16 @@ abstract class Character {
             }
         }
 }
+
     void teleport(int line, int col) {
         characterPosition.set(new Position(line, col));
     }
 
-    void resetPosition(){
+    void resetPosition() {
         characterPosition.set(new Position(0,0));
     }
 
     ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return characterPosition;
     }
-
-
 }

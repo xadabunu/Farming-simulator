@@ -22,5 +22,6 @@ public class CounterViewModel {
     }
     public IntegerProperty counterDaysProperty() {
         return game.ctrDaysProperty();
+
     }
 }

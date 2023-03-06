@@ -11,7 +11,6 @@ class Land {
     Land() {
     }
 
-
     void setContent(LandContent content) {
         this.content.setValue(content);
     }
@@ -19,5 +18,4 @@ class Land {
     ReadOnlyObjectProperty<LandContent> contentProperty() {
         return content;
     }
-
 }

@@ -7,10 +7,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-
 class MenuView extends HBox {
 
-    private FieldView fieldView;
+    private final FieldView fieldView;
     private final MenuViewModel menuViewModel;
     private final Button btnSwitch = new Button();
     private final ToggleButton btnPlant = new ToggleButton();
@@ -18,10 +17,10 @@ class MenuView extends HBox {
 
     MenuView(MenuViewModel menuViewModel, FieldView fieldView) {
         this.menuViewModel = menuViewModel;
+        this.fieldView = fieldView;
         configButtons();
         manageBtn();
         configLogicBinding();
-        this.fieldView = fieldView;
     }
 
     private void configButtons() {
@@ -40,7 +39,7 @@ class MenuView extends HBox {
         btnUnplant.textProperty().bind(menuViewModel.unplantLabelProperty());
     }
 
-    private void manageBtn(){
+    private void manageBtn() {
         btnSwitch.setOnAction(e -> {
             menuViewModel.start();
             fieldView.requestFocus();
