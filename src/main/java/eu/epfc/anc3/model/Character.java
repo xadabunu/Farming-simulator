@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 abstract class Character {
 
-    private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
+    protected final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
 
     Character() {
     }

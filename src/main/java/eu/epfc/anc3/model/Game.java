@@ -10,7 +10,7 @@ class Game {
     private final Field field = new Field();
 
 
-//----------------- Methode Start/Reset + Methodes modifiant le status -----------------
+/* --------- Methode Start/Reset + Methodes modifiant le status --------- */
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -34,7 +34,7 @@ class Game {
     }
 
 
-//----------------- Gestion compteur + Planter/Déplanter -----------------
+/* ----------------- Gestion compteur + Planter/Déplanter ----------------- */
 
     private boolean plantUnplant() {
         if (gameStatus.isEqualTo(GameStatus.PLANT).get())
@@ -66,7 +66,7 @@ class Game {
     }
 
 
-//-------------------------- Mouvement -------------------------------
+/* ------------------------------- Mouvement ------------------------------- */
 
     void move(Direction d) {
         if (!gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -80,7 +80,7 @@ class Game {
     }
 
 
-//----------------- ReadOnlyProperty -----------------
+/* ---------------------------- ReadOnlyProperty -------------------------- */
 
     ReadOnlyObjectProperty<Position> characterPositionProperty() {
         return farmer.characterPositionProperty();
