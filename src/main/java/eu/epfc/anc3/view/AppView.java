@@ -5,23 +5,29 @@ import eu.epfc.anc3.model.GameFacade;
 import eu.epfc.anc3.vm.AppViewModel;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AppView extends VBox {
 
     private final AppViewModel appViewModel = new AppViewModel();
-    private static final int MENU_HEIGHT = 30;
+    private static final int MENU_HEIGHT = 80;
+    private static final int SIDE_MENU_WIDTH = 145;
     static final int PADDING = 20;
-    private static final int SCENE_MIN_WIDTH = 1200, SCENE_MIN_HEIGHT = 800;
+    private static final int SCENE_MIN_WIDTH = 1400, SCENE_MIN_HEIGHT = 800;
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(500);
     private final DoubleProperty fieldhHeightProperty = new SimpleDoubleProperty(300);
     private FieldView fieldView;
+    private HBox fieldAndMenus;
+    private SideMenuView sideMenuView;
     private boolean spacePressed = false;
 
     public AppView(Stage stage) {
@@ -42,14 +48,19 @@ public class AppView extends VBox {
 
     private void configMainComponents(Stage stage) {
         stage.titleProperty().bind(appViewModel.titleProperty());
+        fieldAndMenus = new HBox();
         configCounter();
         configFieldView();
-        configMenu();
+        configSideMenu();
+        configBottomMenu();
     }
-
-    private void configMenu() {
-        MenuView menuView = new MenuView(appViewModel.getMenuViewModel(), fieldView);
-        this.getChildren().add(menuView);
+    private void configSideMenu(){
+        sideMenuView = new SideMenuView(appViewModel.getSideMenuViewModel(), fieldView);
+        fieldAndMenus.getChildren().add(sideMenuView);
+    }
+    private void configBottomMenu() {
+        BottomMenuView bottomMenuView = new BottomMenuView(appViewModel.getBottomMenuViewModel(), fieldView);
+        this.getChildren().add(bottomMenuView);
     }
 
     private void configCounter() {
@@ -63,12 +74,12 @@ public class AppView extends VBox {
         fieldView.minWidthProperty().bind(fieldWidthProperty);
         fieldView.maxHeightProperty().bind(fieldhHeightProperty);
         fieldView.maxWidthProperty().bind(fieldWidthProperty);
-        fieldWidthProperty.bind(widthProperty().subtract(PADDING*2));
+        fieldWidthProperty.bind(widthProperty().subtract(PADDING*2).subtract(SIDE_MENU_WIDTH));
         fieldhHeightProperty.bind(heightProperty().subtract(PADDING*2).subtract(MENU_HEIGHT));
-        this.getChildren().add(fieldView);
+        fieldAndMenus.getChildren().add(fieldView);
+        this.getChildren().add(fieldAndMenus);
         setAlignment(Pos.CENTER);
     }
-
     private void keyboardManager() {
         setOnKeyPressed(e -> {
             switch (e.getCode()) {
