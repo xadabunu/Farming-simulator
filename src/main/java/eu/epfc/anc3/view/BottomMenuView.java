@@ -1,23 +1,24 @@
 package eu.epfc.anc3.view;
 
-import eu.epfc.anc3.vm.MenuViewModel;
+import eu.epfc.anc3.vm.BottomMenuViewModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-class MenuView extends HBox {
+class BottomMenuView extends HBox {
 
     private final FieldView fieldView;
-    private final MenuViewModel menuViewModel;
+    private final BottomMenuViewModel bottomMenuViewModel;
     private final Button btnSwitch = new Button();
     private final ToggleButton btnPlant = new ToggleButton();
     private final ToggleButton btnUnplant = new ToggleButton();
 
-    MenuView(MenuViewModel menuViewModel, FieldView fieldView) {
-        this.menuViewModel = menuViewModel;
+    BottomMenuView(BottomMenuViewModel bottomMenuViewModel, FieldView fieldView) {
+        this.bottomMenuViewModel = bottomMenuViewModel;
         this.fieldView = fieldView;
+        this.setPrefHeight(60);
         configButtons();
         manageBtn();
         configLogicBinding();
@@ -34,22 +35,22 @@ class MenuView extends HBox {
     }
 
     private void configLabel() {
-        btnSwitch.textProperty().bind(menuViewModel.startLabelProperty());
-        btnPlant.textProperty().bind(menuViewModel.plantLabelProperty());
-        btnUnplant.textProperty().bind(menuViewModel.unplantLabelProperty());
+        btnSwitch.textProperty().bind(bottomMenuViewModel.startLabelProperty());
+        btnPlant.textProperty().bind(bottomMenuViewModel.plantLabelProperty());
+        btnUnplant.textProperty().bind(bottomMenuViewModel.unplantLabelProperty());
     }
 
     private void manageBtn() {
         btnSwitch.setOnAction(e -> {
-            menuViewModel.start();
+            bottomMenuViewModel.start();
             fieldView.requestFocus();
         });
         btnPlant.setOnAction(e -> {
-            menuViewModel.setStatusPlant();
+            bottomMenuViewModel.setStatusPlant();
             fieldView.requestFocus();
         });
         btnUnplant.setOnAction(e -> {
-            menuViewModel.setStatusUnplant();
+            bottomMenuViewModel.setStatusUnplant();
             fieldView.requestFocus();
         });
 
@@ -57,12 +58,12 @@ class MenuView extends HBox {
     }
 
     private void configLogicBinding() {
-        btnPlant.disableProperty().bind(menuViewModel.isOnProperty().not());
-        btnUnplant.disableProperty().bind(menuViewModel.isOnProperty().not());
-        menuViewModel.isOnProperty().addListener((obs, oldval, newval) -> {
-            btnSwitch.textProperty().bind(menuViewModel.startLabelProperty());
+        btnPlant.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
+        btnUnplant.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
+        bottomMenuViewModel.isOnProperty().addListener((obs, oldval, newval) -> {
+            btnSwitch.textProperty().bind(bottomMenuViewModel.startLabelProperty());
         });
-        menuViewModel.isOnProperty().addListener((obs, old, newVal) -> {
+        bottomMenuViewModel.isOnProperty().addListener((obs, old, newVal) -> {
             btnPlant.setSelected(false);
             btnUnplant.setSelected(false);
         });
