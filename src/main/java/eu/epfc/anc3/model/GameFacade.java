@@ -26,8 +26,24 @@ public class GameFacade {
         game.start();
     }
 
+    public void sleep () {
+        game.sleep();
+    }
+
     public void setStatusPlant() {
         game.setStatusPlant();
+    }
+
+    public void setPlantingGrass() {
+        game.setPlantingGrass();
+    }
+
+    public void setPlantingCarrot() {
+        game.setPlantingCarrot();
+    }
+
+    public void setPlantingCabbage() {
+        game.setPlantingCabbage();
     }
 
     public void setStatusUnplant() {
@@ -39,6 +55,10 @@ public class GameFacade {
 
     public boolean plantUnplant() {
         return game.counterManager();
+    }
+
+    public void fertilize() {
+        game.fertilize();
     }
 
     public IntegerProperty ctrScoreProperty() {

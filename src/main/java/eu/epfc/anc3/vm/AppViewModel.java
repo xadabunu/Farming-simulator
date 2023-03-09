@@ -14,7 +14,7 @@ public class AppViewModel {
 
     public AppViewModel() {
         bottomMenuViewModel = new BottomMenuViewModel(game);
-        sideMenuViewModel = new SideMenuViewModel();
+        sideMenuViewModel = new SideMenuViewModel(game);
         fieldViewModel = new FieldViewModel(game);
         counterViewModel = new CounterViewModel(game);
     }

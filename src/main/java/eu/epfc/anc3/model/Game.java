@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 class Game {
 
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
+    private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
     public final IntegerProperty ctrScore = new SimpleIntegerProperty(0);
     public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
     private final Field field = new Field();
@@ -35,12 +36,28 @@ class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
+    public void setPlantingGrass() {
+        planting.set(Planting.GRASS);
+    }
+
+    public void setPlantingCarrot() {
+        planting.set(Planting.CARROT);
+    }
+
+    public void setPlantingCabbage() {
+        planting.set(Planting.CABBAGE);
+    }
+
 
 /* ----------------- Gestion compteur + Planter/Déplanter ----------------- */
 
     private boolean plantUnplant() {
         if (gameStatus.isEqualTo(GameStatus.PLANT).get())
-            return plantGrass();
+            return switch (planting.get()) {
+                case GRASS -> plantGrass();
+                case CARROT -> plantCarrot();
+                case CABBAGE -> plantCabbage();
+            };
         else if (gameStatus.isEqualTo(GameStatus.UNPLANT).get())
             return unplant();
         return false;
@@ -54,6 +71,14 @@ class Game {
         return farmer.unplant();
     }
 
+    private boolean plantCarrot() {
+        return farmer.plantCarrot();
+    }
+
+    private boolean plantCabbage() {
+        return farmer.plantCabbage();
+    }
+
     boolean counterManager() {
         if (plantUnplant()) {
             if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
@@ -63,6 +88,14 @@ class Game {
             return true;
         }
         return false;
+    }
+
+    public void fertilize() {
+        farmer.fertilize();
+    }
+
+    public void sleep(){
+        
     }
 
 
@@ -93,5 +126,6 @@ class Game {
     ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
         return gameStatus;
     }
+
 
 }
