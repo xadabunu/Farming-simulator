@@ -6,13 +6,15 @@ import javafx.beans.property.*;
 
 public class AppViewModel {
 
-    private final MenuViewModel menuViewModel;
+    private final BottomMenuViewModel bottomMenuViewModel;
+    private final SideMenuViewModel sideMenuViewModel;
     private final FieldViewModel fieldViewModel;
     private final CounterViewModel counterViewModel;
     private final GameFacade game = new GameFacade();
 
     public AppViewModel() {
-        menuViewModel = new MenuViewModel(game);
+        bottomMenuViewModel = new BottomMenuViewModel(game);
+        sideMenuViewModel = new SideMenuViewModel();
         fieldViewModel = new FieldViewModel(game);
         counterViewModel = new CounterViewModel(game);
     }
@@ -29,10 +31,12 @@ public class AppViewModel {
         return fieldViewModel;
     }
 
-    public MenuViewModel getMenuViewModel() {
-        return menuViewModel;
+    public BottomMenuViewModel getBottomMenuViewModel() {
+        return bottomMenuViewModel;
     }
-
+    public SideMenuViewModel getSideMenuViewModel() {
+        return sideMenuViewModel;
+    }
     public CounterViewModel getCounterViewModel() {
         return counterViewModel;
     }

@@ -5,11 +5,11 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class MenuViewModel {
+public class BottomMenuViewModel {
 
     private final GameFacade game;
 
-    MenuViewModel(GameFacade game) {
+    BottomMenuViewModel(GameFacade game) {
         this.game = game;
     }
 
