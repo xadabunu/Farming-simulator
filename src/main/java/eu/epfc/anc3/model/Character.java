@@ -6,42 +6,44 @@ import javafx.beans.property.SimpleObjectProperty;
 
 abstract class Character {
 
-    private final ObjectProperty<Position> characterPosition = new SimpleObjectProperty<>(new Position(0, 0));
+    private final Field field;
+    protected final ObjectProperty<Land> position;
 
-    Character() {
+    Character(Field field) {
+        this.field = field;
+        position = new SimpleObjectProperty<>(field.getLand(0, 0));
     }
 
     void move(Direction d) {
-        var pos = characterPosition.get();
         switch (d) {
             case UP -> {
-                if (pos.getLine() > 0)
-                    teleport(pos.getLine() - 1, pos.getCol());
+                if (position.get().getLine() > 0)
+                    teleport(position.get().getLine() - 1, position.get().getCol());
             }
             case DOWN -> {
-                if (pos.getLine() < Field.LINES - 1)
-                    teleport(pos.getLine() + 1, pos.getCol());
+                if (position.get().getLine() < Field.LINES - 1)
+                    teleport(position.get().getLine() + 1, position.get().getCol());
             }
             case RIGHT -> {
-                if (pos.getCol() < Field.COLUMNS - 1)
-                    teleport(pos.getLine(), pos.getCol() + 1);
+                if (position.get().getCol() < Field.COLUMNS - 1)
+                    teleport(position.get().getLine(), position.get().getCol() + 1);
             }
             case LEFT -> {
-                if (pos.getCol() > 0)
-                    teleport(pos.getLine(), pos.getCol() - 1);
+                if (position.get().getCol() > 0)
+                    teleport(position.get().getLine(), position.get().getCol() - 1);
             }
         }
 }
 
     void teleport(int line, int col) {
-        characterPosition.set(new Position(line, col));
+        position.set(field.getLand(line, col));
     }
 
     void resetPosition() {
-        characterPosition.set(new Position(0,0));
+        position.set(field.getLand(0, 0));
     }
 
-    ReadOnlyObjectProperty<Position> characterPositionProperty() {
-        return characterPosition;
+    ReadOnlyObjectProperty<Land> characterPositionProperty() {
+        return position;
     }
 }
