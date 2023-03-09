@@ -14,8 +14,8 @@ public class LandView extends StackPane {
 
     private static final Image grassImage = new Image("grass.png");
     private static final Image dirtImage = new Image("dirt.png");
-    private static final Image carrot1Image = new Image("carrot.png");
-    private static final Image gabbage1Image = new Image("gabbage.png");
+    private static final Image carrot1Image = new Image("carrot1.png");
+    private static final Image cabbage1Image = new Image("cabbage1.png");
     private final ImageView imageView = new ImageView();
     ReadOnlyObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
 
@@ -33,35 +33,14 @@ public class LandView extends StackPane {
         });
     }
 
-    private void setLandImage(ImageView imageView, LandContent landContent) {
-        if(landContent == LandContent.GRASS) {
-            imageView.setImage(grassImage);
-        }
-        else if(landContent == LandContent.DIRT) {
-            imageView.setImage((dirtImage));
-        }
-        else if(landContent == LandContent.CARROT) {
-            imageView.setImage((carrot1Image));
-        }
-        else {
-            imageView.setImage(gabbage1Image);
-        }
-    }
+
 
     private void setLandImage(ImageView imageView, LandContent landContent) {
         switch (landContent) {
-            case GRASS:
-                imageView.setImage(grassImage);
-                break;
-            case DIRT:
-                imageView.setImage(dirtImage);
-                break;
-            case CARROT:
-                imageView.setImage(carrot1Image);
-                break;
-            case GABBAGE :
-                imageView.setImage(gabbage1Image);
-                break;
+            case GRASS -> imageView.setImage(grassImage);
+            case DIRT -> imageView.setImage(dirtImage);
+            case CARROT -> imageView.setImage(carrot1Image);
+            case CABBAGE -> imageView.setImage(cabbage1Image);
         }
     }
 

@@ -17,13 +17,11 @@ public class BottomMenuViewModel {
         game.start();
     }
 
-    public void setStatusPlant() {
-        game.setStatusPlant();
+    public void sleep() {
+        game.sleep();
     }
 
-    public void setStatusUnplant() {
-        game.setStatusUnplant();
-    }
+
 
     public ReadOnlyStringProperty startLabelProperty() {
         if(!game.isOnProperty().get()){
@@ -34,12 +32,8 @@ public class BottomMenuViewModel {
         }
     }
 
-    public ReadOnlyStringProperty plantLabelProperty() {
-        return new SimpleStringProperty("Planter du gazon");
-    }
-
-    public ReadOnlyStringProperty unplantLabelProperty() {
-        return new SimpleStringProperty("Enlever du gazon");
+    public ReadOnlyStringProperty sleepLabelProperty() {
+        return new SimpleStringProperty("Dormir");
     }
 
     public ReadOnlyBooleanProperty isOnProperty() {
