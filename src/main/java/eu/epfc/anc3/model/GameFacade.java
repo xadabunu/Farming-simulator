@@ -67,7 +67,7 @@ public class GameFacade {
         return game.contentProperty(line ,col);
     }
 
-    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
+    public ReadOnlyObjectProperty<Land> characterPositionProperty() {
         return game.characterPositionProperty();
     }
 }

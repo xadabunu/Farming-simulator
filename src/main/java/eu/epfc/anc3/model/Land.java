@@ -4,11 +4,23 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-class Land {
+public class Land {
+
+    private final int line, col;
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
 
-    Land() {
+    Land(int i, int j) {
+        line = i;
+        col = j;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getCol() {
+        return col;
     }
 
     void setContent(LandContent content) {

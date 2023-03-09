@@ -1,7 +1,7 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
-import eu.epfc.anc3.model.Position;
+import eu.epfc.anc3.model.Land;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
 public class FieldViewModel {
@@ -16,7 +16,7 @@ public class FieldViewModel {
         return new LandViewModel(line, col, game);
     }
 
-    public ReadOnlyObjectProperty<Position> characterPositionProperty() {
+    public ReadOnlyObjectProperty<Land> characterPositionProperty() {
         return game.characterPositionProperty();
     }
 }

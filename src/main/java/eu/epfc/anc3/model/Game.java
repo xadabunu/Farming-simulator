@@ -4,13 +4,13 @@ import javafx.beans.property.*;
 
 class Game {
 
-    private final Farmer farmer = new Farmer();
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     public final IntegerProperty counter = new SimpleIntegerProperty(0);
     private final Field field = new Field();
+    private final Farmer farmer = new Farmer(field);
 
 
-/* --------- Methode Start/Reset + Methodes modifiant le status --------- */
+    /* --------- Methode Start/Reset + Methodes modifiant le status --------- */
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -45,13 +45,11 @@ class Game {
     }
 
     private boolean plantGrass() {
-        var pos = field.getLand(characterPositionProperty().getValue().getLine(), characterPositionProperty().get().getCol());
-        return farmer.plantGrass(pos);
+        return farmer.plantGrass();
     }
 
     private boolean unplant() {
-        var pos = field.getLand(characterPositionProperty().getValue().getLine(), characterPositionProperty().get().getCol());
-        return farmer.unplant(pos);
+        return farmer.unplant();
     }
 
     boolean counterManager() {
@@ -82,7 +80,7 @@ class Game {
 
 /* ---------------------------- ReadOnlyProperty -------------------------- */
 
-    ReadOnlyObjectProperty<Position> characterPositionProperty() {
+    ReadOnlyObjectProperty<Land> characterPositionProperty() {
         return farmer.characterPositionProperty();
     }
 

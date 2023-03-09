@@ -11,7 +11,7 @@ class Field {
         lands = new Land[LINES][COLUMNS];
         for (int i = 0 ; i < LINES ; ++i) {
             for (int j = 0 ; j < COLUMNS ; ++j)
-                lands[i][j] = new Land();
+                lands[i][j] = new Land(i, j);
         }
     }
 
