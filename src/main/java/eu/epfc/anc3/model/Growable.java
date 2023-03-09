@@ -39,6 +39,6 @@ public abstract class Growable {
     abstract int getScore();
 
     int getRottenScore() {
-        return MAXIMUM_SCORE * (age - rotten_age) / 10;
+        return - MAXIMUM_SCORE * (age - rotten_age) / 10;
     }
 }

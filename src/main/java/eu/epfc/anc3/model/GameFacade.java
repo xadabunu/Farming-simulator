@@ -20,7 +20,7 @@ public class GameFacade {
     }
 
 
-//----------------- Methode Start/Reset + Methodes modifiant le status -----------------
+/* ---------- Methode Start/Reset + Methodes modifiant le status ---------- */
 
     public void start() {
         game.start();
@@ -35,7 +35,7 @@ public class GameFacade {
     }
 
 
-//----------------- Planter/Déplanter + Retour counter -----------------
+/* ----------------- Planter/Déplanter + Retour counter ----------------- */
 
     public boolean plantUnplant() {
         return game.counterManager();
@@ -50,7 +50,7 @@ public class GameFacade {
     }
 
 
-//-------------------------- Mouvement -------------------------------
+/* -------------------------- Mouvement ------------------------------- */
 
     public void teleport(int line, int col) {
         game.teleport(line, col);
@@ -61,14 +61,14 @@ public class GameFacade {
     }
 
 
-//----------------- ReadOnlyProperty -----------------
+/* ------------------------- ReadOnlyProperty ------------------------- */
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return isOn;
     }
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
-        return game.contentProperty(line ,col);
+        return game.contentProperty(line, col);
     }
 
     public ReadOnlyObjectProperty<Land> characterPositionProperty() {

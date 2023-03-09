@@ -11,7 +11,7 @@ class Game {
     private final Farmer farmer = new Farmer(field);
 
 
-    /* --------- Methode Start/Reset + Methodes modifiant le status --------- */
+/* --------- Methode Start/Reset + Methodes modifiant le status --------- */
 
     void start() {
         if (gameStatus.isEqualTo(GameStatus.GAME_OFF).get()) {
@@ -56,7 +56,7 @@ class Game {
 
     boolean counterManager() {
         if (plantUnplant()) {
-            if(gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
+            if (gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
                 ctrScore.setValue(ctrScore.intValue() + 1);
             else
                 ctrScore.setValue(ctrScore.intValue() - 1);
