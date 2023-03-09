@@ -91,11 +91,11 @@ class Game {
     }
 
     public void fertilize() {
-        farmer.fertilize();
+//        farmer.fertilize();
     }
 
     public void sleep(){
-        
+        ctrDays.setValue(ctrDays.get()+1);
     }
 
 
