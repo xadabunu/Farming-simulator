@@ -28,12 +28,8 @@ public class LandView extends StackPane {
         contentProperty.addListener((obs, old, newVal) -> {
             setLandImage(imageView, landViewModel.contentProperty().get());
         });
-        setOnMouseClicked(e -> {
-            landViewModel.teleport();
-        });
+        setOnMouseClicked(e -> landViewModel.teleport());
     }
-
-
 
     private void setLandImage(ImageView imageView, LandContent landContent) {
         switch (landContent) {

@@ -8,7 +8,7 @@ class Game {
     private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
     public final IntegerProperty ctrScore = new SimpleIntegerProperty(0);
     public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
-    private final Field field = new Field();
+    private final Field field = new Field(ctrDaysProperty());
     private final Farmer farmer = new Farmer(field);
 
 
@@ -140,5 +140,8 @@ class Game {
         return gameStatus;
     }
 
+    ReadOnlyIntegerProperty ctrDaysProperty() {
+        return ctrDays;
+    }
 
 }

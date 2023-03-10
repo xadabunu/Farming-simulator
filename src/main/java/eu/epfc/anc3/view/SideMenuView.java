@@ -16,8 +16,6 @@ public class SideMenuView extends VBox {
     private final ToggleButton btnFertilize = new ToggleButton();
     private final ToggleButton btnCollect = new ToggleButton();
 
-
-
     SideMenuView(SideMenuViewModel sideMenuViewModel, FieldView fieldView) {
         this.sideMenuViewModel = sideMenuViewModel;
         this.fieldView = fieldView;
@@ -92,7 +90,6 @@ public class SideMenuView extends VBox {
             sideMenuViewModel.setStatusUnplant();
             fieldView.requestFocus();
         });
-
     }
 
     private void configLogicBinding() {

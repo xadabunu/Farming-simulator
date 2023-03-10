@@ -9,6 +9,7 @@ public class Land {
     private final int line, col;
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
+    private Growable growable;
 
     Land(int i, int j) {
         line = i;
@@ -25,6 +26,13 @@ public class Land {
 
     void setContent(LandContent content) {
         this.content.setValue(content);
+    }
+
+    void grow() {
+        if (growable != null) {
+            growable.grow();
+            System.out.println(growable.state);
+        }
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty() {

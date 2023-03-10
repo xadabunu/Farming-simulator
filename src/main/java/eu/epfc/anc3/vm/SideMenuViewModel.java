@@ -19,18 +19,12 @@ public class SideMenuViewModel {
 
     public void setStatusPlantGrass() {
         game.setStatusPlantGrass();
-//        game.setPlantingGrass();
-//        game.setStatusPlant();
     }
     public void setStatusPlantCarrot() {
         game.setStatusPlantCarrot();
-//        game.setPlantingCarrot();
-//        game.setStatusPlant();
     }
     public void setStatusPlantCabbage() {
         game.setStatusPlantCabbage();
-//        game.setPlantingCabbage();
-//        game.setStatusPlant();
     }
 
 
@@ -76,7 +70,7 @@ public class SideMenuViewModel {
     }
 
     public ReadOnlyStringProperty collectLabelProperty() {
-        return new SimpleStringProperty("Récoleter");
+        return new SimpleStringProperty("Récolter");
     }
 
     public ReadOnlyObjectProperty<ImageView> collectImageProperty() {

@@ -17,7 +17,7 @@ public abstract class Growable {
         this.state = state;
     }
 
-    private int grow() {
+    int grow() {
         state = state.grow();
         return 0;
     }
