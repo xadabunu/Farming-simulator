@@ -18,15 +18,7 @@ public abstract class Growable {
     }
 
     private int grow() {
-        switch (state) {
-            case STATE_1 -> setState(GrowingState.STATE_2);
-            case STATE_2 -> setState(GrowingState.STATE_3);
-            case STATE_3 -> setState(GrowingState.STATE_4);
-            case STATE_4 -> setState(GrowingState.ROTTEN);
-            case ROTTEN -> {
-                return reap();
-            }
-        }
+        state = state.grow();
         return 0;
     }
 

@@ -18,16 +18,19 @@ public class SideMenuViewModel {
     }
 
     public void setStatusPlantGrass() {
-        game.setPlantingGrass();
-        game.setStatusPlant();
+        game.setStatusPlantGrass();
+//        game.setPlantingGrass();
+//        game.setStatusPlant();
     }
     public void setStatusPlantCarrot() {
-        game.setPlantingCarrot();
-        game.setStatusPlant();
+        game.setStatusPlantCarrot();
+//        game.setPlantingCarrot();
+//        game.setStatusPlant();
     }
     public void setStatusPlantCabbage() {
-        game.setPlantingCabbage();
-        game.setStatusPlant();
+        game.setStatusPlantCabbage();
+//        game.setPlantingCabbage();
+//        game.setStatusPlant();
     }
 
 

@@ -36,16 +36,29 @@ class Game {
         gameStatus.set(gameStatus.isEqualTo(GameStatus.UNPLANT).get() ? GameStatus.GAME_ON : GameStatus.UNPLANT);
     }
 
-    public void setPlantingGrass() {
-        planting.set(Planting.GRASS);
+    private void switchPlanting(Planting p) {
+        if (!gameStatus.isEqualTo(GameStatus.PLANT).get()) {
+            gameStatus.set(GameStatus.PLANT);
+            planting.set(p);
+        }
+        else {
+            if (planting.isEqualTo(p).get())
+                gameStatus.set(GameStatus.GAME_ON);
+            else
+                planting.set(p);
+        }
     }
 
-    public void setPlantingCarrot() {
-        planting.set(Planting.CARROT);
+    public void setStatusPlantGrass() {
+        switchPlanting(Planting.GRASS);
     }
 
-    public void setPlantingCabbage() {
-        planting.set(Planting.CABBAGE);
+    public void setStatusPlantCarrot() {
+        switchPlanting(Planting.CARROT);
+    }
+
+    public void setStatusPlantCabbage() {
+        switchPlanting(Planting.CABBAGE);
     }
 
 

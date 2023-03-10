@@ -34,16 +34,16 @@ public class GameFacade {
         game.setStatusPlant();
     }
 
-    public void setPlantingGrass() {
-        game.setPlantingGrass();
+    public void setStatusPlantGrass() {
+        game.setStatusPlantGrass();
     }
 
-    public void setPlantingCarrot() {
-        game.setPlantingCarrot();
+    public void setStatusPlantCarrot() {
+        game.setStatusPlantCarrot();
     }
 
-    public void setPlantingCabbage() {
-        game.setPlantingCabbage();
+    public void setStatusPlantCabbage() {
+        game.setStatusPlantCabbage();
     }
 
     public void setStatusUnplant() {
