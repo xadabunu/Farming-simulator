@@ -1,10 +1,11 @@
 package eu.epfc.anc3.model;
 
-public abstract class Growable {
+public abstract class Growable implements Plantable{
 
     final int MAXIMUM_SCORE;
     int age = 0;
-    final int rotten_age;
+    protected int days_until_next_state;
+    int rotten_age;
 
     GrowingState state = GrowingState.STATE_1;
 
@@ -18,17 +19,28 @@ public abstract class Growable {
     }
 
     int grow() {
-        state = state.grow();
-        return 0;
+        return canGrow() ? 0 : getRottenScore();
     }
+
+    private boolean canGrow() {
+        ++age;
+        if (age == days_until_next_state) {
+            state = state.grow();
+            age = 0;
+            days_until_next_state = getStateDuration();
+        }
+        return state != null;
+    }
+
+    protected abstract int getStateDuration();
 
     private int reap() {
         int points = getScore();
-        //doit retirer le Growable
+        state = null;
         return points;
     }
 
-    abstract int getScore();
+    protected abstract int getScore();
 
     int getRottenScore() {
         return - MAXIMUM_SCORE * (age - rotten_age) / 10;

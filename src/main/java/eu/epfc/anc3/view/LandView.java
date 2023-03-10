@@ -39,5 +39,4 @@ public class LandView extends StackPane {
             case CABBAGE -> imageView.setImage(cabbage1Image);
         }
     }
-
 }
