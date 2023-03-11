@@ -30,13 +30,12 @@ public class Land {
         this.content.setValue(content);
     }
 
-
     void setGrowable(LandGrowable growable) {
-        this.growableProp.setValue(growable);
+        growableProp.setValue(growable);
     }
 
     public void removeGrowable() {
-        this.growableProp.set(null);
+        growableProp.set(null);
     }
 
 
@@ -45,11 +44,25 @@ public class Land {
 
     }
 
+    void plant(Growable g) {
+        growable = g;
+        g.stateProperty().addListener((obs, old, newVal) -> {
+            if (newVal == null) {
+                growable = null;
+            }
+        });
+    }
+
     ReadOnlyObjectProperty<LandContent> contentProperty() {
         return content;
     }
 
     ReadOnlyObjectProperty<LandGrowable> growableProperty() {
         return growableProp;
+    }
+
+    void fertilize() {
+        if (growable != null)
+            growable.fertilize();
     }
 }

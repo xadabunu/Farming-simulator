@@ -58,7 +58,7 @@ public class GameFacade {
     }
 
     public void fertilize() {
-        game.fertilize();
+        game.setStatusFertilize();
     }
 
     public IntegerProperty ctrScoreProperty() {

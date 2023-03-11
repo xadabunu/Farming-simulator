@@ -27,12 +27,10 @@ public class LandView extends StackPane {
         imageView.fitWidthProperty().bind(landWidthProperty);
         getChildren().add(imageView);
         setLandImage(imageView, landContentProperty.get());
-        ReadOnlyObjectProperty<LandContent> contentProperty = landViewModel.contentProperty();
-        contentProperty.addListener((obs, old, newVal) -> {
+        landViewModel.contentProperty().addListener((obs, old, newVal) -> {
             setLandImage(imageView, landViewModel.contentProperty().get());
         });
-        ReadOnlyObjectProperty<LandGrowable> growableProperty = landViewModel.growableProperty();
-        growableProperty.addListener((obs, old, newVal) -> {
+        landViewModel.growableProperty().addListener((obs, old, newVal) -> {
             getChildren().remove(growableImageView);
             setGrowableImage(landViewModel.growableProperty().get(), landWidthProperty.get());
         });

@@ -3,17 +3,21 @@ package eu.epfc.anc3.model;
 public class Cabbage extends Growable {
 
     private static final int MAXIMUM_SCORE = 200;
-    private static final int ROTTEN_DAYS = 14;
-    private static final int[] STATES_DAYS = {5, 4, 3, 2, 10};
-    private static final int[] GRASS_STATES_DAYS = {4, 3, 2, 1, 5};
+    private static final int[] STATE_DURATION = {5, 4, 3, 2, 10};
+    private static final int[] GRASS_STATE_DURATION = {4, 3, 2, 1, 5};
 
-    public Cabbage() {
-        super(MAXIMUM_SCORE, ROTTEN_DAYS);
+
+    public Cabbage(boolean onGrass) {
+        super(MAXIMUM_SCORE, onGrass);
+        days_until_next_state = getStateDuration();
     }
 
     @Override
     protected int getStateDuration() {
-        return 0;
+        if (state == null) {
+            return 0;
+        }
+        return onGrass ? GRASS_STATE_DURATION[state.ordinal()] : STATE_DURATION[state.ordinal()];
     }
 
     @Override
@@ -24,5 +28,10 @@ public class Cabbage extends Growable {
             case STATE_4 -> MAXIMUM_SCORE;
             case ROTTEN -> getRottenScore();
         };
+    }
+
+    @Override
+    void fertilize() {
+
     }
 }

@@ -1,5 +1,7 @@
 package eu.epfc.anc3.model;
 
-public interface Plantable {
+public abstract class Plantable {
+
+    int age = 0;
 
 }

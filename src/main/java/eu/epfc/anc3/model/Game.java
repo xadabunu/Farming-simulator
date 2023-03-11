@@ -61,6 +61,10 @@ class Game {
         switchPlanting(Planting.CABBAGE);
     }
 
+    public void setStatusFertilize() {
+        gameStatus.set(GameStatus.FERTILIZE);
+    }
+
 
 /* ----------------- Gestion compteur + Planter/Déplanter ----------------- */
 
@@ -93,7 +97,10 @@ class Game {
     }
 
     boolean counterManager() {
-        if (plantUnplant()) {
+        if (gameStatusProperty().isEqualTo(GameStatus.FERTILIZE).get()){
+            farmer.fertilize();
+        }
+        else if (plantUnplant()) {
             if (gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
                 ctrScore.setValue(ctrScore.intValue() + 1);
             else
@@ -103,9 +110,7 @@ class Game {
         return false;
     }
 
-    public void fertilize() {
-//        farmer.fertilize();
-    }
+
 
     public void sleep(){
         ctrDays.setValue(ctrDays.get()+1);

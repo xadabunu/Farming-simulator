@@ -1,5 +1,5 @@
 package eu.epfc.anc3.model;
 
-public class Grass implements Plantable {
+public class Grass extends Plantable {
 
 }

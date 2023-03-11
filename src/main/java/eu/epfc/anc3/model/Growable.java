@@ -1,17 +1,20 @@
 package eu.epfc.anc3.model;
 
-public abstract class Growable implements Plantable{
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
+public abstract class Growable extends Plantable{
 
     final int MAXIMUM_SCORE;
-    int age = 0;
     protected int days_until_next_state;
-    int rotten_age;
+
+    boolean onGrass;
 
     GrowingState state = GrowingState.STATE_1;
 
-    Growable(int maximumScore, int rotten_age) {
+    Growable(int maximumScore, boolean onGrass) {
         MAXIMUM_SCORE = maximumScore;
-        this.rotten_age = rotten_age;
+        this.onGrass = onGrass;
     }
 
     public void setState(GrowingState state) {
@@ -28,6 +31,8 @@ public abstract class Growable implements Plantable{
             state = state.grow();
             age = 0;
             days_until_next_state = getStateDuration();
+            if(state != null)
+                System.out.println(state.name());
         }
         return state != null;
     }
@@ -41,8 +46,15 @@ public abstract class Growable implements Plantable{
     }
 
     protected abstract int getScore();
+    abstract  void fertilize();
+
 
     int getRottenScore() {
-        return - MAXIMUM_SCORE * (age - rotten_age) / 10;
+
+        return - (MAXIMUM_SCORE * age) / 10;
+    }
+
+    ReadOnlyObjectProperty<GrowingState> stateProperty() {
+        return new SimpleObjectProperty<>(state);
     }
 }
