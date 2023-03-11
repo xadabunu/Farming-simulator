@@ -8,7 +8,7 @@ class Game {
     private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
     public final IntegerProperty ctrScore = new SimpleIntegerProperty(0);
     public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
-    private final Field field = new Field(ctrDaysProperty());
+    private final Field field = new Field();
     private final Farmer farmer = new Farmer(field);
 
 
@@ -20,8 +20,8 @@ class Game {
             field.reset();
             ctrScore.set(0);
             ctrDays.set(0);
+            ctrDays.addListener((obs, oldValue, newValue) -> farmer.manageField());
             gameStatus.set(GameStatus.GAME_ON);
-
         }
         else {
             gameStatus.set(GameStatus.GAME_OFF);
@@ -143,9 +143,4 @@ class Game {
     ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
         return gameStatus;
     }
-
-    ReadOnlyIntegerProperty ctrDaysProperty() {
-        return ctrDays;
-    }
-
 }

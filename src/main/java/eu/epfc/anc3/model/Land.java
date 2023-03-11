@@ -30,6 +30,7 @@ public class Land {
         this.content.setValue(content);
     }
 
+
     void setGrowable(LandGrowable growable) {
         this.growableProp.setValue(growable);
     }
@@ -39,11 +40,9 @@ public class Land {
     }
 
 
-    void grow() {
-        if (growable != null) {
-            growable.grow();
-            System.out.println(growable.state);
-        }
+    int grow() {
+        return growable == null ? 0 : growable.grow();
+
     }
 
     ReadOnlyObjectProperty<LandContent> contentProperty() {

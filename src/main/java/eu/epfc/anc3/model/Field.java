@@ -7,13 +7,12 @@ class Field {
     static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
-    Field(ReadOnlyIntegerProperty ctrDays) {
+    Field() {
         lands = new Land[LINES][COLUMNS];
         for (int i = 0 ; i < LINES ; ++i) {
             for (int j = 0 ; j < COLUMNS ; ++j)
                 lands[i][j] = new Land(i, j);
         }
-        ctrDays.addListener((obs, oldVal, newVal) -> grow());
     }
 
     Land getLand(int line, int col) {
@@ -28,15 +27,7 @@ class Field {
             }
         }
     }
-
-
-    private void grow() {
-        for (int i = 0 ; i < LINES ; ++i) {
-            for (int j = 0 ; j < COLUMNS ; ++j)
-                lands[i][j].grow();
-        }
-    }
-
+    
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return lands[line][col].contentProperty();
     }

@@ -46,6 +46,7 @@ public class LandView extends StackPane {
         }
     }
 
+
     private void setGrowableImage(LandGrowable landGrowable, double landWidth) {
         if (landGrowable != null) {
             growableImageView = switch (landGrowable) {
@@ -73,5 +74,4 @@ public class LandView extends StackPane {
 
         return imageView;
     }
-
 }

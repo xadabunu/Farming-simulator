@@ -43,7 +43,6 @@ class FieldView extends GridPane {
         initiateCharacter();
     }
 
-
     private void initiateCharacter() {
         ImageView imageView = new ImageView(new CharacterView("farmer.png").getImage());
         add(imageView, characterPosition.get().getCol(), characterPosition.get().getLine());

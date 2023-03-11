@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 abstract class Character {
 
-    private final Field field;
+    protected final Field field;
     protected final ObjectProperty<Land> position;
 
     Character(Field field) {
