@@ -97,5 +97,10 @@ public class SideMenuView extends VBox {
         for (ToggleButton button : buttons) {
             button.disableProperty().bind(sideMenuViewModel.isOnProperty().not());
         }
+        sideMenuViewModel.isOnProperty().addListener((obs, old, newVal) -> {
+            for (ToggleButton button : buttons) {
+                button.setSelected(false);
+            }
+        });
     }
 }

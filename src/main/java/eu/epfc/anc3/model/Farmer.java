@@ -31,16 +31,16 @@ class Farmer extends Character {
     }
 
     boolean plantCarrot() {
-        if (position.get().contentProperty().isEqualTo(LandContent.DIRT).get() || position.get().contentProperty().isEqualTo(LandContent.GRASS).get()) {
-            position.get().setContent(LandContent.CARROT);
+        if (position.get().growableProperty().get() == (null)) {
+            position.get().setGrowable(LandGrowable.CARROT);
             return true;
         }
         return false;
     }
 
     boolean plantCabbage() {
-        if (position.get().contentProperty().isEqualTo(LandContent.DIRT).get() || position.get().contentProperty().isEqualTo(LandContent.GRASS).get()) {
-            position.get().setContent(LandContent.CABBAGE);
+        if (position.get().growableProperty().get() == (null)) {
+            position.get().setGrowable(LandGrowable.CABBAGE);
             return true;
         }
         return false;

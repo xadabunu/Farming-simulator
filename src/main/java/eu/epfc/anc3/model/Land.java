@@ -9,6 +9,8 @@ public class Land {
     private final int line, col;
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
+
+    final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
     private Growable growable;
 
     Land(int i, int j) {
@@ -28,6 +30,15 @@ public class Land {
         this.content.setValue(content);
     }
 
+    void setGrowable(LandGrowable growable) {
+        this.growableProp.setValue(growable);
+    }
+
+    public void removeGrowable() {
+        this.growableProp.set(null);
+    }
+
+
     void grow() {
         if (growable != null) {
             growable.grow();
@@ -37,5 +48,9 @@ public class Land {
 
     ReadOnlyObjectProperty<LandContent> contentProperty() {
         return content;
+    }
+
+    ReadOnlyObjectProperty<LandGrowable> growableProperty() {
+        return growableProp;
     }
 }

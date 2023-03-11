@@ -136,6 +136,10 @@ class Game {
         return field.contentProperty(line, col);
     }
 
+    ReadOnlyObjectProperty<LandGrowable> growableProperty(int line, int col) {
+        return field.growableProperty(line, col);
+    }
+
     ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
         return gameStatus;
     }

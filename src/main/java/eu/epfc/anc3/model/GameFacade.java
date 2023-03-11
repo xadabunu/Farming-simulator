@@ -91,6 +91,10 @@ public class GameFacade {
         return game.contentProperty(line, col);
     }
 
+    public ReadOnlyObjectProperty<LandGrowable> growableProperty(int line, int col) {
+        return game.growableProperty(line, col);
+    }
+
     public ReadOnlyObjectProperty<Land> characterPositionProperty() {
         return game.characterPositionProperty();
     }

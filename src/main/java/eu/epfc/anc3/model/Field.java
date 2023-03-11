@@ -22,10 +22,13 @@ class Field {
 
     void reset() {
         for (int i = 0; i < LINES; ++i) {
-            for (int j = 0; j < COLUMNS; ++j)
+            for (int j = 0; j < COLUMNS; ++j) {
                 lands[i][j].setContent(LandContent.DIRT);
+                lands[i][j].removeGrowable();
+            }
         }
     }
+
 
     private void grow() {
         for (int i = 0 ; i < LINES ; ++i) {
@@ -36,5 +39,9 @@ class Field {
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return lands[line][col].contentProperty();
+    }
+
+    public ReadOnlyObjectProperty<LandGrowable> growableProperty(int line, int col) {
+        return lands[line][col].growableProperty() ;
     }
 }
