@@ -26,10 +26,14 @@ public abstract class Growable extends Plantable{
     }
 
     private boolean canGrow() {
-        ++age;
+        if (state != null) {
+            ++age;
+        }
         if (age == days_until_next_state) {
             state = state.grow();
-            age = 0;
+            if (state != null) {
+                age = 0;
+            }
             days_until_next_state = getStateDuration();
             if(state != null)
                 System.out.println(state.name());
@@ -39,7 +43,7 @@ public abstract class Growable extends Plantable{
 
     protected abstract int getStateDuration();
 
-    private int reap() {
+    int reap() {
         int points = getScore();
         state = null;
         return points;
@@ -50,7 +54,7 @@ public abstract class Growable extends Plantable{
 
 
     int getRottenScore() {
-
+        System.out.println(MAXIMUM_SCORE +  " - " + age + " " + (- (MAXIMUM_SCORE * age) / 10));
         return - (MAXIMUM_SCORE * age) / 10;
     }
 

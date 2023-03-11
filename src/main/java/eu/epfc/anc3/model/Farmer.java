@@ -1,10 +1,12 @@
 package eu.epfc.anc3.model;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 class Farmer extends Character {
 
-    private int score = 0;
+    private final IntegerProperty score = new SimpleIntegerProperty(0);
 
     Farmer(Field field) {
         super(field);
@@ -49,11 +51,25 @@ class Farmer extends Character {
      void manageField() {
         for (int i = 0 ; i < Field.LINES; ++i) {
             for (int j = 0 ; j <  Field.COLUMNS; ++j)
-                score += field.getLand(i, j).grow();
+                score.set(score.get() + field.getLand(i, j).grow());
         }
     }
 
     void fertilize() {
         position.get().fertilize();
+    }
+
+    void reap() {
+        score.set(score.get() + position.get().reap());
+    }
+
+    IntegerProperty scoreProperty() {
+        return score;
+    }
+
+    @Override
+    void resetPosition() {
+        super.resetPosition();
+        score.set(0);
     }
 }

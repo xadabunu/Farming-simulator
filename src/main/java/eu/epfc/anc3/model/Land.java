@@ -65,4 +65,8 @@ public class Land {
         if (growable != null)
             growable.fertilize();
     }
+
+    int reap() {
+        return growable == null ? 0 : growable.reap();
+    }
 }

@@ -6,10 +6,10 @@ class Game {
 
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
-    public final IntegerProperty ctrScore = new SimpleIntegerProperty(0);
     public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
     private final Field field = new Field();
     private final Farmer farmer = new Farmer(field);
+    public final IntegerProperty ctrScore = farmer.scoreProperty();
 
 
 /* --------- Methode Start/Reset + Methodes modifiant le status --------- */
@@ -100,17 +100,11 @@ class Game {
         if (gameStatusProperty().isEqualTo(GameStatus.FERTILIZE).get()){
             farmer.fertilize();
         }
-        else if (plantUnplant()) {
-            if (gameStatusProperty().isEqualTo(GameStatus.PLANT).get())
-                ctrScore.setValue(ctrScore.intValue() + 1);
-            else
-                ctrScore.setValue(ctrScore.intValue() - 1);
-            return true;
+        else {
+            plantUnplant();
         }
         return false;
     }
-
-
 
     public void sleep(){
         ctrDays.setValue(ctrDays.get()+1);
