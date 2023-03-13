@@ -20,7 +20,6 @@ class Game {
             field.reset();
             ctrScore.set(0);
             ctrDays.set(0);
-            ctrDays.addListener((obs, oldValue, newValue) -> farmer.manageField());
             gameStatus.set(GameStatus.GAME_ON);
         }
         else {
@@ -107,7 +106,8 @@ class Game {
     }
 
     public void sleep(){
-        ctrDays.setValue(ctrDays.get()+1);
+        ctrDays.setValue(ctrDays.get() + 1);
+        farmer.manageField();
     }
 
 

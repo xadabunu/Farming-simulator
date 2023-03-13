@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public abstract class Growable extends Plantable {
 
-    final int MAXIMUM_SCORE;
+    final int maximum_score;
     protected int days_until_next_state;
 
     boolean onGrass;
@@ -14,7 +14,7 @@ public abstract class Growable extends Plantable {
     SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
 
     Growable(int maximumScore, boolean onGrass) {
-        MAXIMUM_SCORE = maximumScore;
+        maximum_score = maximumScore;
         this.onGrass = onGrass;
     }
 
@@ -58,8 +58,8 @@ public abstract class Growable extends Plantable {
 
 
     int getRottenScore() {
-        System.out.println(MAXIMUM_SCORE +  " - " + age + " " + (- (MAXIMUM_SCORE * age) / 10));
-        return - (MAXIMUM_SCORE * age) / 10;
+        System.out.println(maximum_score +  " - " + age + " " + (- (maximum_score * age) / 10));
+        return - (maximum_score * age) / 10;
     }
 
     ReadOnlyObjectProperty<GrowingState> stateProperty() {
