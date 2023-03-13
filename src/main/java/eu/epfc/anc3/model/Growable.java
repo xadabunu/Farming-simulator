@@ -3,7 +3,7 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public abstract class Growable extends Plantable{
+public abstract class Growable extends Plantable {
 
     final int MAXIMUM_SCORE;
     protected int days_until_next_state;
@@ -53,7 +53,7 @@ public abstract class Growable extends Plantable{
         return points;
     }
 
-    protected abstract int getScore();
+    abstract int getScore();
     abstract  void fertilize();
 
 
