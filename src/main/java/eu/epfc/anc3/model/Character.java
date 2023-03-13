@@ -33,7 +33,7 @@ abstract class Character {
                     teleport(position.get().getLine(), position.get().getCol() - 1);
             }
         }
-}
+    }
 
     void teleport(int line, int col) {
         position.set(field.getLand(line, col));

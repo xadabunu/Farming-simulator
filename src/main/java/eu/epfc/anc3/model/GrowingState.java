@@ -5,7 +5,6 @@ public enum GrowingState {
 
     GrowingState grow() {
         return switch(this) {
-
             case STATE_1 -> STATE_2;
             case STATE_2 -> STATE_3;
             case STATE_3 -> STATE_4;

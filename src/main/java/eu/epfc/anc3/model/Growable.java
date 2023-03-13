@@ -11,6 +11,7 @@ public abstract class Growable extends Plantable{
     boolean onGrass;
 
     GrowingState state = GrowingState.STATE_1;
+    SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
 
     Growable(int maximumScore, boolean onGrass) {
         MAXIMUM_SCORE = maximumScore;
@@ -19,6 +20,7 @@ public abstract class Growable extends Plantable{
 
     public void setState(GrowingState state) {
         this.state = state;
+        stateProperty.set(state);
     }
 
     int grow() {
@@ -31,6 +33,7 @@ public abstract class Growable extends Plantable{
         }
         if (age == days_until_next_state) {
             state = state.grow();
+            stateProperty.set(stateProperty.getValue().grow());
             if (state != null) {
                 age = 0;
             }
@@ -46,6 +49,7 @@ public abstract class Growable extends Plantable{
     int reap() {
         int points = getScore();
         state = null;
+        stateProperty.set(null);
         return points;
     }
 
@@ -59,6 +63,6 @@ public abstract class Growable extends Plantable{
     }
 
     ReadOnlyObjectProperty<GrowingState> stateProperty() {
-        return new SimpleObjectProperty<>(state);
+        return stateProperty;
     }
 }
