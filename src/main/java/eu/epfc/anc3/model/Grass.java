@@ -14,6 +14,10 @@ public class Grass extends Plantable {
             isDead.set(true);
         }
     }
+    void resetGrass(){
+        isDead.set(false);
+        age = 0;
+    }
 
     ReadOnlyBooleanProperty grassProperty() {return isDead;}
 

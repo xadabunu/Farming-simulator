@@ -13,14 +13,17 @@ public class Land {
 
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
     private Growable growable;
-    private final Grass grass = new Grass();
+    private Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
         col = j;
 
         isDead().addListener((obs, old, newVal) -> {
-            content.set(LandContent.DIRT);
+            if (isDead().get()) {
+                content.set(LandContent.DIRT);
+                grass.resetGrass();
+            }
         });
     }
 
