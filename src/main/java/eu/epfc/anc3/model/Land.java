@@ -13,6 +13,8 @@ public class Land {
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
     private Growable growable;
 
+    private Grass grass;
+
     Land(int i, int j) {
         line = i;
         col = j;
@@ -38,8 +40,15 @@ public class Land {
         growableProp.set(null);
     }
 
+    public void removeGrass() {
+        content.set(LandContent.DIRT);
+    }
+
 
     int grow() {
+        if(content.isEqualTo(LandContent.GRASS).get()) {
+            grass.grow();
+        }
         return growable == null ? 0 : growable.grow();
 
     }
