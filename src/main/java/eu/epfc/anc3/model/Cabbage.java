@@ -1,41 +1,35 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 public class Cabbage extends Growable {
 
-    private static final int MAXIMUM_SCORE = 200;
-    private static final int[] STATE_DURATION = {5, 4, 3, 2, 10};
-    private static final int[] GRASS_STATE_DURATION = {4, 3, 2, 1, 5};
-
+    private final ObjectProperty<CabbageStates> stateProperty = new SimpleObjectProperty<>();
 
     public Cabbage(boolean onGrass) {
-        super(MAXIMUM_SCORE, onGrass);
-        days_until_next_state = getStateDuration();
-    }
-
-    @Override
-    protected int getStateDuration() {
-        if (state == null) {
-            return 0;
-        }
-        return onGrass ? GRASS_STATE_DURATION[state.ordinal()] : STATE_DURATION[state.ordinal()];
-    }
-
-    @Override
-    int getScore() {
-        return switch (state) {
-            case STATE_1, STATE_2 -> 0;
-            case STATE_3 -> MAXIMUM_SCORE * 3/4;
-            case STATE_4 -> MAXIMUM_SCORE;
-            case ROTTEN -> getRottenScore();
-        };
+        super(onGrass);
+        stateProperty.set(new CabbageState1(onGrass,this));
     }
 
     @Override
     void fertilize() {
+    }
 
+    void changeState() {
+        stateProperty.set(stateProperty.get().grow());
+    }
+
+    int grow() {
+        return stateProperty.get().canGrow() ? 0 : stateProperty.get().reap();
+    }
+
+    int reap() {
+        int score = stateProperty.get().reap();
+        stateProperty.set(null);
+        return score;
     }
 }
 
@@ -45,24 +39,39 @@ abstract class CabbageStates implements State {
     private final int duration;
     final BooleanProperty onGrass;
     int age = 0;
+    final Cabbage cabbage;
 
-    CabbageStates(int duration, boolean onGrass) {
+    static GrowingState growingState;
+
+    CabbageStates(int duration, boolean onGrass, Cabbage cabbage) {
         this.duration = duration;
         this.onGrass = new SimpleBooleanProperty(onGrass);
+        this.cabbage = cabbage;
     }
 
     boolean canGrow() {
         ++age;
-        return age != duration;
+        if (age == duration) {
+            cabbage.changeState();
+            return growingState != GrowingState.ROTTEN;
+        }
+        return true;
     }
+
+    int reap() {
+        return getScore();
+    }
+
+    abstract CabbageStates grow();
 }
 
 class CabbageState1 extends CabbageStates {
 
     private static final int[] durations = {5, 4};
 
-    CabbageState1(boolean onGrass) {
-        super(durations[onGrass ? 1 : 0], onGrass);
+    CabbageState1(boolean onGrass, Cabbage cabbage) {
+        super(durations[onGrass ? 1 : 0], onGrass, cabbage);
+        growingState = GrowingState.STATE_1;
     }
 
     @Override
@@ -71,8 +80,8 @@ class CabbageState1 extends CabbageStates {
     }
 
     @Override
-    public State grow() {
-        return new CabbageState2(onGrass.get());
+    public CabbageStates grow() {
+        return new CabbageState2(onGrass.get(), cabbage);
     }
 }
 
@@ -80,8 +89,9 @@ class CabbageState2 extends CabbageStates {
 
     private static final int[] duration = {4, 3};
 
-    CabbageState2(boolean onGrass) {
-        super(duration[onGrass ? 1 : 0], onGrass);
+    CabbageState2(boolean onGrass, Cabbage cabbage) {
+        super(duration[onGrass ? 1 : 0], onGrass, cabbage);
+        growingState = GrowingState.STATE_2;
     }
 
     @Override
@@ -90,17 +100,18 @@ class CabbageState2 extends CabbageStates {
     }
 
     @Override
-    public State grow() {
-        return new CabbageState3(onGrass.get());
+    public CabbageStates grow() {
+        return new CabbageState3(onGrass.get(), cabbage);
     }
 }
 
 class CabbageState3 extends CabbageStates {
 
-    private static final int[] duration = {4, 3};
+    private static final int[] duration = {3, 2};
 
-    CabbageState3(boolean onGrass) {
-        super(duration[onGrass ? 1 : 0], onGrass);
+    CabbageState3(boolean onGrass, Cabbage cabbage) {
+        super(duration[onGrass ? 1 : 0], onGrass, cabbage);
+        growingState = GrowingState.STATE_3;
     }
 
     @Override
@@ -109,17 +120,19 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
-    public State grow() {
-        return new CabbageState4(onGrass.get());
+    public CabbageStates grow() {
+        return new CabbageState4(onGrass.get(), cabbage);
     }
 }
 
 class CabbageState4 extends CabbageStates {
 
-    private static final int[] duration = {3, 2};
+    private static final int[] duration = {2, 1};
 
-    CabbageState4(boolean onGrass) {
-        super(duration[onGrass ? 1 : 0], onGrass);
+
+    CabbageState4(boolean onGrass, Cabbage cabbage) {
+        super(duration[onGrass ? 1 : 0], onGrass, cabbage);
+        growingState = GrowingState.STATE_4;
     }
 
     @Override
@@ -128,7 +141,26 @@ class CabbageState4 extends CabbageStates {
     }
 
     @Override
-    public State grow() {
-        return new RottenState();
+    public CabbageStates grow() {
+        return new RottenCabbageState(onGrass.get(), cabbage);
+    }
+}
+
+class RottenCabbageState extends CabbageStates {
+
+    private static final int [] duration = {10, 5};
+    RottenCabbageState(Boolean onGrass, Cabbage cabbage) {
+        super(duration[onGrass ? 1 : 0], onGrass, cabbage);
+        growingState = GrowingState.ROTTEN;
+    }
+
+    @Override
+    CabbageStates grow() {
+        return this;
+    }
+
+    @Override
+    public int getScore() {
+        return - (maximum_score * age) / 10;
     }
 }

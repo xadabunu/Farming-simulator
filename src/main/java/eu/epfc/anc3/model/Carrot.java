@@ -1,72 +1,87 @@
 package eu.epfc.anc3.model;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 public class Carrot extends Growable {
 
-    private static final int MAXIMUM_SCORE = 100;
-    private static final int[] STATES_DAYS = {3, 3, 3, 3, 10};
+    private final ObjectProperty<CarrotStates> stateProperty = new SimpleObjectProperty<>();
 
     public Carrot(boolean onGrass) {
-        super(MAXIMUM_SCORE, onGrass);
-        days_until_next_state = getStateDuration();
-    }
-
-    @Override
-    protected int getStateDuration() {
-        return state == null ? 0 : STATES_DAYS[state.ordinal()];
-    }
-
-    @Override
-    int getScore() {
-        return switch (state) {
-            case STATE_1 -> MAXIMUM_SCORE / 10;
-            case STATE_2 -> MAXIMUM_SCORE / 5;
-            case STATE_3 -> MAXIMUM_SCORE / 2;
-            case STATE_4 -> MAXIMUM_SCORE;
-            case ROTTEN -> getRottenScore();
-        };
+        super(onGrass);
+        stateProperty.set(new CarrotState1(this));
     }
 
     @Override
     void fertilize() {
         if(state.ordinal() < 2) {
             state = GrowingState.STATE_3;
+            stateProperty.set(new CarrotState3(this));
         }
+    }
+
+    int grow() {
+        return stateProperty.get().canGrow() ? 0 : stateProperty.get().reap();
+    }
+
+    int reap() {
+        int score = stateProperty.get().reap();
+        stateProperty.set(null);
+        return score;
+    }
+
+    void changeState() {
+        stateProperty.set(stateProperty.get().grow());
     }
 }
 
 abstract class CarrotStates implements State {
 
-    final int MAXIMUM_SCORE = 100;
+    final int maximum_score = 100;
     private final int duration;
+    final Carrot carrot;
+    static GrowingState growingState;
 
     int age = 0;
 
-    CarrotStates(int duration) {
+    CarrotStates(int duration, Carrot carrot) {
         this.duration = duration;
+        this.carrot = carrot;
+    }
+
+    int reap() {
+        return getScore();
     }
 
     boolean canGrow() {
         ++age;
-        return age != duration;
+        if (age == duration) {
+            carrot.changeState();
+            return growingState != GrowingState.ROTTEN;
+        }
+        return true;
     }
+
+    abstract CarrotStates grow();
 }
 
 class CarrotState1 extends CarrotStates {
 
     private static final int duration = 3;
 
-    CarrotState1() {
-        super(duration);
+    CarrotState1(Carrot carrot) {
+        super(duration, carrot);
+        growingState = GrowingState.STATE_1;
     }
 
     @Override
     public int getScore() {
-        return MAXIMUM_SCORE / 10;
+        return maximum_score / 10;
     }
 
     @Override
-    public State grow() {
-        return new CarrotState2();
+    public CarrotStates grow() {
+        return new CarrotState2(carrot);
     }
 }
 
@@ -74,18 +89,19 @@ class CarrotState2 extends CarrotStates {
 
     private static final int duration = 3;
 
-    CarrotState2() {
-        super(duration);
+    CarrotState2(Carrot carrot) {
+        super(duration, carrot);
+        growingState = GrowingState.STATE_2;
     }
 
     @Override
     public int getScore() {
-        return MAXIMUM_SCORE / 5;
+        return maximum_score / 5;
     }
 
     @Override
-    public State grow() {
-        return new CarrotState3();
+    public CarrotStates grow() {
+        return new CarrotState3(carrot);
     }
 }
 
@@ -93,18 +109,19 @@ class CarrotState3 extends CarrotStates {
 
     private static final int duration = 3;
 
-    CarrotState3() {
-        super(duration);
+    CarrotState3(Carrot carrot) {
+        super(duration, carrot);
+        growingState = GrowingState.STATE_3;
     }
 
     @Override
     public int getScore() {
-        return MAXIMUM_SCORE / 2;
+        return maximum_score / 2;
     }
 
     @Override
-    public State grow() {
-        return new CarrotState4();
+    public CarrotStates grow() {
+        return new CarrotState4(carrot);
     }
 }
 
@@ -112,17 +129,38 @@ class CarrotState4 extends CarrotStates {
 
     private static final int duration = 3;
 
-    CarrotState4() {
-        super(duration);
+    CarrotState4(Carrot carrot) {
+        super(duration, carrot);
+        growingState = GrowingState.STATE_4;
     }
 
     @Override
     public int getScore() {
-        return MAXIMUM_SCORE;
+        return maximum_score;
     }
 
     @Override
-    public State grow() {
-        return new RottenState();
+    public CarrotStates grow() {
+        return new RottenCarrotState(carrot);
+    }
+}
+
+class RottenCarrotState extends CarrotStates {
+
+    private static final int duration = 10;
+
+    RottenCarrotState(Carrot carrot) {
+        super(duration, carrot);
+        growingState = GrowingState.ROTTEN;
+    }
+
+    @Override
+    CarrotStates grow() {
+        return this;
+    }
+
+    @Override
+    public int getScore() {
+        return - (maximum_score * age) / 10;
     }
 }

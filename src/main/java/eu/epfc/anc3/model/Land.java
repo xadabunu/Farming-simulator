@@ -41,7 +41,6 @@ public class Land {
 
     int grow() {
         return growable == null ? 0 : growable.grow();
-
     }
 
     void plant(Growable g) {
