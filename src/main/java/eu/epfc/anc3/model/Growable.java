@@ -54,8 +54,7 @@ public abstract class Growable extends Plantable {
     }
 
     abstract int getScore();
-    abstract  void fertilize();
-
+    abstract void fertilize();
 
     int getRottenScore() {
         System.out.println(maximum_score +  " - " + age + " " + (- (maximum_score * age) / 10));

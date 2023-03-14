@@ -3,6 +3,7 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 
 public class Land {
 
@@ -12,12 +13,15 @@ public class Land {
 
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
     private Growable growable;
-
-    private Grass grass;
+    private final Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
         col = j;
+
+        isDead().addListener((obs, old, newVal) -> {
+            content.set(LandContent.DIRT);
+        });
     }
 
     public int getLine() {
@@ -44,13 +48,11 @@ public class Land {
         content.set(LandContent.DIRT);
     }
 
-
     int grow() {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
         }
         return growable == null ? 0 : growable.grow();
-
     }
 
     void plant(Growable g) {
@@ -69,6 +71,8 @@ public class Land {
     ReadOnlyObjectProperty<LandGrowable> growableProperty() {
         return growableProp;
     }
+
+    private ReadOnlyBooleanProperty isDead() {return grass.grassProperty();}
 
     void fertilize() {
         if (growable != null)
