@@ -5,64 +5,18 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public abstract class Growable extends Plantable {
 
-    //final int maximum_score;
-    protected int days_until_next_state;
-
     boolean onGrass;
 
     GrowingState state = GrowingState.STATE_1;
     final SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
 
     Growable(boolean onGrass) {
-        //maximum_score = maximumScore;
         this.onGrass = onGrass;
     }
 
-    public void setState(GrowingState state) {
-        this.state = state;
-        stateProperty.set(state);
-    }
-
     abstract int grow();
-
-//    int grow() {
-//        return canGrow() ? 0 : getRottenScore();
-//    }
-
-//    private boolean canGrow() {
-//        if (state != null) {
-//            ++age;
-//        }
-//        if (age == days_until_next_state) {
-//            state = state.grow();
-//            stateProperty.set(stateProperty.getValue().grow());
-//            if (state != null) {
-//                age = 0;
-//            }
-//            days_until_next_state = getStateDuration();
-//            if(state != null)
-//                System.out.println(state.name());
-//        }
-//        return state != null;
-//    }
-
-//    protected abstract int getStateDuration();
-
-//    int reap() {
-//        int points = getScore();
-//        state = null;
-//        stateProperty.set(null);
-//        return points;
-//    }
-
     abstract int reap();
     abstract  void fertilize();
-
-
-//    int getRottenScore() {
-//        System.out.println(maximum_score +  " - " + age + " " + (- (maximum_score * age) / 10));
-//        return - (maximum_score * age) / 10;
-//    }
 
     ReadOnlyObjectProperty<GrowingState> stateProperty() {
         return stateProperty;

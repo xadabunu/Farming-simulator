@@ -7,6 +7,8 @@ class Field {
     static final int LINES = 15, COLUMNS = 25;
     private final Land[][] lands;
 
+    Grass grass;
+
     Field() {
         lands = new Land[LINES][COLUMNS];
         for (int i = 0 ; i < LINES ; ++i) {
@@ -27,7 +29,7 @@ class Field {
             }
         }
     }
-    
+
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
         return lands[line][col].contentProperty();
     }
