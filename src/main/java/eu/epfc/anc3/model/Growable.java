@@ -2,7 +2,7 @@ package eu.epfc.anc3.model;
 
 import javafx.beans.property.SimpleObjectProperty;
 
-public abstract class Growable extends Plantable {
+abstract class Growable extends Plantable {
 
     boolean onGrass;
 

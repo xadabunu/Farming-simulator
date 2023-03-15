@@ -9,7 +9,7 @@ abstract class Character {
     protected final Field field;
     protected final ObjectProperty<Land> position;
 
-    Character(Field field) {
+    protected Character(Field field) {
         this.field = field;
         position = new SimpleObjectProperty<>(field.getLand(0, 0));
     }

@@ -5,11 +5,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class Cabbage extends Growable {
+class Cabbage extends Growable {
 
     private final ObjectProperty<CabbageStates> stateProperty = new SimpleObjectProperty<>();
 
-    public Cabbage(boolean onGrass) {
+    Cabbage(boolean onGrass) {
         super(onGrass);
         stateProperty.set(new CabbageState1(onGrass,this));
     }
@@ -50,7 +50,7 @@ abstract class CabbageStates implements State {
     int age = 0;
     final Cabbage cabbage;
 
-    static GrowingState growingState;
+    GrowingState growingState;
 
     CabbageStates(int duration, boolean onGrass, Cabbage cabbage) {
         this.duration = duration;
@@ -89,7 +89,7 @@ class CabbageState1 extends CabbageStates {
     }
 
     @Override
-    public CabbageStates grow() {
+    CabbageStates grow() {
         return new CabbageState2(onGrass.get(), cabbage);
     }
 }
@@ -109,7 +109,7 @@ class CabbageState2 extends CabbageStates {
     }
 
     @Override
-    public CabbageStates grow() {
+    CabbageStates grow() {
         return new CabbageState3(onGrass.get(), cabbage);
     }
 }
@@ -129,7 +129,7 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
-    public CabbageStates grow() {
+    CabbageStates grow() {
         return new CabbageState4(onGrass.get(), cabbage);
     }
 }
@@ -150,7 +150,7 @@ class CabbageState4 extends CabbageStates {
     }
 
     @Override
-    public CabbageStates grow() {
+    CabbageStates grow() {
         return new RottenCabbageState(onGrass.get(), cabbage);
     }
 }

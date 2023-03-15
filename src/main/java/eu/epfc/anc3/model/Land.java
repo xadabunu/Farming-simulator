@@ -43,7 +43,7 @@ public class Land {
         growableProp.setValue(growable);
     }
 
-    public void removeGrowable() {
+    void removeGrowable() {
         growableProp.set(null);
     }
 

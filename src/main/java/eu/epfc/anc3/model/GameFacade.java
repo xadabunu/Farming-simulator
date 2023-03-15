@@ -30,10 +30,6 @@ public class GameFacade {
         game.sleep();
     }
 
-    public void setStatusPlant() {
-        game.setStatusPlant();
-    }
-
     public void setStatusPlantGrass() {
         game.setStatusPlantGrass();
     }

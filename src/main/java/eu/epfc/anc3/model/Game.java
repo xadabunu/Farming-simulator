@@ -6,10 +6,10 @@ class Game {
 
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
-    public final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
+    final IntegerProperty ctrDays = new SimpleIntegerProperty(0);
     private final Field field = new Field();
     private final Farmer farmer = new Farmer(field);
-    public final IntegerProperty ctrScore = farmer.scoreProperty();
+    final IntegerProperty ctrScore = farmer.scoreProperty();
 
 
 /* --------- Methode Start/Reset + Methodes modifiant le status --------- */
@@ -48,19 +48,19 @@ class Game {
         }
     }
 
-    public void setStatusPlantGrass() {
+    void setStatusPlantGrass() {
         switchPlanting(Planting.GRASS);
     }
 
-    public void setStatusPlantCarrot() {
+    void setStatusPlantCarrot() {
         switchPlanting(Planting.CARROT);
     }
 
-    public void setStatusPlantCabbage() {
+    void setStatusPlantCabbage() {
         switchPlanting(Planting.CABBAGE);
     }
 
-    public void setStatusFertilize() {
+    void setStatusFertilize() {
         gameStatus.set(GameStatus.FERTILIZE);
     }
 
@@ -105,7 +105,7 @@ class Game {
         return false;
     }
 
-    public void sleep(){
+    void sleep(){
         ctrDays.setValue(ctrDays.get() + 1);
         farmer.manageField();
     }

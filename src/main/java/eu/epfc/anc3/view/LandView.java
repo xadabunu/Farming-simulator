@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 
 
 public class LandView extends StackPane {
-
+    
     private static final Image grassImage = new Image("grass.png");
     private static final Image dirtImage = new Image("dirt.png");
     private static final Image carrot1Image = new Image("carrot1.png");
@@ -90,6 +90,7 @@ public class LandView extends StackPane {
 
             growableImageView = scaleImage(growableImageView.getImage(), landWidth);
             getChildren().add(growableImageView);
+            growableImageView.setTranslateY(-8);
         }
 
         landViewModel.growableState().addListener((obs, old, newVal) -> {
