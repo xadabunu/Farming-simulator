@@ -2,16 +2,13 @@ package eu.epfc.anc3.view;
 
 import eu.epfc.anc3.model.Direction;
 import eu.epfc.anc3.model.GameFacade;
-import eu.epfc.anc3.model.GameStatus;
 import eu.epfc.anc3.vm.AppViewModel;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 

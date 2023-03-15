@@ -79,6 +79,11 @@ public class Land {
             growable.fertilize();
     }
 
+    boolean hasGrowable() {
+        return growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
+                || growableProperty().isEqualTo(LandGrowable.CARROT).get();
+    }
+
     int reap() {
         int score = 0;
         if (growable != null) {
