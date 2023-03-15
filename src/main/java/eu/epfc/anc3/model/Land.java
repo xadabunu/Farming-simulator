@@ -92,6 +92,7 @@ public class Land {
         if (growable != null) {
             score = growable.reap();
             growable = null;
+            removeGrowable();
         }
         return score;
     }

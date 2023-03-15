@@ -22,8 +22,8 @@ class Farmer extends Character {
     boolean plantCarrot() {
         if (position.get().growableProperty().get() == (null)) {
             Growable g = new Carrot(position.get().contentProperty().isEqualTo(LandContent.GRASS).get());
-            position.get().setGrowable(LandGrowable.CARROT);
             position.get().plant(g);
+            position.get().setGrowable(LandGrowable.CARROT);
             return true;
         }
         return false;
@@ -32,8 +32,8 @@ class Farmer extends Character {
     boolean plantCabbage() {
         if (position.get().growableProperty().get() == (null)) {
             Growable g = new Cabbage(position.get().contentProperty().isEqualTo(LandContent.GRASS).get());
-            position.get().setGrowable(LandGrowable.CABBAGE);
             position.get().plant(g);
+            position.get().setGrowable(LandGrowable.CABBAGE);
             return true;
         }
         return false;

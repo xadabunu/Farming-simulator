@@ -7,6 +7,7 @@ import eu.epfc.anc3.vm.LandViewModel;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -40,12 +41,7 @@ public class LandView extends StackPane {
         landViewModel.contentProperty().addListener((obs, old, newVal) -> setLandImage(imageView, landViewModel.contentProperty().get()));
         landViewModel.growableProperty().addListener((obs, old, newVal) -> {
             getChildren().remove(growableImageView);
-            setGrowableImage(landViewModel.growableProperty().get(), landWidthProperty.get());
-        });
-
-        landViewModel.growableState().addListener((obs, old, newVal) -> {
-            getChildren().remove(growableImageView);
-            setGrowableStateImage(landViewModel.growableProperty().get(), landViewModel.growableState().get(), landWidthProperty.get());
+            setGrowableImage(landViewModel.growableProperty().get(), landWidthProperty.get(), landViewModel, landWidthProperty);
         });
         setOnMouseClicked(e -> landViewModel.teleport());
     }
@@ -58,9 +54,7 @@ public class LandView extends StackPane {
     }
 
     private void setGrowableStateImage(LandGrowable landGrowable, GrowingState growablestate, double landWidth){
-
-        if (growablestate != null) {
-
+        if (growablestate != null && landGrowable !=null) {
             switch (landGrowable){
                 case CABBAGE -> {
                     growableImageView = switch (growablestate) {
@@ -71,7 +65,6 @@ public class LandView extends StackPane {
                         case ROTTEN -> new ImageView(cabbage5Image);
                     };
                 }
-
                 case CARROT -> {
                     growableImageView = switch (growablestate) {
                         case STATE_1 -> new ImageView(carrot1Image);
@@ -82,15 +75,13 @@ public class LandView extends StackPane {
                     };
                 }
             }
-
             growableImageView = scaleImage(growableImageView.getImage(), landWidth);
             getChildren().add(growableImageView);
-
-
         }
     }
 
-    private void setGrowableImage(LandGrowable landGrowable, double landWidth) {
+    private void setGrowableImage(LandGrowable landGrowable, double landWidth, LandViewModel landViewModel, DoubleBinding landWidthProperty) {
+
         if (landGrowable != null) {
             growableImageView = switch (landGrowable) {
                 case CABBAGE -> new ImageView(cabbage1Image);
@@ -100,8 +91,12 @@ public class LandView extends StackPane {
             growableImageView = scaleImage(growableImageView.getImage(), landWidth);
             getChildren().add(growableImageView);
         }
-    }
 
+        landViewModel.growableState().addListener((obs, old, newVal) -> {
+            getChildren().remove(growableImageView);
+            setGrowableStateImage(landViewModel.growableProperty().get(), landViewModel.growableState().get(), landWidthProperty.get());
+        });
+    }
 
     private ImageView scaleImage(Image image, double landWidth) {
         double imageWidth = image.getWidth();
