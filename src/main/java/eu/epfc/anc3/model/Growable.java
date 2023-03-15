@@ -1,7 +1,5 @@
 package eu.epfc.anc3.model;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public abstract class Growable extends Plantable {

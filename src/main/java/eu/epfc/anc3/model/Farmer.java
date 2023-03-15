@@ -1,7 +1,6 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 class Farmer extends Character {
@@ -41,8 +40,7 @@ class Farmer extends Character {
     }
 
     boolean unplant() {
-        if (position.get().growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
-                || position.get().growableProperty().isEqualTo(LandGrowable.CARROT).get()) {
+        if (position.get().hasGrowable()) {
             reap();
             position.get().removeGrowable();
         }

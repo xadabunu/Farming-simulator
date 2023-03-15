@@ -14,7 +14,7 @@ public class Carrot extends Growable {
 
     @Override
     void fertilize() {
-        if(state.ordinal() < 2) {
+        if (state.ordinal() < 2) {
             state = GrowingState.STATE_3;
             stateProperty.set(new CarrotState3(this));
         }

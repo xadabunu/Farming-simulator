@@ -45,10 +45,6 @@ public class Land {
         growableProp.set(null);
     }
 
-    public void removeGrass() {
-        content.set(LandContent.DIRT);
-    }
-
     int grow() {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
@@ -81,6 +77,11 @@ public class Land {
     void fertilize() {
         if (growable != null)
             growable.fertilize();
+    }
+
+    boolean hasGrowable() {
+        return growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
+                || growableProperty().isEqualTo(LandGrowable.CARROT).get();
     }
 
     int reap() {
