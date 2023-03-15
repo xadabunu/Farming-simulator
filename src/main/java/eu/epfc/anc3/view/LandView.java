@@ -1,5 +1,6 @@
 package eu.epfc.anc3.view;
 
+import eu.epfc.anc3.model.GrowingState;
 import eu.epfc.anc3.model.LandContent;
 import eu.epfc.anc3.model.LandGrowable;
 import eu.epfc.anc3.vm.LandViewModel;
@@ -17,7 +18,17 @@ public class LandView extends StackPane {
     private static final Image grassImage = new Image("grass.png");
     private static final Image dirtImage = new Image("dirt.png");
     private static final Image carrot1Image = new Image("carrot1.png");
+    private static final Image carrot2Image = new Image("carrot2.png");
+    private static final Image carrot3Image = new Image("carrot3.png");
+    private static final Image carrot4Image = new Image("carrot4.png");
+    private static final Image carrot5Image = new Image("rotten_carrot.png");
+
     private static final Image cabbage1Image = new Image("cabbage1.png");
+    private static final Image cabbage2Image = new Image("cabbage2.png");
+    private static final Image cabbage3Image = new Image("cabbage3.png");
+    private static final Image cabbage4Image = new Image("cabbage4.png");
+    private static final Image cabbage5Image = new Image("rotten_cabbage.png");
+
     private final ImageView imageView = new ImageView();
     private ImageView growableImageView = new ImageView();
     ReadOnlyObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
@@ -34,6 +45,11 @@ public class LandView extends StackPane {
             getChildren().remove(growableImageView);
             setGrowableImage(landViewModel.growableProperty().get(), landWidthProperty.get());
         });
+
+        landViewModel.growableState().addListener((obs, old, newVal) -> {
+            getChildren().remove(growableImageView);
+            setGrowableStateImage(landViewModel.growableProperty().get(), landViewModel.growableState().get(), landWidthProperty.get());
+        });
         setOnMouseClicked(e -> landViewModel.teleport());
     }
 
@@ -44,6 +60,38 @@ public class LandView extends StackPane {
         }
     }
 
+    private void setGrowableStateImage(LandGrowable landGrowable, GrowingState growablestate, double landWidth){
+
+        if (growablestate != null) {
+
+            switch (landGrowable){
+                case CABBAGE -> {
+                    growableImageView = switch (growablestate) {
+                        case STATE_1 -> new ImageView(cabbage1Image);
+                        case STATE_2 -> new ImageView(cabbage2Image);
+                        case STATE_3 -> new ImageView(cabbage3Image);
+                        case STATE_4 -> new ImageView(cabbage4Image);
+                        case ROTTEN -> new ImageView(cabbage5Image);
+                    };
+                }
+
+                case CARROT -> {
+                    growableImageView = switch (growablestate) {
+                        case STATE_1 -> new ImageView(carrot1Image);
+                        case STATE_2 -> new ImageView(carrot2Image);
+                        case STATE_3 -> new ImageView(carrot3Image);
+                        case STATE_4 -> new ImageView(carrot4Image);
+                        case ROTTEN -> new ImageView(carrot5Image);
+                    };
+                }
+            }
+
+            growableImageView = scaleImage(growableImageView.getImage(), landWidth);
+            getChildren().add(growableImageView);
+
+
+        }
+    }
 
     private void setGrowableImage(LandGrowable landGrowable, double landWidth) {
         if (landGrowable != null) {

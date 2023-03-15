@@ -10,10 +10,10 @@ public class Land {
     private final int line, col;
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
-
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
+
     private Growable growable;
-    private Grass grass = new Grass();
+    private final Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
@@ -73,6 +73,10 @@ public class Land {
 
     ReadOnlyObjectProperty<LandGrowable> growableProperty() {
         return growableProp;
+    }
+
+    public ReadOnlyObjectProperty<GrowingState> growableState() {
+        return growable.stateProperty();
     }
 
     private ReadOnlyBooleanProperty isDead() {return grass.grassProperty();}

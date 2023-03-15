@@ -1,6 +1,7 @@
 package eu.epfc.anc3.vm;
 
 import eu.epfc.anc3.model.GameFacade;
+import eu.epfc.anc3.model.GrowingState;
 import eu.epfc.anc3.model.LandContent;
 import eu.epfc.anc3.model.LandGrowable;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -26,6 +27,9 @@ public class LandViewModel {
 
     public ReadOnlyObjectProperty<LandGrowable> growableProperty() {
         return game.growableProperty(line, col);
+    }
+    public ReadOnlyObjectProperty<GrowingState> growableState() {
+        return game.growableState(line, col);
     }
 
 }

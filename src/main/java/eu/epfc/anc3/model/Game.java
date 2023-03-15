@@ -138,6 +138,9 @@ class Game {
     ReadOnlyObjectProperty<LandGrowable> growableProperty(int line, int col) {
         return field.growableProperty(line, col);
     }
+    ReadOnlyObjectProperty<GrowingState> growableState(int line, int col) {
+        return field.growableState(line, col);
+    }
 
     ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
         return gameStatus;
