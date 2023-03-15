@@ -14,7 +14,7 @@ public class Carrot extends Growable {
 
     @Override
     void fertilize() {
-        if(state.ordinal() < 2) {
+        if (state.ordinal() < 2) {
             state = GrowingState.STATE_3;
             stateProperty.set(new CarrotState3(this));
         }
@@ -57,7 +57,7 @@ abstract class CarrotStates implements State {
         ++age;
         if (age == duration) {
             carrot.changeState();
-            return growingState != GrowingState.ROTTEN;
+            return growingState != null;
         }
         return true;
     }
@@ -156,6 +156,8 @@ class RottenCarrotState extends CarrotStates {
 
     @Override
     CarrotStates grow() {
+        carrot.stateProperty().set(null);
+        growingState = null;
         return this;
     }
 

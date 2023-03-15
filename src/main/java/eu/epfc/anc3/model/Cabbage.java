@@ -53,7 +53,7 @@ abstract class CabbageStates implements State {
         ++age;
         if (age == duration) {
             cabbage.changeState();
-            return growingState != GrowingState.ROTTEN;
+            return growingState != null;
         }
         return true;
     }
@@ -156,6 +156,8 @@ class RottenCabbageState extends CabbageStates {
 
     @Override
     CabbageStates grow() {
+        cabbage.stateProperty().set(null);
+        growingState = null;
         return this;
     }
 

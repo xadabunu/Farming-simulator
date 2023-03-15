@@ -47,10 +47,6 @@ public class Land {
         growableProp.set(null);
     }
 
-    public void removeGrass() {
-        content.set(LandContent.DIRT);
-    }
-
     int grow() {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
@@ -63,6 +59,7 @@ public class Land {
         g.stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == null) {
                 growable = null;
+                removeGrowable();
             }
         });
     }
@@ -79,14 +76,23 @@ public class Land {
         return growable.stateProperty();
     }
 
-    private ReadOnlyBooleanProperty isDead() {return grass.grassProperty();}
-
+    private ReadOnlyBooleanProperty isDead() {
+        return grass.grassProperty();
+    }
     void fertilize() {
         if (growable != null)
             growable.fertilize();
     }
-
+    boolean hasGrowable() {
+        return growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
+                || growableProperty().isEqualTo(LandGrowable.CARROT).get();
+    }
     int reap() {
-        return growable == null ? 0 : growable.reap();
+        int score = 0;
+        if (growable != null) {
+            score = growable.reap();
+            growable = null;
+        }
+        return score;
     }
 }
