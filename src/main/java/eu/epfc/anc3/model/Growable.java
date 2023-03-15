@@ -1,6 +1,7 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public abstract class Growable extends Plantable {
@@ -18,7 +19,9 @@ public abstract class Growable extends Plantable {
     abstract int reap();
     abstract  void fertilize();
 
-    ReadOnlyObjectProperty<GrowingState> stateProperty() {
+    SimpleObjectProperty<GrowingState> stateProperty() {
         return stateProperty;
     }
+
+
 }

@@ -57,7 +57,7 @@ abstract class CarrotStates implements State {
         ++age;
         if (age == duration) {
             carrot.changeState();
-            return growingState != GrowingState.ROTTEN;
+            return growingState != null;
         }
         return true;
     }
@@ -156,6 +156,8 @@ class RottenCarrotState extends CarrotStates {
 
     @Override
     CarrotStates grow() {
+        carrot.stateProperty().set(null);
+        growingState = null;
         return this;
     }
 

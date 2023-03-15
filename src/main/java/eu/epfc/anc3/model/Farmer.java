@@ -41,7 +41,12 @@ class Farmer extends Character {
     }
 
     boolean unplant() {
-        if (!position.get().contentProperty().isEqualTo(LandContent.DIRT).get()) {
+        if (position.get().growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
+                || position.get().growableProperty().isEqualTo(LandGrowable.CARROT).get()) {
+            reap();
+            position.get().removeGrowable();
+        }
+        else if (!position.get().contentProperty().isEqualTo(LandContent.DIRT).get()) {
             position.get().setContent(LandContent.DIRT);
             return true;
         }
@@ -50,8 +55,9 @@ class Farmer extends Character {
 
      void manageField() {
         for (int i = 0 ; i < Field.LINES; ++i) {
-            for (int j = 0 ; j <  Field.COLUMNS; ++j)
+            for (int j = 0 ; j <  Field.COLUMNS; ++j) {
                 score.set(score.get() + field.getLand(i, j).grow());
+            }
         }
     }
 

@@ -10,15 +10,13 @@ public class Land {
     private final int line, col;
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
-
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
     private Growable growable;
-    private Grass grass = new Grass();
+    private final Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
         col = j;
-
         isDead().addListener((obs, old, newVal) -> {
             if (isDead().get()) {
                 content.set(LandContent.DIRT);
@@ -63,6 +61,7 @@ public class Land {
         g.stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == null) {
                 growable = null;
+                removeGrowable();
             }
         });
     }
@@ -75,7 +74,9 @@ public class Land {
         return growableProp;
     }
 
-    private ReadOnlyBooleanProperty isDead() {return grass.grassProperty();}
+    private ReadOnlyBooleanProperty isDead() {
+        return grass.grassProperty();
+    }
 
     void fertilize() {
         if (growable != null)
@@ -83,6 +84,11 @@ public class Land {
     }
 
     int reap() {
-        return growable == null ? 0 : growable.reap();
+        int score = 0;
+        if (growable != null) {
+            score = growable.reap();
+            growable = null;
+        }
+        return score;
     }
 }
