@@ -4,7 +4,6 @@ import eu.epfc.anc3.model.LandContent;
 import eu.epfc.anc3.model.LandGrowable;
 import eu.epfc.anc3.vm.LandViewModel;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -54,6 +53,7 @@ public class LandView extends StackPane {
 
             growableImageView = scaleImage(growableImageView.getImage(), landWidth);
             getChildren().add(growableImageView);
+            growableImageView.setTranslateY(-8);
         }
     }
 

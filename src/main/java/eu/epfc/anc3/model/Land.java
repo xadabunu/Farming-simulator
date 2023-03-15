@@ -45,10 +45,6 @@ public class Land {
         growableProp.set(null);
     }
 
-    public void removeGrass() {
-        content.set(LandContent.DIRT);
-    }
-
     int grow() {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();

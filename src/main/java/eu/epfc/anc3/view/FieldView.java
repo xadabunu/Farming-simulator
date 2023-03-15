@@ -40,11 +40,12 @@ class FieldView extends GridPane {
                 add(caseView, j, i);
             }
         }
-        initiateCharacter();
+        initiateCharacter(landWidthProperty);
     }
 
-    private void initiateCharacter() {
+    private void initiateCharacter(DoubleBinding landWidthProperty) {
         ImageView imageView = new ImageView(new CharacterView("farmer.png").getImage());
+        imageView.setFitWidth(landWidthProperty.get() * 2.5);
         add(imageView, characterPosition.get().getCol(), characterPosition.get().getLine());
         characterPosition.addListener((obs, oldVal, newVal) -> {
             getChildren().remove(imageView);
