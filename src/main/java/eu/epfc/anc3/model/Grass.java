@@ -4,7 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class Grass extends Plantable {
+class Grass extends Plantable {
 
     private static final int DURATION = 12;
     private final BooleanProperty isDead = new SimpleBooleanProperty(false);

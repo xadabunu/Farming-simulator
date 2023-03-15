@@ -3,11 +3,11 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class Carrot extends Growable {
+class Carrot extends Growable {
 
     private final ObjectProperty<CarrotStates> stateProperty = new SimpleObjectProperty<>();
 
-    public Carrot(boolean onGrass) {
+    Carrot(boolean onGrass) {
         super(onGrass);
         stateProperty.set(new CarrotState1(this));
     }
@@ -40,7 +40,7 @@ abstract class CarrotStates implements State {
     final int maximum_score = 100;
     private final int duration;
     final Carrot carrot;
-    static GrowingState growingState;
+    GrowingState growingState;
 
     int age = 0;
 
@@ -80,7 +80,7 @@ class CarrotState1 extends CarrotStates {
     }
 
     @Override
-    public CarrotStates grow() {
+    CarrotStates grow() {
         return new CarrotState2(carrot);
     }
 }
@@ -100,7 +100,7 @@ class CarrotState2 extends CarrotStates {
     }
 
     @Override
-    public CarrotStates grow() {
+    CarrotStates grow() {
         return new CarrotState3(carrot);
     }
 }
@@ -120,7 +120,7 @@ class CarrotState3 extends CarrotStates {
     }
 
     @Override
-    public CarrotStates grow() {
+    CarrotStates grow() {
         return new CarrotState4(carrot);
     }
 }
@@ -140,7 +140,7 @@ class CarrotState4 extends CarrotStates {
     }
 
     @Override
-    public CarrotStates grow() {
+    CarrotStates grow() {
         return new RottenCarrotState(carrot);
     }
 }

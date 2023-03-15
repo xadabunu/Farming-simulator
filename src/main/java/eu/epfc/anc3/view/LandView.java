@@ -13,10 +13,10 @@ import javafx.scene.layout.StackPane;
 
 public class LandView extends StackPane {
 
-    private static final Image grassImage = new Image("grass.png");
-    private static final Image dirtImage = new Image("dirt.png");
-    private static final Image carrot1Image = new Image("carrot1.png");
-    private static final Image cabbage1Image = new Image("cabbage1.png");
+    private final Image grassImage = new Image("grass.png");
+    private final Image dirtImage = new Image("dirt.png");
+    private final Image carrot1Image = new Image("carrot1.png");
+    private final Image cabbage1Image = new Image("cabbage1.png");
     private final ImageView imageView = new ImageView();
     private ImageView growableImageView = new ImageView();
     ReadOnlyObjectProperty<LandContent> landContentProperty = new SimpleObjectProperty<>(LandContent.DIRT);
