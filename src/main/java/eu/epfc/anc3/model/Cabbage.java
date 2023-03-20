@@ -80,7 +80,7 @@ class CabbageState1 extends CabbageStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return 0;
     }
 
@@ -100,7 +100,7 @@ class CabbageState2 extends CabbageStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return 0;
     }
 
@@ -120,7 +120,7 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score * 3/4;
     }
 
@@ -141,7 +141,7 @@ class CabbageState4 extends CabbageStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score;
     }
 
@@ -167,7 +167,7 @@ class RottenCabbageState extends CabbageStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return - (maximum_score * age) / 10;
     }
 }

@@ -2,10 +2,7 @@ package eu.epfc.anc3.model;
 
 interface State {
 
-    int getScore();
+    int reap();
     boolean canGrow();
     State grow();
-    default int reap() {
-        return getScore();
-    }
 }

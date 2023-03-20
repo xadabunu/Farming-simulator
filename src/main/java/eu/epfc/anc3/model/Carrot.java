@@ -81,7 +81,7 @@ class CarrotState1 extends CarrotStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score / 10;
     }
 
@@ -101,7 +101,7 @@ class CarrotState2 extends CarrotStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score / 5;
     }
 
@@ -121,7 +121,7 @@ class CarrotState3 extends CarrotStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score / 2;
     }
 
@@ -141,7 +141,7 @@ class CarrotState4 extends CarrotStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return maximum_score;
     }
 
@@ -168,7 +168,7 @@ class RottenCarrotState extends CarrotStates {
     }
 
     @Override
-    public int getScore() {
+    public int reap() {
         return - (maximum_score * age) / 10;
     }
 }
