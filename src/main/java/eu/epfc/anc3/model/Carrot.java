@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 class Carrot extends Growable {
 
-    private final ObjectProperty<CarrotStates> stateProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<State> stateProperty = new SimpleObjectProperty<>();
 
     Carrot(boolean onGrass) {
         super(onGrass);
@@ -14,7 +14,7 @@ class Carrot extends Growable {
 
     @Override
     void fertilize() {
-        if (state.ordinal() < 2) {
+        if (state == GrowingState.STATE_1 || state == GrowingState.STATE_2) {
             state = GrowingState.STATE_3;
             stateProperty().set(GrowingState.STATE_3);
             stateProperty.set(new CarrotState3(this));
@@ -61,11 +61,7 @@ abstract class CarrotStates implements State {
         this.carrot = carrot;
     }
 
-    int reap() {
-        return getScore();
-    }
-
-    boolean canGrow() {
+    public boolean canGrow() {
         ++age;
         if (age == duration) {
             carrot.changeState();
@@ -73,8 +69,6 @@ abstract class CarrotStates implements State {
         }
         return true;
     }
-
-    abstract CarrotStates grow();
 }
 
 class CarrotState1 extends CarrotStates {
@@ -92,7 +86,7 @@ class CarrotState1 extends CarrotStates {
     }
 
     @Override
-    CarrotStates grow() {
+    public State grow() {
         return new CarrotState2(carrot);
     }
 }
@@ -112,7 +106,7 @@ class CarrotState2 extends CarrotStates {
     }
 
     @Override
-    CarrotStates grow() {
+    public State grow() {
         return new CarrotState3(carrot);
     }
 }
@@ -132,7 +126,7 @@ class CarrotState3 extends CarrotStates {
     }
 
     @Override
-    CarrotStates grow() {
+    public State grow() {
         return new CarrotState4(carrot);
     }
 }
@@ -152,7 +146,7 @@ class CarrotState4 extends CarrotStates {
     }
 
     @Override
-    CarrotStates grow() {
+    public State grow() {
         return new RottenCarrotState(carrot);
     }
 }
@@ -167,7 +161,7 @@ class RottenCarrotState extends CarrotStates {
     }
 
     @Override
-    CarrotStates grow() {
+    public State grow() {
         carrot.stateProperty().set(null);
         growingState = null;
         return this;

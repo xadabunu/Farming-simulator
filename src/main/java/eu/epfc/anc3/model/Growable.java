@@ -7,7 +7,7 @@ abstract class Growable extends Plantable {
     boolean onGrass;
 
     GrowingState state = GrowingState.STATE_1;
-    final SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
+    private final SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
 
     Growable(boolean onGrass) {
         this.onGrass = onGrass;
