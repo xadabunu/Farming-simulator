@@ -35,4 +35,7 @@ class Field {
     public ReadOnlyObjectProperty<LandGrowable> growableProperty(int line, int col) {
         return lands[line][col].growableProperty() ;
     }
+    ReadOnlyObjectProperty<GrowingState> growableState(int line, int col) {
+        return lands[line][col].growableState();
+    }
 }

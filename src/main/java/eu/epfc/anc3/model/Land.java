@@ -11,12 +11,14 @@ public class Land {
 
     private final ObjectProperty<LandContent> content = new SimpleObjectProperty<>(LandContent.DIRT);
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
+
     private Growable growable;
     private final Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
         col = j;
+
         isDead().addListener((obs, old, newVal) -> {
             if (isDead().get()) {
                 content.set(LandContent.DIRT);
@@ -49,14 +51,13 @@ public class Land {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
         }
-        return growable == null ? 0 : growable.grow();
+        return hasGrowable() ? growable.grow() : 0;
     }
 
     void plant(Growable g) {
         growable = g;
         g.stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == null) {
-                growable = null;
                 removeGrowable();
             }
         });
@@ -70,25 +71,26 @@ public class Land {
         return growableProp;
     }
 
+    public ReadOnlyObjectProperty<GrowingState> growableState() {
+        return growable.stateProperty();
+    }
+
     private ReadOnlyBooleanProperty isDead() {
         return grass.grassProperty();
     }
-
     void fertilize() {
         if (growable != null)
             growable.fertilize();
     }
-
     boolean hasGrowable() {
         return growableProperty().isEqualTo(LandGrowable.CABBAGE).get()
                 || growableProperty().isEqualTo(LandGrowable.CARROT).get();
     }
-
     int reap() {
         int score = 0;
         if (growable != null) {
             score = growable.reap();
-            growable = null;
+            removeGrowable();
         }
         return score;
     }
