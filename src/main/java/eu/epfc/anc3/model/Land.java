@@ -51,14 +51,13 @@ public class Land {
         if(content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
         }
-        return growable == null ? 0 : growable.grow();
+        return hasGrowable() ? growable.grow() : 0;
     }
 
     void plant(Growable g) {
         growable = g;
         g.stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == null) {
-                growable = null;
                 removeGrowable();
             }
         });
@@ -91,7 +90,6 @@ public class Land {
         int score = 0;
         if (growable != null) {
             score = growable.reap();
-            growable = null;
             removeGrowable();
         }
         return score;

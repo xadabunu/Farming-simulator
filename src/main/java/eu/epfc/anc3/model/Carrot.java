@@ -33,15 +33,17 @@ class Carrot extends Growable {
 
     void changeState() {
         stateProperty.set(stateProperty.get().grow());
-        this.stateProperty().set(
-                switch (stateProperty().get()){
-                    case STATE_1 -> GrowingState.STATE_2;
-                    case STATE_2 -> GrowingState.STATE_3;
-                    case STATE_3 -> GrowingState.STATE_4;
-                    case STATE_4 -> GrowingState.ROTTEN;
-                    case ROTTEN -> null;
-                }
+        if (stateProperty().isNotNull().get()) {
+            this.stateProperty().set(
+                    switch (stateProperty().get()) {
+                        case STATE_1 -> GrowingState.STATE_2;
+                        case STATE_2 -> GrowingState.STATE_3;
+                        case STATE_3 -> GrowingState.STATE_4;
+                        case STATE_4 -> GrowingState.ROTTEN;
+                        case ROTTEN -> null;
+                    }
             );
+        }
     }
 }
 
