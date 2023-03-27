@@ -13,11 +13,13 @@ class Grass extends Plantable {
             isDead.set(true);
     }
 
-    void resetGrass(){
+    void resetGrass() {
         isDead.set(false);
         age = 0;
     }
 
-    ReadOnlyBooleanProperty grassProperty() {return isDead;}
+    ReadOnlyBooleanProperty grassProperty() {
+        return isDead;
+    }
 
 }

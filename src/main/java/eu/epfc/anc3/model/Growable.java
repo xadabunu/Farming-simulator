@@ -9,7 +9,7 @@ abstract class Growable extends Plantable {
     boolean onGrass;
 
     GrowingState state = GrowingState.STATE_1;
-    private final SimpleObjectProperty<GrowingState> stateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
+    final SimpleObjectProperty<GrowingState> growingStateProperty = new SimpleObjectProperty<>();
 
     Growable(boolean onGrass) {
         this.onGrass = onGrass;
@@ -18,9 +18,10 @@ abstract class Growable extends Plantable {
     abstract int grow();
     abstract int reap();
     abstract  void fertilize();
+    abstract void setStateProp(State state);
 
     SimpleObjectProperty<GrowingState> stateProperty() {
-        return stateProperty;
+        return growingStateProperty;
     }
 
 

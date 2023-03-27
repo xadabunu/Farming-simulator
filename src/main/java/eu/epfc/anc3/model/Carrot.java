@@ -1,44 +1,41 @@
 package eu.epfc.anc3.model;
 
+import javafx.beans.property.SimpleObjectProperty;
+
 class Carrot extends Growable {
 
     Carrot(boolean onGrass) {
         super(onGrass);
         stateProp.set(new CarrotState1(this));
+        stateProp.addListener((obs, oldV, newV) -> {
+            if (newV != null)
+                growingStateProperty.set(newV.getGrowingState().get());
+        });
     }
 
     @Override
     void fertilize() {
         if (state == GrowingState.STATE_1 || state == GrowingState.STATE_2) {
             state = GrowingState.STATE_3;
-            stateProperty().set(GrowingState.STATE_3);
+            //stateProperty().set(GrowingState.STATE_3);
             stateProp.set(new CarrotState3(this));
         }
     }
 
+    @Override
+    void setStateProp(State state) {
+        stateProp.set(state);
+    }
+
     int grow() {
-        return stateProp.get().canGrow() ? 0 : stateProp.get().reap();
+        //return stateProp.get().canGrow() ? 0 : stateProp.get().reap();
+        return stateProp.get().grow();
     }
 
     int reap() {
         int score = stateProp.get().reap();
         stateProp.set(null);
         return score;
-    }
-
-    void changeState() {
-        stateProp.set(stateProp.get().grow());
-        if (stateProperty().isNotNull().get()) {
-            this.stateProperty().set(
-                    switch (stateProperty().get()) {
-                        case STATE_1 -> GrowingState.STATE_2;
-                        case STATE_2 -> GrowingState.STATE_3;
-                        case STATE_3 -> GrowingState.STATE_4;
-                        case STATE_4 -> GrowingState.ROTTEN;
-                        case ROTTEN -> null;
-                    }
-            );
-        }
     }
 }
 
@@ -47,22 +44,18 @@ abstract class CarrotStates implements State {
     final int maximum_score = 100;
     private final int duration;
     final Carrot carrot;
-    GrowingState growingState;
+    final SimpleObjectProperty<GrowingState> growingState = new SimpleObjectProperty<>();
+
+    @Override
+    public SimpleObjectProperty<GrowingState> getGrowingState() {
+        return growingState;
+    }
 
     int age = 0;
 
     CarrotStates(int duration, Carrot carrot) {
         this.duration = duration;
         this.carrot = carrot;
-    }
-
-    public boolean canGrow() {
-        ++age;
-        if (age == duration) {
-            carrot.changeState();
-            return growingState != null;
-        }
-        return true;
     }
 }
 
@@ -72,7 +65,7 @@ class CarrotState1 extends CarrotStates {
 
     CarrotState1(Carrot carrot) {
         super(duration, carrot);
-        growingState = GrowingState.STATE_1;
+        growingState.set(GrowingState.STATE_1);
     }
 
     @Override
@@ -81,8 +74,11 @@ class CarrotState1 extends CarrotStates {
     }
 
     @Override
-    public State grow() {
-        return new CarrotState2(carrot);
+    public int grow() {
+        ++age;
+        if (age == duration)
+            carrot.setStateProp(new CarrotState2(carrot));
+        return 0;
     }
 }
 
@@ -92,7 +88,7 @@ class CarrotState2 extends CarrotStates {
 
     CarrotState2(Carrot carrot) {
         super(duration, carrot);
-        growingState = GrowingState.STATE_2;
+        growingState.set(GrowingState.STATE_2);
     }
 
     @Override
@@ -101,8 +97,11 @@ class CarrotState2 extends CarrotStates {
     }
 
     @Override
-    public State grow() {
-        return new CarrotState3(carrot);
+    public int grow() {
+        ++age;
+        if (age == duration)
+            carrot.setStateProp(new CarrotState3(carrot));
+        return 0;
     }
 }
 
@@ -112,7 +111,7 @@ class CarrotState3 extends CarrotStates {
 
     CarrotState3(Carrot carrot) {
         super(duration, carrot);
-        growingState = GrowingState.STATE_3;
+        growingState.set(GrowingState.STATE_3);
     }
 
     @Override
@@ -121,8 +120,11 @@ class CarrotState3 extends CarrotStates {
     }
 
     @Override
-    public State grow() {
-        return new CarrotState4(carrot);
+    public int grow() {
+        ++age;
+        if (age == duration)
+            carrot.setStateProp(new CarrotState4(carrot));
+        return 0;
     }
 }
 
@@ -132,7 +134,7 @@ class CarrotState4 extends CarrotStates {
 
     CarrotState4(Carrot carrot) {
         super(duration, carrot);
-        growingState = GrowingState.STATE_4;
+        growingState.set(GrowingState.STATE_4);
     }
 
     @Override
@@ -141,8 +143,11 @@ class CarrotState4 extends CarrotStates {
     }
 
     @Override
-    public State grow() {
-        return new RottenCarrotState(carrot);
+    public int grow() {
+        ++age;
+        if (age == duration)
+            carrot.setStateProp(new RottenCarrotState(carrot));
+        return 0;
     }
 }
 
@@ -152,14 +157,19 @@ class RottenCarrotState extends CarrotStates {
 
     RottenCarrotState(Carrot carrot) {
         super(duration, carrot);
-        growingState = GrowingState.ROTTEN;
+        growingState.set(GrowingState.ROTTEN);
     }
 
     @Override
-    public State grow() {
-        carrot.stateProperty().set(null);
-        growingState = null;
-        return this;
+    public int grow() {
+        int score = 0;
+
+        ++age;
+        if (age == duration) {
+            score = reap();
+            carrot.stateProperty().set(null);
+        }
+        return score;
     }
 
     @Override
