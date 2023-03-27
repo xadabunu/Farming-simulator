@@ -1,15 +1,10 @@
 package eu.epfc.anc3.model;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
 class Carrot extends Growable {
-
-    private final ObjectProperty<State> stateProperty = new SimpleObjectProperty<>();
 
     Carrot(boolean onGrass) {
         super(onGrass);
-        stateProperty.set(new CarrotState1(this));
+        stateProp.set(new CarrotState1(this));
     }
 
     @Override
@@ -17,22 +12,22 @@ class Carrot extends Growable {
         if (state == GrowingState.STATE_1 || state == GrowingState.STATE_2) {
             state = GrowingState.STATE_3;
             stateProperty().set(GrowingState.STATE_3);
-            stateProperty.set(new CarrotState3(this));
+            stateProp.set(new CarrotState3(this));
         }
     }
 
     int grow() {
-        return stateProperty.get().canGrow() ? 0 : stateProperty.get().reap();
+        return stateProp.get().canGrow() ? 0 : stateProp.get().reap();
     }
 
     int reap() {
-        int score = stateProperty.get().reap();
-        stateProperty.set(null);
+        int score = stateProp.get().reap();
+        stateProp.set(null);
         return score;
     }
 
     void changeState() {
-        stateProperty.set(stateProperty.get().grow());
+        stateProp.set(stateProp.get().grow());
         if (stateProperty().isNotNull().get()) {
             this.stateProperty().set(
                     switch (stateProperty().get()) {

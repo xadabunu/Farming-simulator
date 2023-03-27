@@ -1,17 +1,13 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 class Cabbage extends Growable {
 
-    private final ObjectProperty<State> stateProperty = new SimpleObjectProperty<>();
-
     Cabbage(boolean onGrass) {
         super(onGrass);
-        stateProperty.set(new CabbageState1(onGrass,this));
+        stateProp.set(new CabbageState1(onGrass,this));
     }
 
     @Override
@@ -19,7 +15,7 @@ class Cabbage extends Growable {
     }
 
     void changeState() {
-        stateProperty.set(stateProperty.get().grow());
+        stateProp.set(stateProp.get().grow());
         if (stateProperty().isNotNull().get()) {
             this.stateProperty().set(
                     switch (stateProperty().get()) {
@@ -34,12 +30,12 @@ class Cabbage extends Growable {
     }
 
     int grow() {
-        return stateProperty.get().canGrow() ? 0 : stateProperty.get().reap();
+        return stateProp.get().canGrow() ? 0 : stateProp.get().reap();
     }
 
     int reap() {
-        int score = stateProperty.get().reap();
-        stateProperty.set(null);
+        int score = stateProp.get().reap();
+        stateProp.set(null);
         return score;
     }
 }
