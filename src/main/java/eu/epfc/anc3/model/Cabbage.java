@@ -17,6 +17,7 @@ class Cabbage extends Growable {
 
     @Override
     void fertilize() {
+        stateProp.get().fertilize();
     }
 
     @Override
@@ -72,6 +73,11 @@ class CabbageState1 extends CabbageStates {
     }
 
     @Override
+    public void fertilize() {
+
+    }
+
+    @Override
     public int grow() {
         ++age;
         if (age == super.duration)
@@ -92,6 +98,11 @@ class CabbageState2 extends CabbageStates {
     @Override
     public int reap() {
         return 0;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 
     @Override
@@ -118,6 +129,11 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
+    public void fertilize() {
+
+    }
+
+    @Override
     public int grow() {
         ++age;
         if (age == super.duration)
@@ -139,6 +155,11 @@ class CabbageState4 extends CabbageStates {
     @Override
     public int reap() {
         return maximum_score;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 
     @Override
@@ -173,5 +194,10 @@ class RottenCabbageState extends CabbageStates {
     @Override
     public int reap() {
         return - (maximum_score * age) / 10;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 }

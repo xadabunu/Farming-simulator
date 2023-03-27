@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 interface State {
 
     int reap();
-    //boolean canGrow();
+    void fertilize();
     int grow();
     SimpleObjectProperty<GrowingState> getGrowingState();
 }

@@ -15,11 +15,7 @@ class Carrot extends Growable {
 
     @Override
     void fertilize() {
-        if (state == GrowingState.STATE_1 || state == GrowingState.STATE_2) {
-            state = GrowingState.STATE_3;
-            //stateProperty().set(GrowingState.STATE_3);
-            stateProp.set(new CarrotState3(this));
-        }
+        stateProp.get().fertilize();
     }
 
     @Override
@@ -28,7 +24,6 @@ class Carrot extends Growable {
     }
 
     int grow() {
-        //return stateProp.get().canGrow() ? 0 : stateProp.get().reap();
         return stateProp.get().grow();
     }
 
@@ -74,6 +69,11 @@ class CarrotState1 extends CarrotStates {
     }
 
     @Override
+    public void fertilize() {
+        carrot.setStateProp(new CarrotState3(carrot));
+    }
+
+    @Override
     public int grow() {
         ++age;
         if (age == duration)
@@ -103,6 +103,11 @@ class CarrotState2 extends CarrotStates {
             carrot.setStateProp(new CarrotState3(carrot));
         return 0;
     }
+
+    @Override
+    public void fertilize() {
+        carrot.setStateProp(new CarrotState3(carrot));
+    }
 }
 
 class CarrotState3 extends CarrotStates {
@@ -117,6 +122,11 @@ class CarrotState3 extends CarrotStates {
     @Override
     public int reap() {
         return maximum_score / 2;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 
     @Override
@@ -140,6 +150,11 @@ class CarrotState4 extends CarrotStates {
     @Override
     public int reap() {
         return maximum_score;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 
     @Override
@@ -175,5 +190,10 @@ class RottenCarrotState extends CarrotStates {
     @Override
     public int reap() {
         return - (maximum_score * age) / 10;
+    }
+
+    @Override
+    public void fertilize() {
+
     }
 }
