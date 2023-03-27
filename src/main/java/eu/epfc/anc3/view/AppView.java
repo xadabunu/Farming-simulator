@@ -18,7 +18,7 @@ public class AppView extends VBox {
     private static final int MENU_HEIGHT = 80;
     private static final int SIDE_MENU_WIDTH = 145;
     static final int PADDING = 20;
-    private static final int SCENE_MIN_WIDTH = 1400, SCENE_MIN_HEIGHT = 800;
+    private static final int SCENE_MIN_WIDTH = 1200, SCENE_MIN_HEIGHT = 700;
     static final int FIELD_WIDTH = GameFacade.fieldCol();
     static final int FIELD_HEIGHT = GameFacade.fieldLines();
     private final DoubleProperty fieldWidthProperty = new SimpleDoubleProperty(500);

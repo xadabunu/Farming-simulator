@@ -3,7 +3,7 @@ package eu.epfc.anc3.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-abstract class Growable extends Plantable {
+abstract class Growable{
 
     final ObjectProperty<State> stateProp = new SimpleObjectProperty<>();
     boolean onGrass;

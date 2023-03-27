@@ -11,6 +11,8 @@ class BottomMenuView extends HBox {
     private final BottomMenuViewModel bottomMenuViewModel;
     private final Button btnSwitch = new Button();
     private final Button btnSleep = new Button();
+    private final Button btnRestore = new Button();
+    private final Button btnSave = new Button();
 
     BottomMenuView(BottomMenuViewModel bottomMenuViewModel, FieldView fieldView) {
         this.bottomMenuViewModel = bottomMenuViewModel;
@@ -22,7 +24,7 @@ class BottomMenuView extends HBox {
     }
 
     private void configButtons() {
-        getChildren().addAll(btnSwitch, btnSleep);
+        getChildren().addAll(btnSwitch, btnSleep, btnSave, btnRestore);
         configLabel();
         setAlignment(Pos.CENTER);
         setSpacing(30);
@@ -31,6 +33,8 @@ class BottomMenuView extends HBox {
     private void configLabel() {
         btnSwitch.textProperty().bind(bottomMenuViewModel.startLabelProperty());
         btnSleep.textProperty().bind(bottomMenuViewModel.sleepLabelProperty());
+        btnRestore.textProperty().bind(bottomMenuViewModel.restoreLabelProperty());
+        btnSave.textProperty().bind(bottomMenuViewModel.saveLabelProperty());
     }
 
     private void manageBtn() {
@@ -49,5 +53,7 @@ class BottomMenuView extends HBox {
             btnSwitch.textProperty().bind(bottomMenuViewModel.startLabelProperty());
         });
         btnSleep.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
+        btnSave.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
+        btnRestore.disableProperty().bind(bottomMenuViewModel.hasSavedProperty().not());
     }
 }
