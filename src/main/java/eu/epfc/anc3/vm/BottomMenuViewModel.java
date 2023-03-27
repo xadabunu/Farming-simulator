@@ -35,9 +35,19 @@ public class BottomMenuViewModel {
     public ReadOnlyStringProperty sleepLabelProperty() {
         return new SimpleStringProperty("Dormir");
     }
+    public ReadOnlyStringProperty saveLabelProperty() {
+        return new SimpleStringProperty("Sauvegarder");
+    }
+    public ReadOnlyStringProperty restoreLabelProperty() {
+        return new SimpleStringProperty("Restaurer");
+    }
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return game.isOnProperty();
+    }
+
+    public ReadOnlyBooleanProperty hasSavedProperty() {
+        return game.hasSavedProperty();
     }
 
 }

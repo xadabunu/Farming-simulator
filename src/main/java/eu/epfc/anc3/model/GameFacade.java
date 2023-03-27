@@ -7,6 +7,8 @@ public class GameFacade {
     private final Game game = new Game();
     private final BooleanProperty isOn = new SimpleBooleanProperty(false);
 
+    private final BooleanProperty hasSaved = new SimpleBooleanProperty(false);
+
     public GameFacade() {
         isOn.bind(game.gameStatusProperty().isNotEqualTo(GameStatus.GAME_OFF));
     }
@@ -81,6 +83,10 @@ public class GameFacade {
 
     public ReadOnlyBooleanProperty isOnProperty() {
         return isOn;
+    }
+
+    public ReadOnlyBooleanProperty hasSavedProperty(){
+        return hasSaved;
     }
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {
