@@ -1,0 +1,56 @@
+@startuml stateSequenceDiagram
+
+participant Growable
+participant State1
+participant State2
+participant State3
+participant State4
+participant Rotten
+
+== plant growable ==
+
+-> Growable :  setState(State1)
+
+alt reap
+	-> State1 : reap()
+	<- State1 : score
+end
+
+Growable -> State1 : grow()
+-> Growable :  setState(State2)
+
+alt reap
+	-> State2 : reap()
+	<- State2 : score
+end
+
+Growable -> State2 : grow()
+-> Growable :  setState(State3)
+
+alt reap
+	-> State3 : reap()
+	<- State3 : score
+end
+
+Growable -> State3 : grow()
+
+-> Growable :  setState(State4)
+
+alt reap
+	-> State4 : reap()
+	<- State4 : score
+end
+
+Growable -> State4 : grow()
+
+-> Growable :  setState(Rotten)
+Growable -> Rotten : grow()
+
+alt reap
+	-> Rotten : reap()
+	<- Rotten : score
+end
+
+== growable dies ==
+
+@enduml
