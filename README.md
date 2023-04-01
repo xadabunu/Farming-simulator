@@ -14,7 +14,9 @@
 
 ## Notes de version itération 2
 
-...
+### Divers
+
+* Il manque les growables et leurs états dans le diagramme de classes
 
 ## Notes de version itération 3 
 
