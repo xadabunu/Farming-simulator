@@ -14,23 +14,8 @@ class Carrot extends Growable {
     }
 
     @Override
-    void fertilize() {
-        stateProp.get().fertilize();
-    }
-
-    @Override
     void setStateProp(State state) {
         stateProp.set(state);
-    }
-
-    int grow() {
-        return stateProp.get().grow();
-    }
-
-    int reap() {
-        int score = stateProp.get().reap();
-        stateProp.set(null);
-        return score;
     }
 }
 
