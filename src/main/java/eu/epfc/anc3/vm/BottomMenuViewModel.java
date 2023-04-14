@@ -20,7 +20,12 @@ public class BottomMenuViewModel {
     public void sleep() {
         game.sleep();
     }
-
+    public void save() {
+        game.save();
+    }
+    public void restore() {
+        game.restore();
+    }
 
 
     public ReadOnlyStringProperty startLabelProperty() {

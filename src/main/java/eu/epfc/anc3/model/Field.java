@@ -38,4 +38,18 @@ class Field {
     ReadOnlyObjectProperty<GrowingState> growableState(int line, int col) {
         return lands[line][col].growableState();
     }
+
+    Field(Field field) {
+        this.lands = new Land[LINES][COLUMNS];
+
+        for (int i = 0 ; i < LINES ; ++i)
+            for (int j = 0 ; j < COLUMNS ; ++j)
+                lands[i][j] = new Land(field.getLand(i, j));
+    }
+
+    void restore(Field fieldCopy) {
+        for (int i = 0 ; i < LINES ; ++i)
+            for (int j = 0 ; j < COLUMNS ; ++j)
+                lands[i][j] = fieldCopy.getLand(i, j);
+    }
 }

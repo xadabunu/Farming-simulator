@@ -46,6 +46,14 @@ class BottomMenuView extends HBox {
             bottomMenuViewModel.sleep();
             fieldView.requestFocus();
         });
+        btnSave.setOnAction(e -> {
+            bottomMenuViewModel.save();
+            fieldView.requestFocus();
+        });
+        btnRestore.setOnAction(e -> {
+            bottomMenuViewModel.restore();
+            fieldView.requestFocus();
+        });
     }
 
     private void configLogicBinding() {

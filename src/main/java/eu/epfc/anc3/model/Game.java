@@ -2,7 +2,7 @@ package eu.epfc.anc3.model;
 
 import javafx.beans.property.*;
 
-class Game {
+class Game implements Originator {
 
     private final ObjectProperty<GameStatus> gameStatus = new SimpleObjectProperty<>(GameStatus.GAME_OFF);
     private final ObjectProperty<Planting> planting = new SimpleObjectProperty<>();
@@ -144,5 +144,33 @@ class Game {
 
     ReadOnlyObjectProperty<GameStatus> gameStatusProperty() {
         return gameStatus;
+    }
+
+/* ------------------------------ Sauvegarde ------------------------------ */
+
+    private Copy copy;
+    private BooleanProperty savedStatus = new SimpleBooleanProperty(false);
+    BooleanProperty hasSavedProperty() {
+        return savedStatus;
+    }
+
+    public Memento save() {
+        copy = new Copy(this, field, farmer, ctrDays.get());
+        savedStatus.set(true);
+        return copy;
+    }
+    public void restore() {
+        copy.restore();
+    }
+
+    void restoreField(Field fieldCopy) {
+        field.restore(fieldCopy);
+    }
+    void restoreFarmer(Farmer farmerCopy) {
+        this.farmer.restorePosition(farmerCopy.position);
+        this.farmer.scoreProperty().set(farmerCopy.scoreProperty().get());
+    }
+    void restoreDay(int dayCopy) {
+        this.ctrDays.set(dayCopy);
     }
 }

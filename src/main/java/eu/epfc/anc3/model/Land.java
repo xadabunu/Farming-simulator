@@ -13,7 +13,7 @@ public class Land {
     final ObjectProperty<LandGrowable> growableProp = new SimpleObjectProperty<>();
 
     private Growable growable;
-    private final Grass grass = new Grass();
+    private Grass grass = new Grass();
 
     Land(int i, int j) {
         line = i;
@@ -48,7 +48,7 @@ public class Land {
     }
 
     int grow() {
-        if(content.isEqualTo(LandContent.GRASS).get()) {
+        if (content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
         }
         return hasGrowable() ? growable.grow() : 0;
@@ -96,5 +96,20 @@ public class Land {
             removeGrowable();
         }
         return score;
+    }
+
+    Land(Land land) {
+        this.line = land.line;
+        this.col = land.col;
+//        this.growable = land.growable;
+//        this.growable = new Growable(land.growable) {
+//            @Override
+//            void setStateProp(State state) {
+//
+//            }
+//        };
+        this.content.set(land.content.get());
+        this.growableProp.set(land.growableProp.get());
+        this.grass = new Grass(grass.getAge());
     }
 }

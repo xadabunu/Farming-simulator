@@ -31,6 +31,12 @@ public class GameFacade {
     public void sleep () {
         game.sleep();
     }
+    public void save () {
+        game.save();
+    }
+    public void restore () {
+        game.restore();
+    }
 
     public void setStatusPlantGrass() {
         game.setStatusPlantGrass();
@@ -86,7 +92,7 @@ public class GameFacade {
     }
 
     public ReadOnlyBooleanProperty hasSavedProperty(){
-        return hasSaved;
+        return game.hasSavedProperty();
     }
 
     public ReadOnlyObjectProperty<LandContent> contentProperty(int line, int col) {

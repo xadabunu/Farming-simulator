@@ -1,6 +1,7 @@
 package eu.epfc.anc3.model;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 class Farmer extends Character {
@@ -75,5 +76,15 @@ class Farmer extends Character {
     void resetPosition() {
         super.resetPosition();
         score.set(0);
+    }
+
+    void restorePosition(ObjectProperty<Land> position) {
+        this.position.set(position.get());
+    }
+
+    Farmer(Farmer farmer, Field field) {
+        super(field);
+        this.score.set(farmer.score.get());
+        this.position.set(farmer.position.get());
     }
 }

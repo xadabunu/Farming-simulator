@@ -5,7 +5,15 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 class Grass{
-    private int age = 0;
+
+    Grass(int age) {
+        this.age = age;
+    }
+    Grass() {
+        this(0);
+    }
+
+    private int age;
     private static final int DURATION = 12;
     private final BooleanProperty isDead = new SimpleBooleanProperty(false);
     void grow() {
@@ -22,4 +30,7 @@ class Grass{
         return isDead;
     }
 
+    public int getAge() {
+        return age;
+    }
 }
