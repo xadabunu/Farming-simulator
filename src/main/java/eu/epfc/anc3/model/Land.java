@@ -89,6 +89,10 @@ public class Land {
                 || growableProperty().isEqualTo(LandGrowable.CARROT).get();
     }
 
+    boolean hasGrass() {
+        return contentProperty().isEqualTo(LandContent.GRASS).get();
+    }
+
     int reap() {
         int score = 0;
         if (growable != null) {

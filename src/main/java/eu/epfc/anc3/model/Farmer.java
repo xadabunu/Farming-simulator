@@ -13,7 +13,7 @@ class Farmer extends Character {
     }
 
     boolean plantGrass() {
-        if (position.get().contentProperty().isEqualTo(LandContent.DIRT).get()) {
+        if (!position.get().hasGrass()) {
             position.get().setContent(LandContent.GRASS);
             return true;
         }
@@ -21,8 +21,8 @@ class Farmer extends Character {
     }
 
     boolean plantCarrot() {
-        if (position.get().growableProperty().get() == (null)) {
-            Growable g = new Carrot(position.get().contentProperty().isEqualTo(LandContent.GRASS).get());
+        if (!position.get().hasGrowable()) {
+            Growable g = new Carrot(position.get().hasGrass());
             position.get().plant(g);
             position.get().setGrowable(LandGrowable.CARROT);
             return true;
@@ -31,8 +31,8 @@ class Farmer extends Character {
     }
 
     boolean plantCabbage() {
-        if (position.get().growableProperty().get() == (null)) {
-            Growable g = new Cabbage(position.get().contentProperty().isEqualTo(LandContent.GRASS).get());
+        if (!position.get().hasGrowable()) {
+            Growable g = new Cabbage(position.get().hasGrass());
             position.get().plant(g);
             position.get().setGrowable(LandGrowable.CABBAGE);
             return true;
@@ -45,7 +45,7 @@ class Farmer extends Character {
             reap();
             position.get().removeGrowable();
         }
-        else if (!position.get().contentProperty().isEqualTo(LandContent.DIRT).get()) {
+        else if (position.get().hasGrass()) {
             position.get().setContent(LandContent.DIRT);
             return true;
         }
