@@ -33,4 +33,6 @@ class Grass{
     public int getAge() {
         return age;
     }
+    protected void setAge(int age) {this.age = age;}
+    protected void setIsDead(boolean isdead) {this.isDead.set(isdead);}
 }

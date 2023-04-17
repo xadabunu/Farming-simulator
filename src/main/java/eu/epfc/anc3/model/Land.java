@@ -21,8 +21,8 @@ public class Land {
 
         isDead().addListener((obs, old, newVal) -> {
             if (isDead().get()) {
-                content.set(LandContent.DIRT);
-                grass.resetGrass();
+                this.content.set(LandContent.DIRT);
+                this.grass.resetGrass();
             }
         });
     }
@@ -44,18 +44,23 @@ public class Land {
     }
 
     void removeGrowable() {
-        growableProp.set(null);
+        this.growableProp.set(null);
     }
 
     int grow() {
-        if (content.isEqualTo(LandContent.GRASS).get()) {
-            grass.grow();
+        if (this.content.isEqualTo(LandContent.GRASS).get()) {
+            this.grass.grow();
         }
-        return hasGrowable() ? growable.grow() : 0;
+
+        if (hasGrowable()) {
+            System.out.println(this.growable.onGrass + "   " + this.growable.stateProp + "   " + this.growable.growingStateProperty);
+        }
+
+        return hasGrowable() ? this.growable.grow() : 0;
     }
 
     void plant(Growable g) {
-        growable = g;
+        this.growable = g;
         g.stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == null) {
                 removeGrowable();
@@ -81,7 +86,7 @@ public class Land {
 
     void fertilize() {
         if (growable != null)
-            growable.fertilize();
+            this.growable.fertilize();
     }
 
     boolean hasGrowable() {
@@ -92,7 +97,7 @@ public class Land {
     int reap() {
         int score = 0;
         if (growable != null) {
-            score = growable.reap();
+            score = this.growable.reap();
             removeGrowable();
         }
         return score;
@@ -101,15 +106,29 @@ public class Land {
     Land(Land land) {
         this.line = land.line;
         this.col = land.col;
-//        this.growable = land.growable;
-//        this.growable = new Growable(land.growable) {
-//            @Override
-//            void setStateProp(State state) {
-//
-//            }
-//        };
         this.content.set(land.content.get());
         this.growableProp.set(land.growableProp.get());
         this.grass = new Grass(grass.getAge());
+        if (land.growable != null) {
+            this.growable = switch (land.growableProp.get()) {
+                case CARROT -> new Carrot(land.growable);
+                case CABBAGE -> new Cabbage(land.growable);
+                default -> null;
+            };
+        }
     }
+
+    void restore(Land land) {
+        if (land.growable != null) {
+            this.growable.setStateProp(land.growable.stateProp.get());
+            this.growable.onGrass = land.growable.onGrass;
+            this.growable.growingStateProperty.set(land.growable.growingStateProperty.get());
+        }
+        else { this.growable = null; }
+        this.grass.setAge(land.grass.getAge());
+        this.grass.setIsDead(land.grass.grassProperty().get());
+        this.setContent(land.content.get());
+        this.setGrowable(land.growableProp.get());
+    }
+
 }

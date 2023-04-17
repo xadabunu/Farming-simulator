@@ -15,6 +15,13 @@ class Cabbage extends Growable {
         });
     }
 
+    Cabbage(Growable growable) {
+        super(growable);
+        this.stateProp.set(growable.stateProp.get());
+        this.growingStateProperty.set(growable.growingStateProperty.get());
+        this.onGrass = growable.onGrass;
+    }
+
     @Override
     void setStateProp(State state) {
         stateProp.set(state);

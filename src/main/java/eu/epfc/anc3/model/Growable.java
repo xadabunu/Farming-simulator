@@ -14,8 +14,10 @@ abstract class Growable {
         this.onGrass = onGrass;
     }
 
+
+
     int grow() {
-        return stateProp.get().grow();
+        return this.stateProp.get().grow();
     }
     int reap() {
         int score = stateProp.get().reap();
@@ -32,6 +34,6 @@ abstract class Growable {
     }
 
     Growable(Growable growable) {
-
+        this.onGrass = growable.onGrass;
     }
 }

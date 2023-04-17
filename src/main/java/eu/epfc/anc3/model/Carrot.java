@@ -13,6 +13,13 @@ class Carrot extends Growable {
         });
     }
 
+    Carrot(Growable growable) {
+        super(growable);
+        this.growingStateProperty.set(growable.growingStateProperty.get());
+        this.stateProp.set(growable.stateProp.get());
+        this.stateProp.get().getGrowingState().set(growable.stateProp.get().getGrowingState().get());
+    }
+
     @Override
     void setStateProp(State state) {
         stateProp.set(state);
@@ -32,6 +39,7 @@ abstract class CarrotStates implements State {
     }
 
     int age = 0;
+
 
     CarrotStates(int duration, Carrot carrot) {
         this.duration = duration;
