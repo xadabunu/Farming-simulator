@@ -108,8 +108,8 @@ public class Land {
         this.col = land.col;
         this.content.set(land.content.get());
         this.growableProp.set(land.growableProp.get());
-        this.grass = new Grass(grass.getAge());
-        if (land.growable != null) {
+        this.grass = new Grass(land.grass.getAge());
+        if (land.growable != null && land.growableProp.get() != null) {
             this.growable = switch (land.growableProp.get()) {
                 case CARROT -> new Carrot(land.growable);
                 case CABBAGE -> new Cabbage(land.growable);
