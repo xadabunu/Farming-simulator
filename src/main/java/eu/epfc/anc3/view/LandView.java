@@ -80,6 +80,8 @@ public class LandView extends StackPane {
         }
     }
 
+
+
     private void setGrowableImage(LandGrowable landGrowable, double landWidth, LandViewModel landViewModel, DoubleBinding landWidthProperty) {
 
         if (landGrowable != null) {
@@ -91,13 +93,17 @@ public class LandView extends StackPane {
             growableImageView = scaleImage(growableImageView.getImage(), landWidth);
             getChildren().add(growableImageView);
             growableImageView.setTranslateY(-8);
-        }
 
-        landViewModel.growableState().addListener((obs, old, newVal) -> {
-            getChildren().remove(growableImageView);
-            setGrowableStateImage(landViewModel.growableProperty().get(), landViewModel.growableState().get(), landWidthProperty.get());
-        });
+            ReadOnlyObjectProperty<GrowingState> growableState = landViewModel.growableState();
+            if (growableState != null) {
+                growableState.addListener((obs, old, newVal) -> {
+                    getChildren().remove(growableImageView);
+                    setGrowableStateImage(landViewModel.growableProperty().get(), newVal, landWidthProperty.get());
+                });
+            }
+        }
     }
+
 
     private ImageView scaleImage(Image image, double landWidth) {
         double imageWidth = image.getWidth();

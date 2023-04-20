@@ -15,7 +15,6 @@ abstract class Growable {
     }
 
 
-
     int grow() {
         return this.stateProp.get().grow();
     }
@@ -25,8 +24,11 @@ abstract class Growable {
         return score;
     }
     void fertilize() {
-        stateProp.get().fertilize();
+        if (stateProp.get() != null) {
+            stateProp.get().fertilize();
+        }
     }
+
     abstract void setStateProp(State state);
 
     SimpleObjectProperty<GrowingState> stateProperty() {
