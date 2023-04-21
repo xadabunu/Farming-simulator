@@ -51,11 +51,6 @@ public class Land {
         if (this.content.isEqualTo(LandContent.GRASS).get()) {
             grass.grow();
         }
-
-        if (hasGrowable()) {
-            System.out.println(this.growable.onGrass + "   " + this.growable.stateProp + "   " + this.growable.growingStateProperty);
-        }
-
         return hasGrowable() ? this.growable.grow() : 0;
     }
 
@@ -116,7 +111,6 @@ public class Land {
                 case CABBAGE -> new Cabbage(land.growable);
                 default -> null;
             };
-            System.out.println(land.growable.stateProp.get().getAge() + " save");
         }
     }
 
@@ -127,8 +121,6 @@ public class Land {
             case DIRT -> this.setContent(LandContent.DIRT);
         }
         if (land.growable != null) {
-            System.out.println(land.growable.stateProp.get().getGrowingState() + " growingstate   " + land.growable.stateProp.get().getAge() + " age   " + land.growable.stateProp + " stateprop");
-
             switch (land.growableProp.get()) {
                 case CARROT -> this.growable = new Carrot(land.growable);
                 case CABBAGE -> this.growable = new Cabbage(land.growable);
@@ -137,9 +129,7 @@ public class Land {
                 case CARROT -> this.setGrowable(LandGrowable.CARROT);
                 case CABBAGE -> this.setGrowable(LandGrowable.CABBAGE);
             }
-            System.out.println(this.growable.stateProp.get().getGrowingState() + " growingstate   " + this.growable.stateProp.get().getAge() + " age   " + this.growable.stateProp + " stateprop");
         }
         grass.restore(land.grass);
     }
-
 }

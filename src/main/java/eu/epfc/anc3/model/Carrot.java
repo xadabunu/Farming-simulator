@@ -93,7 +93,6 @@ class CarrotState1 extends CarrotStates {
         ++age;
         if (age == duration) {
             carrot.setStateProp(new CarrotState2(carrot));
-            //carrot.growingStateProperty.set(GrowingState.STATE_2);
         }
         return 0;
     }
@@ -128,7 +127,6 @@ class CarrotState2 extends CarrotStates {
         ++age;
         if (age == duration) {
             carrot.setStateProp(new CarrotState3(carrot));
-            //carrot.growingStateProperty.set(GrowingState.STATE_3);
         }
         return 0;
     }
@@ -173,7 +171,6 @@ class CarrotState3 extends CarrotStates {
         ++age;
         if (age == duration) {
             carrot.setStateProp(new CarrotState4(carrot));
-            //carrot.growingStateProperty.set(GrowingState.STATE_4);
         }
         return 0;
     }
@@ -213,7 +210,6 @@ class CarrotState4 extends CarrotStates {
         ++age;
         if (age == duration) {
             carrot.setStateProp(new RottenCarrotState(carrot));
-            //carrot.growingStateProperty.set(GrowingState.ROTTEN);
         }
         return 0;
     }

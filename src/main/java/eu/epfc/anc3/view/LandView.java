@@ -54,7 +54,6 @@ public class LandView extends StackPane {
     }
 
     private void setGrowableStateImage(LandGrowable landGrowable, GrowingState growablestate, double landWidth){
-        System.out.println(landGrowable + "  " + growablestate + " 2eme listener avant");
         if (growablestate != null && landGrowable !=null) {
             switch (landGrowable){
                 case CABBAGE -> {

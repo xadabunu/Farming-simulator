@@ -17,9 +17,21 @@ class Cabbage extends Growable {
 
     Cabbage(Growable growable) {
         super(growable);
-        this.stateProp.set(growable.stateProp.get());
+        stateProp.addListener((obs, oldV, newV) -> {
+            if (newV != null)
+                growingStateProperty.set(newV.getGrowingState().get());
+        });
+        switch (growable.growingStateProperty.get()) {
+            case STATE_1 -> this.stateProp.set(new CabbageState1(growable.onGrass, this));
+            case STATE_2 -> this.stateProp.set(new CabbageState2(growable.onGrass, this));
+            case STATE_3 -> this.stateProp.set(new CabbageState3(growable.onGrass, this));
+            case STATE_4 -> this.stateProp.set(new CabbageState4(growable.onGrass, this));
+            case ROTTEN -> this.stateProp.set(new RottenCabbageState(growable.onGrass, this));
+        }
+        int agge = growable.getAge();
+        this.stateProp.get().setAge(agge);
+
         this.growingStateProperty.set(growable.growingStateProperty.get());
-        this.onGrass = growable.onGrass;
     }
 
     @Override
