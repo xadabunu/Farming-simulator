@@ -1,8 +1,6 @@
 package eu.epfc.anc3.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.*;
 
 class Grass{
 
@@ -12,6 +10,7 @@ class Grass{
     Grass() {
         this(0);
     }
+
 
     private int age;
     private static final int DURATION = 12;
@@ -25,6 +24,10 @@ class Grass{
         isDead.set(false);
         age = 0;
     }
+    void restore(Grass landGrass) {
+        this.setAge(landGrass.getAge());
+        this.setIsDead(landGrass.grassProperty().get());
+    }
 
     ReadOnlyBooleanProperty grassProperty() {
         return isDead;
@@ -33,4 +36,6 @@ class Grass{
     public int getAge() {
         return age;
     }
+    protected void setAge(int age) {this.age = age;}
+    protected void setIsDead(boolean isdead) {this.isDead.set(isdead);}
 }

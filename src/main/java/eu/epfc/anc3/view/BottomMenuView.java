@@ -62,6 +62,7 @@ class BottomMenuView extends HBox {
         });
         btnSleep.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
         btnSave.disableProperty().bind(bottomMenuViewModel.isOnProperty().not());
-        btnRestore.disableProperty().bind(bottomMenuViewModel.hasSavedProperty().not());
+        btnRestore.disableProperty().bind(bottomMenuViewModel.hasSavedProperty().not().or(bottomMenuViewModel.isOnProperty().not()));
+
     }
 }

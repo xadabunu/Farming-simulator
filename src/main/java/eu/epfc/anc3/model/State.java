@@ -7,5 +7,7 @@ interface State {
     int reap();
     void fertilize();
     int grow();
+    int getAge();
+    void setAge(int age);
     SimpleObjectProperty<GrowingState> getGrowingState();
 }

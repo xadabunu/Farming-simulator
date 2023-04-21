@@ -50,6 +50,6 @@ class Field {
     void restore(Field fieldCopy) {
         for (int i = 0 ; i < LINES ; ++i)
             for (int j = 0 ; j < COLUMNS ; ++j)
-                lands[i][j] = fieldCopy.getLand(i, j);
+                lands[i][j].restore(fieldCopy.getLand(i, j));
     }
 }

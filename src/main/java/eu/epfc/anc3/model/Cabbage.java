@@ -15,6 +15,25 @@ class Cabbage extends Growable {
         });
     }
 
+    Cabbage(Growable growable) {
+        super(growable);
+        stateProp.addListener((obs, oldV, newV) -> {
+            if (newV != null)
+                growingStateProperty.set(newV.getGrowingState().get());
+        });
+        switch (growable.growingStateProperty.get()) {
+            case STATE_1 -> this.stateProp.set(new CabbageState1(growable.onGrass, this));
+            case STATE_2 -> this.stateProp.set(new CabbageState2(growable.onGrass, this));
+            case STATE_3 -> this.stateProp.set(new CabbageState3(growable.onGrass, this));
+            case STATE_4 -> this.stateProp.set(new CabbageState4(growable.onGrass, this));
+            case ROTTEN -> this.stateProp.set(new RottenCabbageState(growable.onGrass, this));
+        }
+        int agge = growable.getAge();
+        this.stateProp.get().setAge(agge);
+
+        this.growingStateProperty.set(growable.growingStateProperty.get());
+    }
+
     @Override
     void setStateProp(State state) {
         stateProp.set(state);
@@ -53,6 +72,16 @@ class CabbageState1 extends CabbageStates {
     }
 
     @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
     public int reap() {
         return 0;
     }
@@ -78,6 +107,15 @@ class CabbageState2 extends CabbageStates {
     CabbageState2(boolean onGrass, Cabbage cabbage) {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.STATE_2);
+    }
+    @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
@@ -109,6 +147,16 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
     public int reap() {
         return maximum_score * 3/4;
     }
@@ -136,6 +184,15 @@ class CabbageState4 extends CabbageStates {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.STATE_4);
     }
+    @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     @Override
     public int reap() {
@@ -162,6 +219,15 @@ class RottenCabbageState extends CabbageStates {
     RottenCabbageState(Boolean onGrass, Cabbage cabbage) {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.ROTTEN);
+    }
+    @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
