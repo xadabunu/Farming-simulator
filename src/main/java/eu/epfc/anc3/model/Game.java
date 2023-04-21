@@ -153,13 +153,14 @@ class Game implements Originator {
     BooleanProperty hasSavedProperty() {
         return savedStatus;
     }
-
+    @Override
     public Memento save() {
         copy = new Copy(this, field, farmer, ctrDays.get());
         savedStatus.set(true);
         return copy;
     }
-    public void restore() {
+
+    void restore() {
         copy.restore();
     }
 

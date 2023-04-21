@@ -57,6 +57,16 @@ abstract class CabbageStates implements State {
     }
 
     @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
     public SimpleObjectProperty<GrowingState> getGrowingState() {
         return growingState;
     }
@@ -69,16 +79,6 @@ class CabbageState1 extends CabbageStates {
     CabbageState1(boolean onGrass, Cabbage cabbage) {
         super(durations[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.STATE_1);
-    }
-
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override
@@ -107,15 +107,6 @@ class CabbageState2 extends CabbageStates {
     CabbageState2(boolean onGrass, Cabbage cabbage) {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.STATE_2);
-    }
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override
@@ -147,16 +138,6 @@ class CabbageState3 extends CabbageStates {
     }
 
     @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
     public int reap() {
         return maximum_score * 3/4;
     }
@@ -184,15 +165,6 @@ class CabbageState4 extends CabbageStates {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.STATE_4);
     }
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public int reap() {
@@ -201,7 +173,6 @@ class CabbageState4 extends CabbageStates {
 
     @Override
     public void fertilize() {
-
     }
 
     @Override
@@ -219,15 +190,6 @@ class RottenCabbageState extends CabbageStates {
     RottenCabbageState(Boolean onGrass, Cabbage cabbage) {
         super(duration[onGrass ? 1 : 0], onGrass, cabbage);
         growingState.set(GrowingState.ROTTEN);
-    }
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override
@@ -249,6 +211,5 @@ class RottenCabbageState extends CabbageStates {
 
     @Override
     public void fertilize() {
-
     }
 }

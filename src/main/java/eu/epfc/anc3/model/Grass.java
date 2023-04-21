@@ -11,7 +11,6 @@ class Grass{
         this(0);
     }
 
-
     private int age;
     private static final int DURATION = 12;
     private final BooleanProperty isDead = new SimpleBooleanProperty(false);
@@ -33,7 +32,7 @@ class Grass{
         return isDead;
     }
 
-    public int getAge() {
+    int getAge() {
         return age;
     }
     protected void setAge(int age) {this.age = age;}

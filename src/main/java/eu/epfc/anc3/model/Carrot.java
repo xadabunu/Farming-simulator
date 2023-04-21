@@ -52,6 +52,16 @@ abstract class CarrotStates implements State {
 
     int age = 0;
 
+    @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 
     CarrotStates(int duration, Carrot carrot) {
         this.duration = duration;
@@ -66,16 +76,6 @@ class CarrotState1 extends CarrotStates {
     CarrotState1(Carrot carrot) {
         super(duration, carrot);
         growingState.set(GrowingState.STATE_1);
-    }
-
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override
@@ -108,15 +108,6 @@ class CarrotState2 extends CarrotStates {
     }
 
     @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
-    @Override
     public int reap() {
         return maximum_score / 5;
     }
@@ -144,15 +135,7 @@ class CarrotState3 extends CarrotStates {
         super(duration, carrot);
         growingState.set(GrowingState.STATE_3);
     }
-    @Override
-    public int getAge() {
-        return this.age;
-    }
 
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public int reap() {
@@ -182,15 +165,7 @@ class CarrotState4 extends CarrotStates {
         super(duration, carrot);
         growingState.set(GrowingState.STATE_4);
     }
-    @Override
-    public int getAge() {
-        return age;
-    }
 
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public int reap() {
@@ -220,15 +195,7 @@ class RottenCarrotState extends CarrotStates {
         super(duration, carrot);
         growingState.set(GrowingState.ROTTEN);
     }
-    @Override
-    public int getAge() {
-        return age;
-    }
 
-    @Override
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public int grow() {

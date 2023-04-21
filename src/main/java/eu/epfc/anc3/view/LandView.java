@@ -80,8 +80,6 @@ public class LandView extends StackPane {
         }
     }
 
-
-
     private void setGrowableImage(LandGrowable landGrowable, double landWidth, LandViewModel landViewModel, DoubleBinding landWidthProperty) {
         ReadOnlyObjectProperty<GrowingState> growableState = landViewModel.growableState();
         if (landGrowable != null) {
@@ -89,8 +87,6 @@ public class LandView extends StackPane {
                 case CABBAGE -> new ImageView(cabbage1Image);
                 case CARROT -> new ImageView(carrot1Image);
             };
-
-
 
             if (growableState != null) {
                 switch (landGrowable) {

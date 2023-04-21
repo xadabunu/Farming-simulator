@@ -37,13 +37,7 @@ abstract class Growable {
         this.onGrass = growable.onGrass;
     }
 
-
-    public int getAge() {
+    int getAge() {
         return this.stateProp.get().getAge();
     }
-
-    public void setAge(int age) {
-        this.stateProp.get().setAge(age);
-    }
-
 }

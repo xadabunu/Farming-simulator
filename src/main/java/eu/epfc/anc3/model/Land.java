@@ -71,7 +71,7 @@ public class Land {
         return growableProp;
     }
 
-    public ReadOnlyObjectProperty<GrowingState> growableState() {
+    ReadOnlyObjectProperty<GrowingState> growableState() {
         return growable != null ? growable.stateProperty() : null;
     }
 
