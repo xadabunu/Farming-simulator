@@ -104,7 +104,6 @@ class CarrotState2 extends CarrotStates {
 
     CarrotState2(Carrot carrot) {
         super(duration, carrot);
-        age = 0;
         growingState.set(GrowingState.STATE_2);
     }
 
@@ -143,7 +142,6 @@ class CarrotState3 extends CarrotStates {
 
     CarrotState3(Carrot carrot) {
         super(duration, carrot);
-        age = 0;
         growingState.set(GrowingState.STATE_3);
     }
     @Override
@@ -182,7 +180,6 @@ class CarrotState4 extends CarrotStates {
 
     CarrotState4(Carrot carrot) {
         super(duration, carrot);
-        age = 0;
         growingState.set(GrowingState.STATE_4);
     }
     @Override
@@ -221,7 +218,6 @@ class RottenCarrotState extends CarrotStates {
 
     RottenCarrotState(Carrot carrot) {
         super(duration, carrot);
-        age = 0;
         growingState.set(GrowingState.ROTTEN);
     }
     @Override
