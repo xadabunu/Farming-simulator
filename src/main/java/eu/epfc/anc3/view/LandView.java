@@ -54,6 +54,7 @@ public class LandView extends StackPane {
     }
 
     private void setGrowableStateImage(LandGrowable landGrowable, GrowingState growablestate, double landWidth){
+        System.out.println(landGrowable + "  " + growablestate + " 2eme listener avant");
         if (growablestate != null && landGrowable !=null) {
             switch (landGrowable){
                 case CABBAGE -> {
@@ -83,22 +84,43 @@ public class LandView extends StackPane {
 
 
     private void setGrowableImage(LandGrowable landGrowable, double landWidth, LandViewModel landViewModel, DoubleBinding landWidthProperty) {
-
+        ReadOnlyObjectProperty<GrowingState> growableState = landViewModel.growableState();
         if (landGrowable != null) {
             growableImageView = switch (landGrowable) {
                 case CABBAGE -> new ImageView(cabbage1Image);
                 case CARROT -> new ImageView(carrot1Image);
             };
 
-            growableImageView = scaleImage(growableImageView.getImage(), landWidth);
-            getChildren().add(growableImageView);
-            growableImageView.setTranslateY(-8);
 
-            ReadOnlyObjectProperty<GrowingState> growableState = landViewModel.growableState();
+
             if (growableState != null) {
+                switch (landGrowable) {
+                    case CABBAGE -> {
+                        growableImageView = switch (growableState.get()) {
+                            case STATE_1 -> new ImageView(cabbage1Image);
+                            case STATE_2 -> new ImageView(cabbage2Image);
+                            case STATE_3 -> new ImageView(cabbage3Image);
+                            case STATE_4 -> new ImageView(cabbage4Image);
+                            case ROTTEN -> new ImageView(cabbage5Image);
+                        };
+                    }
+                    case CARROT -> {
+                        growableImageView = switch (growableState.get()) {
+                            case STATE_1 -> new ImageView(carrot1Image);
+                            case STATE_2 -> new ImageView(carrot2Image);
+                            case STATE_3 -> new ImageView(carrot3Image);
+                            case STATE_4 -> new ImageView(carrot4Image);
+                            case ROTTEN -> new ImageView(carrot5Image);
+                        };
+                    }
+                }
+                growableImageView = scaleImage(growableImageView.getImage(), landWidth);
+                getChildren().add(growableImageView);
+                growableImageView.setTranslateY(-8);
+
                 growableState.addListener((obs, old, newVal) -> {
                     getChildren().remove(growableImageView);
-                    setGrowableStateImage(landViewModel.growableProperty().get(), newVal, landWidthProperty.get());
+                    setGrowableStateImage(landGrowable, newVal, landWidthProperty.get());
                 });
             }
         }

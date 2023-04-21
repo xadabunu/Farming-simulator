@@ -8,12 +8,11 @@ abstract class Growable {
     final ObjectProperty<State> stateProp = new SimpleObjectProperty<>();
     boolean onGrass;
 
-    final SimpleObjectProperty<GrowingState> growingStateProperty = new SimpleObjectProperty<>();
+    final SimpleObjectProperty<GrowingState> growingStateProperty = new SimpleObjectProperty<>(GrowingState.STATE_1);
 
     Growable(boolean onGrass) {
         this.onGrass = onGrass;
     }
-
 
     int grow() {
         return this.stateProp.get().grow();
@@ -38,4 +37,14 @@ abstract class Growable {
     Growable(Growable growable) {
         this.onGrass = growable.onGrass;
     }
+
+
+    public int getAge() {
+        return this.stateProp.get().getAge();
+    }
+
+    public void setAge(int age) {
+        this.stateProp.get().setAge(age);
+    }
+
 }

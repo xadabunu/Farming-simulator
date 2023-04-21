@@ -24,6 +24,10 @@ class Grass{
         isDead.set(false);
         age = 0;
     }
+    void restore(Grass landGrass) {
+        this.setAge(landGrass.getAge());
+        this.setIsDead(landGrass.grassProperty().get());
+    }
 
     ReadOnlyBooleanProperty grassProperty() {
         return isDead;
